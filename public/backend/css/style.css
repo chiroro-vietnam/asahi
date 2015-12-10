@@ -1,0 +1,61 @@
+@charset "utf-8";
+td {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+}
+.col1 {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #36C;
+}
+
+.col2 {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	font-weight: bold;
+	background-color: #94AEE4;
+}
+
+.col3 {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-size: 12px;
+	line-height: 18px;
+	background-color: #D8E1F5;
+}
+.gray {
+	color: #999;
+}
+
+.white {
+	color: #FFF;
+}
+.red {
+	color: #F00;
+}
+.blue {
+	color: #00F;
+}
+.notnull {
+	color: #C00;
+}
+a {
+    color: #0000FF
+}
+a:link {
+    color: #0000FF
+}
+a:visited {
+    color: #0000FF
+}
+a:hover {
+    color: #0000FF
+}
+a:active {
+    color: #0000FF
+}
+

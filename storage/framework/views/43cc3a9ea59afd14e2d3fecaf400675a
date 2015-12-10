@@ -1,0 +1,84 @@
+<?php $__env->startSection('content'); ?>
+
+<table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
+  <tr>
+    <td class="col1">■レンタル商品管理　＞　登録済みレンタル商品の一覧</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+ <?php echo Form::open( ['method' => 'post', 'route' => 'admin.product.rental.list', 'id' => 'frmCatRental', 'enctype'=>'multipart/form-data'] ); ?>
+
+  <tr>
+    <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
+      <tr>
+        <td class="col3">カテゴリ</td>
+        <td><select name="cat_rental" id="cat_rental">
+          <option selected="selected">▼選択</option>          
+            <?php if(count($crs) > 0): ?> 
+                <?php foreach($crs as $key => $cat): ?>
+                <option value="<?php echo e($key); ?>"
+                        <?php if(isset($cr_id) && $cr_id == $key) echo 'selected='."selected" ;?> ><?php echo e($cat); ?></option>                
+                <?php endforeach; ?>
+            <?php endif; ?>          
+        </select>
+          <input type="submit" name="btmSearchRT" id="btmSearchRT" value="表示" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <?php echo Form::close(); ?>
+
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  
+  <?php if(isset($rp)) {?>
+  <tr>
+    <td align="right"><input type="button" onClick="location.href='<?php echo route('admin.product.rental.add'); ?>'" value="商品の新規登録" /></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
+    <tr class="col3">
+        <td width="5%" align="center">削除</td>
+        <td width="8%" align="center">表示</td>
+        <td align="center">商品名</td>
+        <td align="center">商品名（補助）</td>
+        <td width="10%" align="center">詳細・編集</td>
+        <td colspan="4" align="center">表示順序</td>
+    </tr>
+        <?php 
+          $display_arr = array('0' => '×', '1' => '○'); 
+          $class_arr = array('0'=>'red', '1'=>'blue');
+        ?>
+        <?php if(count($rp) > 0): ?>
+            <?php foreach($rp as $val_rp): ?>
+                  <tr>
+                      <td>
+                          <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.category.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                      </td>
+                      <td align="center"><span class=<?php echo e(@$class_arr[$val_rp->display_top]); ?>><?php echo e(@$display_arr[$val_rp->display_top]); ?></span></td>
+                      <td><?php echo e($val_rp->product_name); ?></td>
+                      <td><?php echo e($val_rp->product_name_auxiliary); ?></td>
+                      <td><input type="button" onclick="location.href='<?php echo route('admin.category.rental.edit'); ?>'" value="詳細・編集" /></td>
+                      <td><input type="submit" name="button6" id="button6" value="TOP" /></td>
+                      <td><input type="submit" name="button7" id="button7" value="↑" /></td>
+                      <td><input type="submit" name="button8" id="button8" value="↓" /></td>
+                      <td><input type="submit" name="button4" id="button4" value="LAST" /></td>                      
+                </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="9"><center>No Data</center></td>  
+          </tr>
+        <?php endif; ?>
+
+    </table></td>
+  </tr>  
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <?php } ?>
+  
+</table>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
