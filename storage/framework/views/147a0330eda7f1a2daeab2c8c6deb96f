@@ -1,4 +1,5 @@
 <?php $__env->startSection('content'); ?>
+
 <?php echo HTML::script('ckeditor/ckeditor.js'); ?>
 
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
@@ -8,7 +9,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-<?php echo Form::open( ['method' => 'post', 'route' => 'admin.product.rental.add', 'enctype'=>'multipart/form-data'] ); ?>  
+<?php echo Form::open( ['method' => 'post', 'url' => 'admin/product/rental/add/'.$cr_id, 'enctype'=>'multipart/form-data'] ); ?>  
   <tr>
       
     <td>
@@ -27,7 +28,7 @@
           <?php endif; ?>      
     <tr>
         <td width="20%" class="col3">カテゴリ</td>
-        <td>配水ポリエチレン管融着工具</td>
+        <td><?php echo e($cat_rental->name); ?></td>
       </tr>
       <tr>
         <td width="20%" class="col3">商品名 <span class="notnull">[*]</span></td>
@@ -134,8 +135,8 @@
 <script type="text/javascript">
     window.onload = function () {
         CKEDITOR.replace('omotekumi', {
-                filebrowserBrowseUrl: "<?php echo url('filemanager/show'); ?>",
-                enterMode	: Number(2)
+            filebrowserBrowseUrl: "<?php echo url('filemanager/show'); ?>",
+            enterMode	: Number(2)
         });
     };
 </script>

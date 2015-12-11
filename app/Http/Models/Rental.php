@@ -21,6 +21,6 @@ class Rental extends Model {
 //	);
 
 	public static function get_detail(){
-		return DB::table(static::$table)->where('is_deleted', '=', NO_DELETE)->paginate(LIMIT_PAGE);
+		return DB::table(static::$table)->where('is_deleted', '=', NO_DELLETE)->paginate(LIMIT_PAGE);
 	}
 }

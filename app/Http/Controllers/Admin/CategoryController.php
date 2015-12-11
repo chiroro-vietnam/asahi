@@ -66,7 +66,7 @@ class CategoryController extends Controller
     //deletel category rental
     public function delCatRental($id){
         DB::table('category_rental')->where('id', '=', $id)
-                                    ->update(array('is_deleted' => 1));
+                                    ->update(array('is_deleted' => NO_DELLETE));
         return Redirect::route('admin.category.rental.list')->with('message', 'Category rental has been deleted successfully');
     }
     

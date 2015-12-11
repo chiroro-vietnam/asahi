@@ -47,4 +47,17 @@ class Model{
 		return DB::table(static::$table)->where(static::$primary_key, '=', $id)->delete();
 	}
 
+	public static function active($id)
+	{
+		return DB::table(static::$table)->where(static::$primary_key, '=', $id)->update(array(
+			static::$active	=>	ACTIVE
+		));
+	}
+
+	public static function deactive($id)
+	{
+		return DB::table(static::$table)->where(static::$primary_key, '=', $id)->update(array(
+			static::$active	=>	INACTIVE
+		));
+	}
 }

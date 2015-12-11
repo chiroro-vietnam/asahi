@@ -9,9 +9,9 @@ class CategoryRental extends Model {
 	
 	//get list category rental
 	public static function getCatRental(){
-		return DB::table(static::$table)->where('is_deleted', NO_DELETE)
+		return DB::table(static::$table)->where('is_deleted', 0)
                                                 ->orderBy('created_at', 'DESC')
-                                                ->paginate(LIMIT_PAGE);
+                                                ->paginate(10);
                         
 	}
 	
@@ -27,6 +27,6 @@ class CategoryRental extends Model {
 	);
 
 	public static $messages = array(
-		'name.required'	=> 'Please enter category rental'
+		'name.required'	=> 'Please enter category rental'		
 	);
 }

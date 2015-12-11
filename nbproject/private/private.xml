@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/ashahi/app/Http/Controllers/Admin/RentalController.php</file>
-            <file>file:/D:/xampp/htdocs/ashahi/app/Http/Controllers/Admin/CategoryController.php</file>
-            <file>file:/D:/xampp/htdocs/ashahi/app/Http/Models/Category.php</file>
-            <file>file:/D:/xampp/htdocs/ashahi/app/Http/routes.php</file>
-            <file>file:/D:/xampp/htdocs/ashahi/resources/views/admin/category/rental/list.blade.php</file>
-            <file>file:/D:/xampp/htdocs/ashahi/app/Http/Models/Rental.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/edit.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/app.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Rental.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/add.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/backend.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/list.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/routes.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/homepage.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Admin/RentalController.php</file>
         </group>
     </open-files>
 </project-private>

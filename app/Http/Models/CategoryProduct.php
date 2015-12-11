@@ -7,7 +7,7 @@ class CategoryRental extends Model {
 	protected $order = 'desc';
 
 	public function get_cat(){
-		return DB::table('category_rental')->where('is_deleted', NO_DELETE)
+		return DB::table('category_rental')->where('is_deleted', 0)
                                                     ->orderBy('created_at', 'DESC')
                                                     ->get();
                         

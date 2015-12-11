@@ -59,10 +59,15 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::post('admin/product/sell/edit', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
     
     //product rental
-    Route::get('admin/product/rental', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
-     Route::post('admin/product/rental', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
-    Route::get('admin/product/rental/add', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));
-    Route::post('admin/product/rental/add', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
-    Route::get('admin/product/rental/edit', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@getProRentalEdit'));
-    Route::post('admin/product/rental/edit', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@postProRentalEdit'));
+    Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
+    //Route::get('admin/product/rental/{cr_id}', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
+    Route::post('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
+   
+    Route::get('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
+    Route::post('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
+    Route::get('admin/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@getProRentalEdit'));
+    Route::post('admin/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@postProRentalEdit'));
+    Route::get('admin/product/rental/del/{id}', array('as' => 'admin.product.rental.del', 'uses' => 'RentalController@delProRental'));
+    
 });
+

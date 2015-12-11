@@ -10,7 +10,7 @@ class RentalProduct extends Model {
     public static function searchRentalPro($cat_rental_id=null){
         return DB::table(static::$table)->where('is_deleted', 0)
                                         ->where('cat_rental_id', $cat_rental_id)
-                                        ->paginate(10);                        
+                                        ->paginate(LIMIT_PAGE);                        
     }
 
     //delete item category rental
