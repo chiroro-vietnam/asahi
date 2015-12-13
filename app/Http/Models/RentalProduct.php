@@ -5,10 +5,20 @@ use Paginator;
 class RentalProduct extends Model {
     protected static $table = 'rental_product';
 
+    public static $rules = array(
+        'product_name'    => 'required',
+        'show_rate'       => 'required',
+
+    );
+
+    public static $messages = array(
+            'product_name.required'	=> 'Please enter rental product',
+            'show_rate.required'	=> 'Please choose show rate'
+    );
 
     //get list rental product
     public static function searchRentalPro($cat_rental_id=null){
-        return DB::table(static::$table)->where('is_deleted', 0)
+        return DB::table(static::$table)->where('is_deleted', NO_DELLETE)
                                         ->where('cat_rental_id', $cat_rental_id)
                                         ->paginate(LIMIT_PAGE);                        
     }
@@ -20,14 +30,11 @@ class RentalProduct extends Model {
 
     }
 
-    public static $rules = array(
-            'product_name'    => 'required',
-            'show_rate'       => 'required',
-
-    );
-
-    public static $messages = array(
-            'product_name.required'	=> 'Please enter rental product',
-            'show_rate.required'	=> 'Please choose show rate'
-    );
+    
+    //get all rental product
+     public static function getAllRentalPro(){
+        return DB::table(static::$table)->select('id', 'product_name', 'product_name_auxiliary', 'order')
+                                        ->where('is_deleted', NO_DELLETE)
+                                        ->paginate(LIMIT_PAGE);                        
+    }
 }

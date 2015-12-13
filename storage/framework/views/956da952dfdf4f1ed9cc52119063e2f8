@@ -1,7 +1,6 @@
-@extends('backend')
+<?php $__env->startSection('content'); ?>
+<?php echo HTML::script('ckeditor/ckeditor.js'); ?>
 
-@section('content')
-{!! HTML::script('ckeditor/ckeditor.js') !!}
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
   <tr>
     <td class="col1">■販売商品管理　＞　販売商品の新規登録</td>
@@ -12,25 +11,25 @@
   
   <tr>
       <td>
-            @if($errors->any())
+            <?php if($errors->any()): ?>
             <div class="errors ">
                 <ul class="msg-validate">
-                    @foreach($errors->all() as $error)
+                    <?php foreach($errors->all() as $error): ?>
                       <div class="alert alert-danger">
-                          <li>{{ $error }}</li>
+                          <li><?php echo e($error); ?></li>
                       </div>               
-                    @endforeach
+                    <?php endforeach; ?>
                 </ul>
             </div>
-          @endif 
+          <?php endif; ?> 
       </td>
   </tr>
   
-  @if(count($sp) >0)
-    @foreach($sp as $val)        
-    @endforeach
-  @endif
-{!! Form::open( [ 'id' => 'frmEditSP','method' => 'post', 'url' => 'admin/product/sell/edit/'.$id, 'files'=>true, 'enctype'=>'multipart/form-data']) !!}  
+  <?php if(count($sp) >0): ?>
+    <?php foreach($sp as $val): ?>        
+    <?php endforeach; ?>
+  <?php endif; ?>
+<?php echo Form::open( [ 'id' => 'frmEditSP','method' => 'post', 'url' => 'admin/product/sell/edit/'.$id, 'files'=>true, 'enctype'=>'multipart/form-data']); ?>  
  
 <tr>
       
@@ -43,48 +42,48 @@
             リンクタイプ<br />
             <input type="radio" name="display_type" id="display_type" <?php if($val->display_type == 3) echo 'checked="checked"'; ?> value="3" />
             ファイルタイプ
-            <input name="id" type="hidden" id="id" value="{{$id}}"/>
-            <input name="cat_product_id" type="hidden" id="cat_product_id" value="{{$val->cat_product_id}}"/>
+            <input name="id" type="hidden" id="id" value="<?php echo e($id); ?>"/>
+            <input name="cat_product_id" type="hidden" id="cat_product_id" value="<?php echo e($val->cat_product_id); ?>"/>
           </td>
         </tr>
         <tr>
           <td width="20%" class="col3">カテゴリ</td>
-          <td>{{$val->name}}</td>
+          <td><?php echo e($val->name); ?></td>
         </tr>
         <tr>
           <td width="20%" class="col3">商品名 <span class="notnull">[*]</span></td>
-          <td><input name="product_name" type="text" id="product_name" value="{{$val->product_name}}" size="60" /></td>
+          <td><input name="product_name" type="text" id="product_name" value="<?php echo e($val->product_name); ?>" size="60" /></td>
         </tr>
         <tr>
           <td width="20%" class="col3">商品名（補助用語）</td>
-          <td><input name="product_name_auxiliary" type="text" id="product_name_auxiliary" value="{{$val->product_name_auxiliary}}" size="60" /></td>
+          <td><input name="product_name_auxiliary" type="text" id="product_name_auxiliary" value="<?php echo e($val->product_name_auxiliary); ?>" size="60" /></td>
         </tr>
         <tr>
           <td width="20%" class="col3">キャッチコピー</td>
-          <td><textarea name="copy" cols="60" rows="2" id="copy" value="{{$val->copy}}">{{$val->copy}}</textarea></td>
+          <td><textarea name="copy" cols="60" rows="2" id="copy" value="<?php echo e($val->copy); ?>"><?php echo e($val->copy); ?></textarea></td>
         </tr>
         <tr>
           <td colspan="2" class="col2">●&nbsp;詳細画面タイプ</td>
         </tr>
         <tr>
           <td width="20%" class="col3">概要</td>
-          <td><textarea name="overview" cols="60" rows="3" id="overview" value="{{$val->overview}}">{{$val->overview}}</textarea></td>
+          <td><textarea name="overview" cols="60" rows="3" id="overview" value="<?php echo e($val->overview); ?>"><?php echo e($val->overview); ?></textarea></td>
         </tr>
         <tr>
           <td width="20%" class="col3">セット内容</td>
-          <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="{{$val->overview}}">{{$val->set_content}}</textarea></td>
+          <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="<?php echo e($val->overview); ?>"><?php echo e($val->set_content); ?></textarea></td>
         </tr>
         <tr>
           <td width="20%" class="col3">注釈</td>
-          <td><textarea name="annotation" cols="60" rows="2" id="annotation" value="{{$val->annotation}}">{{$val->annotation}}</textarea></td>
+          <td><textarea name="annotation" cols="60" rows="2" id="annotation" value="<?php echo e($val->annotation); ?>"><?php echo e($val->annotation); ?></textarea></td>
         </tr>
         <tr>
           <td width="20%" class="col3">写真-1</td>
-          <td><input type="file" name="image_first" id="image_first" value="{{$val->image_first}}"/></td>
+          <td><input type="file" name="image_first" id="image_first" value="<?php echo e($val->image_first); ?>"/></td>
         </tr>
         <tr>
           <td width="20%" class="col3">写真-2</td>
-          <td><input type="file" name="image_second" id="image_second" value="{{$val->image_second}}"/></td>
+          <td><input type="file" name="image_second" id="image_second" value="<?php echo e($val->image_second); ?>"/></td>
         </tr>
         <tr>
           <td colspan="2" class="col2">▼料金</td>
@@ -98,16 +97,16 @@
         </tr>
         <tr>
           <td width="20%" class="col3">販売価格</td>
-          <td><input type="text" name="sell_price" id="sell_price" value="{{$val->sell_price}}"/>
+          <td><input type="text" name="sell_price" id="sell_price" value="<?php echo e($val->sell_price); ?>"/>
             円（税別）</td>
         </tr>
         <tr>
           <td width="20%" class="col3">価格注釈</td>
-          <td><textarea name="annotation_price" cols="60" rows="2" id="annotation_price" value="{{$val->annotation_price}}">{{$val->annotation_price}}</textarea></td>
+          <td><textarea name="annotation_price" cols="60" rows="2" id="annotation_price" value="<?php echo e($val->annotation_price); ?>"><?php echo e($val->annotation_price); ?></textarea></td>
         </tr>
         <tr>
             <td width="20%" class="col3">表組み</td>       
-            <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$val->omotekumi}}">{{$val->omotekumi}}</textarea></td>              
+            <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="<?php echo e($val->omotekumi); ?>"><?php echo e($val->omotekumi); ?></textarea></td>              
         </tr>
         <tr>
           <td colspan="2" class="col2">●リンクタイプ</td>
@@ -115,9 +114,9 @@
         <tr>
           <td class="col3">URL <span class="notnull">[*]</span></td>
           
-          <td><input name="url" type="text" id="url" size="50" value="{{$val->url}}" />
+          <td><input name="url" type="text" id="url" size="50" value="<?php echo e($val->url); ?>" />
               
-              <input type="checkbox" name="open_tab" id="open_tab" value="{{$val->open_tab}}" <?php if($val->open_tab == 1) echo 'checked="checked"'; ?>/>
+              <input type="checkbox" name="open_tab" id="open_tab" value="<?php echo e($val->open_tab); ?>" <?php if($val->open_tab == 1) echo 'checked="checked"'; ?>/>
             新しいウィンドウを開いて表示する <br />
             入力例） http://www.yahoo.co.jp</td>
         </tr>
@@ -126,7 +125,7 @@
         </tr>
         <tr>
           <td class="col3">ファイル <span class="notnull">[*]</span></td>
-          <td><input type="file" name="file" id="file" value="{{$val->file}}"/><br />
+          <td><input type="file" name="file" id="file" value="<?php echo e($val->file); ?>"/><br />
             ※容量2MBまで</td>
         </tr>
         <tr>
@@ -134,7 +133,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display_top" id="display_top" value="{{$val->display_top}}" <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
+          <td><input type="checkbox" name="display_top" id="display_top" value="<?php echo e($val->display_top); ?>" <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
             おすすめの＜販売＞商品として表示する</td>
         </tr>
         <tr>
@@ -142,7 +141,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display" id="display" value="{{$val->display}}" <?php if($val->display == 1) echo 'checked="checked"'; ?>/>
+          <td><input type="checkbox" name="display" id="display" value="<?php echo e($val->display); ?>" <?php if($val->display == 1) echo 'checked="checked"'; ?>/>
             一時的に一般側画面へ表示しない</td>
         </tr>
       </table></td>
@@ -151,7 +150,8 @@
   <tr>
     <td align="center"><input type="submit" name="btnSubEdit" id="btnSubEdit" value="登録する" />     
   </tr>
-      {!! Form::close() !!}
+      <?php echo Form::close(); ?>
+
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -162,12 +162,13 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-@endsection
+<?php $__env->stopSection(); ?>
 <script type="text/javascript">
     window.onload = function () {
         CKEDITOR.replace('omotekumi', {
-            filebrowserBrowseUrl: "{!! url('filemanager/show') !!}",
+            filebrowserBrowseUrl: "<?php echo url('filemanager/show'); ?>",
             enterMode	: Number(2)
         });
     };
 </script>
+<?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

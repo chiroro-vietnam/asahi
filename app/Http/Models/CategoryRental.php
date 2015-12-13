@@ -9,16 +9,18 @@ class CategoryRental extends Model {
 	
 	//get list category rental
 	public static function getCatRental(){
-		return DB::table(static::$table)->where('is_deleted', 0)
-                                                ->orderBy('created_at', 'DESC')
-                                                ->paginate(10);
+		return DB::table(static::$table)
+                        ->where('is_deleted', NO_DELLETE)
+                        ->orderBy('order', 'ASC')
+                        ->paginate(LIMIT_PAGE);
                         
 	}
 	
 	//delete item category rental
 	public static function delCateRental($id){
-		return DB::table(static::$table)->where('id', '=', $id)
-										->update(array('is_deleted' => 1));
+		return DB::table(static::$table)
+                        ->where('id', '=', $id)
+                        ->update(array('is_deleted' => DELETED));
                         
 	}
         

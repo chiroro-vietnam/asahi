@@ -22,16 +22,47 @@ class RentalController extends Controller
     }
 
 
-    //rental    
+    //get rental osusume    
     public function getOsusume()
     {
-        return view('admin.rental.osusume');
+        //list rental product
+        $lrp = RentalProduct::getAllRentalPro();
+        return view('admin.rental.osusume', compact('lrp'));
     }
-    //rental
+    //update rental osusume order
     public function postOsusume()
     {
-        
+        $orders = DB::table('rental_product')
+                        ->select('id', 'order')
+                        ->where('is_deleted', NO_DELLETE)
+                        ->get();
+
+        $orderUpdate = array();
+        foreach ($orders as $order){
+            $id = $order->id;
+            $orderUpdate[$id] = Input::get('order_'.$id);
+        }
+
+        //update order rental product
+        foreach ($orderUpdate as $id => $val) {
+                DB::table('rental_product')
+                        ->where('id', '=', $id)
+                        ->update(array('order' => $val));
+        }
+        Session::flash('success', 'Order rental product updated successfully.');
+        return redirect::route('admin.rental.osusume');
     }
+    
+    //delete rental osusume
+    public function delRenOsusume($id)
+    {
+        DB::table('rental_product')
+                ->where('id', '=', $id)
+                ->update(array('is_deleted' => DELETED));
+        Session::flash('success', 'The rental product deleted successfully.');
+        return redirect::route('admin.rental.osusume');
+    }
+    
     
     //category rental
     public function getCatategory()
@@ -49,12 +80,14 @@ class RentalController extends Controller
     {
         $cr_id = Input::get('cr_id');
         if($cr_id != null){
-            $crs = DB::table('category_rental')->where('is_deleted', NO_DELLETE)->lists('name', 'id');
+            $crs = DB::table('category_rental')
+                    ->where('is_deleted', NO_DELLETE)->lists('name', 'id');
             $rp = $this->_searchRentPro($cr_id);
             return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
             
         }  else {
-            $crs = DB::table('category_rental')->where('is_deleted', NO_DELLETE)->lists('name', 'id');
+            $crs = DB::table('category_rental')
+                    ->where('is_deleted', NO_DELLETE)->lists('name', 'id');
             if(Input::has('btmSearchRT'))
             {            
                $cr_id = Input::get('cat_rental');
@@ -72,9 +105,11 @@ class RentalController extends Controller
     //Search rental product
     private function _searchRentPro($cat_rental_id)
     {
-        return DB::table('rental_product')->where('is_deleted', NO_DELLETE)
-                                          ->where('cat_rental_id', $cat_rental_id)
-                                          ->paginate(LIMIT_PAGE);
+        return DB::table('rental_product')
+                ->where('is_deleted', NO_DELLETE)
+                ->where('cat_rental_id', $cat_rental_id)
+                ->orderBy('order', 'ASC')
+                ->paginate(LIMIT_PAGE);
         
     }
 
@@ -82,7 +117,9 @@ class RentalController extends Controller
     //product rental add
     public function getProRentalAdd($cr_id)            
     {
-        $cat_rental = DB::table('category_rental')->where('is_deleted', NO_DELLETE)->select('id','name')->find($cr_id);
+        $cat_rental = DB::table('category_rental')
+                ->where('is_deleted', NO_DELLETE)
+                ->select('id','name')->find($cr_id);
         return view('admin.product.rental.add', compact('cr_id', 'cat_rental'));
     }
     
@@ -137,9 +174,10 @@ class RentalController extends Controller
                 return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
         }
 
-        return Redirect::to('admin/product/rental/add/'.$cr_id)->with('message'. 'Edit rental product fail, try again!')
-                                                           ->withErrors($validator)
-                                                           ->withInput();  
+        return Redirect::to('admin/product/rental/add/'.$cr_id)
+                ->with('message'. 'Edit rental product fail, try again!')
+                ->withErrors($validator)
+                ->withInput();  
     }
     //product rental edit
     public function getProRentalEdit($id)
@@ -210,14 +248,17 @@ class RentalController extends Controller
                 }
 
 
-                DB::table('rental_product')->where('id', $id)->update($inputData);
+                DB::table('rental_product')
+                        ->where('id', $id)
+                        ->update($inputData);
                 Session::flash('success', 'The rental product updated successfully.');
                 return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
         }
 
-        return Redirect::to('admin/product/rental/edit/'.$id)->with('message'. 'Edit rental product fail, try again!')
-                                                           ->withErrors($validator)
-                                                           ->withInput();  
+        return Redirect::to('admin/product/rental/edit/'.$id)
+                ->with('message'. 'Edit rental product fail, try again!')
+                ->withErrors($validator)
+                ->withInput();  
     }
     
     //product rental delete
@@ -225,8 +266,9 @@ class RentalController extends Controller
     {
         $cat_id = DB::table('rental_product')->select('cat_rental_id')->find($id);
         $cr_id = $cat_id->cat_rental_id;
-        DB::table('rental_product')->where('id', '=', $id)
-                                    ->update(array('is_deleted' => DELETED));
+        DB::table('rental_product')
+                ->where('id', '=', $id)
+                ->update(array('is_deleted' => DELETED));
         return Redirect::to('admin/product/rental/?cr_id='.$cr_id)->with('message', 'Product rental has been deleted successfully');
     }
 }

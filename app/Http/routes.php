@@ -33,7 +33,7 @@ Route::group(array('namespace' => 'Admin'), function () {
     //product osusume sell
     Route::get('admin/product/osusume-rental', array('as' => 'admin.rental.osusume', 'uses' => 'RentalController@getOsusume'));
     Route::post('admin/product/osusume-rental', array('as' => 'admin.rental.osusume', 'uses' => 'RentalController@postOsusume'));
-    
+    Route::get('admin/product/osusume-rental/del/{id}', array('as' => 'admin.rental.osusume.del', 'uses' => 'RentalController@delRenOsusume'));
 
     //category rental list
     Route::get('admin/category/rental', array('as' => 'admin.category.rental.list', 'uses' => 'CategoryController@listCatRental'));
@@ -48,15 +48,17 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/category/sell', array('as' => 'admin.category.sell.list', 'uses' => 'CategoryController@listCatSell'));
     Route::get('admin/category/sell/add', array('as' => 'admin.category.sell.add', 'uses' => 'CategoryController@getCatSellAdd'));
     Route::post('admin/category/sell/add', array('as' => 'admin.category.sell.add', 'uses' => 'CategoryController@postCatSellAdd'));
-    Route::get('admin/category/sell/edit', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@getCatSellEdit'));
-    Route::post('admin/category/sell/edit', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@postSellEdit'));
+    Route::get('admin/category/sell/edit/{id?}', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@getCatSellEdit'));
+    Route::post('admin/category/sell/edit/{id?}', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@postCatSellEdit'));
+    Route::get('admin/category/sell/del/{id?}', array('as' => 'admin.category.sell.del', 'uses' => 'CategoryController@delCatSell'));
 
     //product sell
     Route::get('admin/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));
-    Route::get('admin/product/sell/add', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
-    Route::post('admin/product/sell/add', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
-    Route::get('admin/product/sell/edit', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@getProSellEdit'));
-    Route::post('admin/product/sell/edit', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
+    Route::post('admin/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));
+    Route::get('admin/product/sell/add/{cs_id?}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
+    Route::post('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
+    Route::get('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@getProSellEdit'));
+    Route::post('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
     
     //product rental
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));

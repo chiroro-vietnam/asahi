@@ -1,6 +1,4 @@
-@extends('backend')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
   <tr>
@@ -11,30 +9,33 @@
   </tr>
     <tr>
       <td>
-          @if($errors->any())
+          <?php if($errors->any()): ?>
             <div class="errors">
                 <ul class="msg-validate">
-                    @foreach($errors->all() as $error)
+                    <?php foreach($errors->all() as $error): ?>
                       <div class="alert alert-danger">
-                          <li>{{ $error }}</li>
+                          <li><?php echo e($error); ?></li>
                       </div>               
-                    @endforeach
+                    <?php endforeach; ?>
                 </ul>
             </div>
-          @endif          
+          <?php endif; ?>          
       </td>    
   </tr>
   
-   {!! Form::open( ['method' => 'post', 'url' => 'admin/category/sell/edit/'.$cat_sell->id, 'enctype'=>'multipart/form-data'] ) !!}
+  <?php echo Form::open( ['method' => 'post', 'route' => 'admin.category.sell.add', 'enctype'=>'multipart/form-data'] ); ?>
+
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td width="20%" class="col3">カテゴリ名 <span class="notnull">[*]</span></td>
-        <td><input name="name" type="text" id="name" value="{{$cat_sell->name}}" size="60" /></td>
+        <td><input name="name" type="text" id="name" size="60" />
+            <input name="order" type="hidden" id="order" value="<?php echo e($order); ?>" size="60" />
+        </td>
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>
-        <td><input type="checkbox" name="display" id="display" <?php if($cat_sell->display) echo 'checked="checked"';?>/>
+        <td><input type="checkbox" name="display" id="display" />
           一時的に一般側画面へ表示しない</td>
       </tr>
     </table></td>
@@ -54,5 +55,7 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-{!! Form::close() !!}
-@endsection
+<?php echo Form::close(); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

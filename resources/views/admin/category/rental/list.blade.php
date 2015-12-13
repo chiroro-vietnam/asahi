@@ -48,7 +48,7 @@
                 <td><input type="submit" name="button7" id="button7" value="↑" /></td>
                 <td><input type="submit" name="button8" id="button8" value="↓" /></td>
                 <td><input type="submit" name="button4" id="button4" value="LAST" /></td>
-                <td><input type="button" onclick="location.href='<?php echo route('admin.product.rental.list'); ?>'" value="カテゴリ内商品管理" /></td>
+                <td><input type="button" onclick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
           @endforeach
         @else

@@ -1,15 +1,31 @@
 <?php namespace App\Http\Models;
 use DB;
+use Paginator;
 
-class CategoryRental extends Model {
-	protected $table = 'category_rental';
-	protected $primary_key = 'id';
-	protected $order = 'desc';
+class CategoryProduct extends Model {
+	protected static $table = 'category_product';
+	protected static $primary_key = 'id';
+        
+        public static $rules = array(
+		'name'    => 'required'
+	);
 
-	public function get_cat(){
-		return DB::table('category_rental')->where('is_deleted', 0)
-                                                    ->orderBy('created_at', 'DESC')
-                                                    ->get();
+	public static $messages = array(
+		'name.required'	=> 'Please enter category sell'		
+	);
+
+	public static function getCatSell(){
+		return DB::table(static::$table)
+                        ->where('is_deleted', NO_DELLETE)
+                        ->orderBy('order', 'ASC')
+                        ->paginate(LIMIT_PAGE);
+                        
+	}
+        
+        public static function getCatSellEdit($id){
+		return DB::table(static::$table)
+                        ->where('is_deleted', NO_DELLETE)
+                        ->find($id);
                         
 	}
 }

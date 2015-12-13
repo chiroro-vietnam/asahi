@@ -9,15 +9,34 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
+    <tr>
+      <td>
+          @if($errors->any())
+            <div class="errors">
+                <ul class="msg-validate">
+                    @foreach($errors->all() as $error)
+                      <div class="alert alert-danger">
+                          <li>{{ $error }}</li>
+                      </div>               
+                    @endforeach
+                </ul>
+            </div>
+          @endif          
+      </td>    
+  </tr>
+  
+  {!! Form::open( ['method' => 'post', 'route' => 'admin.category.sell.add', 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td width="20%" class="col3">カテゴリ名 <span class="notnull">[*]</span></td>
-        <td><input name="textfield10" type="text" id="textfield10" size="60" /></td>
+        <td><input name="name" type="text" id="name" size="60" />
+            <input name="order" type="hidden" id="order" value="{{$order}}" size="60" />
+        </td>
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>
-        <td><input type="checkbox" name="checkbox" id="checkbox" />
+        <td><input type="checkbox" name="display" id="display" />
           一時的に一般側画面へ表示しない</td>
       </tr>
     </table></td>
@@ -37,4 +56,5 @@
     <td>&nbsp;</td>
   </tr>
 </table>
+{!! Form::close() !!}
 @endsection
