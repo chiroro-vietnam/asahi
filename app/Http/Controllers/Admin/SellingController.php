@@ -17,17 +17,45 @@ use Image;
 class SellingController extends Controller
 {
    
-        
+   //get sell osusume     
     public function getOsusume()
     {
-        return view('admin.sell.osusume');
+        //list sell product
+        $lsp = SellProduct::getAllSellPro();
+        return view('admin.sell.osusume', compact('lsp'));
     }
-    
+        //update sell osusume order
     public function postOsusume()
     {
-        
+         $orders = DB::table('sell_product')
+                        ->select('id', 'order')
+                        ->where('is_deleted', NO_DELLETE)
+                        ->get();
+
+        $orderUpdate = array();
+        foreach ($orders as $order){
+            $id = $order->id;
+            $orderUpdate[$id] = Input::get('order_'.$id);
+        }
+
+        //update order sell product
+        foreach ($orderUpdate as $id => $val) {
+                DB::table('sell_product')
+                        ->where('id', '=', $id)
+                        ->update(array('order' => $val));
+        }
+        Session::flash('success', 'Order sell product updated successfully.');
+        return redirect::route('admin.sell.osusume');
     }
-    
+    //delete sell osusume
+    public function delRenOsusume($id)
+    {
+        DB::table('sell_product')
+                ->where('id', '=', $id)
+                ->update(array('is_deleted' => DELETED));
+        Session::flash('success', 'The sell product deleted successfully.');
+        return redirect::route('admin.sell.osusume');
+    }
     //product sell list
     public function listProSell($cs_id=null)
     {
