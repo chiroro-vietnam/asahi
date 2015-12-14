@@ -53,7 +53,7 @@
       </tr>
       <tr>
         <td width="20%" class="col3">セット内容</td>
-        <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="{{$rp->set_content}}">{{$rp->set_content}}</textarea></td>
+        <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="{{nl2br($rp->set_content)}}">{{nl2br($rp->set_content)}}</textarea></td>
       </tr>
       <tr>
         <td width="20%" class="col3">注釈</td>

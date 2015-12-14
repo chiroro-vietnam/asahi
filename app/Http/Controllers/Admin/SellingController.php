@@ -247,7 +247,7 @@ class SellingController extends Controller
                 if(Input::file('file')){
                         $extension = Input::file('file')->getClientOriginalExtension(); // getting image extension  
                         $fileName = rand(date("Ymd"), time()).".".$extension;
-                       $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
+                        $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
                         $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
                 }
 

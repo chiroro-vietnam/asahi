@@ -1,15 +1,7 @@
 @extends('frontend')
 
 @section('content')
-<nav>
-  <ul class="clear">
-    <li id="nav01"><a href="index.html" title="TOP">TOP</a></li>
-    <li id="nav02"><a href="rental_list.html" title="レンタルサービス">レンタルサービス</a></li>
-    <li id="nav03"><a href="products_list.html" title="販売">販売</a></li>
-    <li id="nav04"><a href="maker.html" title="取扱いメーカー">取扱いメーカー</a></li>
-    <li id="nav05"><a href="company.html" title="会社概要">会社概要</a></li>
-  </ul>
-</nav>
+
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="index.html" title="TOP" class="now">TOP</a></li>

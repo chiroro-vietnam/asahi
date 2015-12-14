@@ -19,11 +19,16 @@ Route::get('/', function () {
 Route::group(array('namespace' => 'Frontend'), function () {
     //homepage
     Route::get('/', ['as' => 'frontend.homepage', 'uses' => 'HomepageController@index']);
+    
     //rental
     Route::get('rental/', ['as' => 'frontend.rental.list', 'uses' => 'RentalController@index']);
+    Route::get('rental/detail/{id}', ['as' => 'frontend.rental.detail', 'uses' => 'RentalController@rentalDetail']);    
+    Route::get('rental/agree', ['as' => 'frontend.rental.agree', 'uses' => 'RentalController@rentalAgree']);
 
+  
     //product
     Route::get('product/', ['as' => 'frontend.product.list', 'uses' => 'ProductController@index']);
+    Route::get('product/{id?}', ['as' => 'frontend.product.detail', 'uses' => 'ProductController@productDetail']);
     
     //maker
     Route::get('maker/', ['as' => 'frontend.maker.list', 'uses' => 'MakerController@index']);

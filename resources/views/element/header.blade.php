@@ -29,3 +29,12 @@
       <img src="frontend/image/h_tel.png" alt="電話でのお問い合わせ：086-244-1201">
   </div>
 </header>
+<nav>
+  <ul class="clear">
+    <li id="nav01"><a href="<?php echo route('frontend.homepage'); ?>" title="TOP">TOP</a></li>
+    <li id="nav02"><a href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス" class="now">レンタルサービス</a></li>
+    <li id="nav03"><a href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
+    <li id="nav04"><a href="<?php echo route('frontend.maker.list'); ?>" title="取扱いメーカー">取扱いメーカー</a></li>
+    <li id="nav05"><a href="<?php echo route('frontend.company.index'); ?>" title="会社概要">会社概要</a></li>
+  </ul>
+</nav>
