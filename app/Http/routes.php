@@ -80,6 +80,7 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::post('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
     Route::get('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@getProSellEdit'));
     Route::post('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
+    Route::get('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));  
     
     //product rental
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
