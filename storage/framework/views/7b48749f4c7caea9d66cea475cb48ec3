@@ -1,5 +1,4 @@
 <?php $__env->startSection('content'); ?>
-
 <nav>
   <ul class="clear">
     <li id="nav01"><a href="index.html" title="TOP">TOP</a></li>
