@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\URL;
 use DB;
 
 class Rental extends Model {
-	protected static $table = 'rental';
-	protected static $primary_key = 'id';
+	protected static $table = 'rental_product';
 
 
 //	public static $rules = array(
@@ -19,8 +18,19 @@ class Rental extends Model {
 //			'user_id.required'	=> 'Please choose user',
 //			'comment.required'	=> 'Please enter comment',
 //	);
-
-	public static function get_detail(){
-		return DB::table(static::$table)->where('is_deleted', '=', NO_DELLETE)->paginate(LIMIT_PAGE);
+        //get list rental for frontend
+	public static function getRental(){
+		return DB::table(static::$table)
+                        ->select('rental_product.*')
+                        ->where('is_deleted', '=', NO_DELLETE)
+                        ->paginate(LIMIT_PAGE);
+	}
+        
+        //get list rental detail
+	public static function getRentalDetail($id){
+		return DB::table(static::$table)
+                        ->select('rental_product.*')
+                        ->where('is_deleted', '=', NO_DELLETE)
+                        ->find($id);
 	}
 }

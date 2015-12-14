@@ -1,33 +1,57 @@
 <?php
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\FrontendController;
+use App\Http\Models\Rental;
+//getRental
 
-use Validator;
-use Auth;
-use Session;
-use Input;
-use Redirect;
-use Html;
-use League\Flysystem\Filesystem;
 use View;
 use DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Support\Facades\File;
-use Illuminate\Contracts\Auth\Guard;
+use Html;
+use URL;
+use Form;
+
 
 
 
 
 class RentalController extends FrontendController{
+    
 
-	/************************************************************************
+        /************************************************************************
 	*
+        * 
+        * 
+        *
 	/************************************************************************/
 	public function index() 
         {
-            return view('frontend.rental.list');
-	}
+            $title_rental = 'レンタルサービス';
+            $title_cat_rental = '配水ポリエチレン管融着工具';
+            $rentals = Rental::getRental();
 
+            return view('frontend.rental.list', compact('rentals', 'title_rental', 'title_cat_rental'));
+	}
+        
+        /************************************************************************
+	*@Rental detail
+        * 
+        * 
+        *
+	/************************************************************************/
+        public function rentalDetail($id){
+            $title_rental = 'レンタルサービス';
+            $rental = Rental::getRentalDetail($id);
+            return view('frontend.rental.detail', compact('rental', 'title_rental'));
+        }
+        
+        /************************************************************************
+	*@Rental agree
+        * 
+        * 
+        *
+	/************************************************************************/
+        public function rentalAgree(){
+            
+        }
+        
 }
