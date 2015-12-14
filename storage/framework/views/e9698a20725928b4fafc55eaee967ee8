@@ -11,15 +11,21 @@
 <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
 
- @yield('style')
-    {!! HTML::style('frontend/css/import.css') !!}
+ <?php echo $__env->yieldContent('style'); ?>
+    <?php echo HTML::style('frontend/css/import.css'); ?>
+
     
-@yield('script')
-{!! HTML::script('frontend/js/jquery.cookie.js'); !!}
-{!! HTML::script('frontend/js/jquery.bxslider.min.js'); !!}
-{!! HTML::script('frontend/js/function.js'); !!}
-{!! HTML::script('frontend/js/jquery.bxslider.min.js'); !!}
-{!! HTML::script('frontend/js/top.js'); !!}
+<?php echo $__env->yieldContent('script'); ?>
+<?php echo HTML::script('frontend/js/jquery.cookie.js');; ?>
+
+<?php echo HTML::script('frontend/js/jquery.bxslider.min.js');; ?>
+
+<?php echo HTML::script('frontend/js/function.js');; ?>
+
+<?php echo HTML::script('frontend/js/jquery.bxslider.min.js');; ?>
+
+<?php echo HTML::script('frontend/js/top.js');; ?>
+
 
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -35,19 +41,19 @@
 
 <body id="ptop">
 <!--    begin header-->
- @include('element/header')
+ <?php echo $__env->make('element/header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <!--end header    -->
     
     
 <!-- begin content -->
-  @yield('content')
+  <?php echo $__env->yieldContent('content'); ?>
 <!-- end content -->   
     
     
     
 <!--bengin footer    -->
- @include('element/footer')
+ <?php echo $__env->make('element/footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <!--end footer-->
 </body>
 </html>    

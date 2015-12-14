@@ -15,6 +15,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Frontend
+Route::group(array('namespace' => 'Frontend'), function () {
+    //homepage
+    Route::get('/', ['as' => 'frontend.homepage', 'uses' => 'HomepageController@index']);
+    //rental
+    Route::get('rental/', ['as' => 'frontend.rental.list', 'uses' => 'RentalController@index']);
+
+    //product
+    Route::get('product/', ['as' => 'frontend.product.list', 'uses' => 'ProductController@index']);
+    
+    //maker
+    Route::get('maker/', ['as' => 'frontend.maker.list', 'uses' => 'MakerController@index']);
+    
+     //Company
+    Route::get('company/', ['as' => 'frontend.company.index', 'uses' => 'CompanyController@index']);
+    
+    //Inquiry
+    Route::get('inquiry/', ['as' => 'frontend.inquiry.index', 'uses' => 'InquiryController@index']);
+    
+});
+
 //Admin
 Route::group(array('namespace' => 'Admin'), function () {
     
@@ -72,4 +93,6 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/product/rental/del/{id}', array('as' => 'admin.product.rental.del', 'uses' => 'RentalController@delProRental'));
     
 });
+
+
 

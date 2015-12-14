@@ -27,36 +27,13 @@ abstract class BackendController extends BaseController {
 	/************************************************************************/
 	public function __construct()
 	{
-		//deine contant key value setting
-		$settingModel = new Setting;
-		$dataSetting = $settingModel->getVal();
-		if(!empty($dataSetting)){
-			foreach($dataSetting as $key => $val){
-				$k = trim($val->key);
-				$v = trim($val->current_value);
-				define($k, $v, true);
-			}
-		}
+		
 	}
 
 
 	/************************************************************************
 	*	this function return array, no object
 	/************************************************************************/
-	public function recursive_category($list_category, $parent = 0, $prefix = '', $tree = array()){
-		if($list_category){
-			foreach($list_category as $key => $value){
-				if($value->parent == $parent){
-					$value->name = $prefix.$value->name;
-					$tree[] = get_object_vars($value);
-					$id = $value->id;
-					unset($list_category[$key]);
-					$tree = $this->recursive_category($list_category, $id, $prefix . '--- ', $tree);
-				}
-			}
-		}
-		return $tree;
-	}
 
 	
 }

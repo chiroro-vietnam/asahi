@@ -23,7 +23,7 @@
 	<?php endif; ?>
       </td>
   </tr>
-  <?php echo Form::open( ['method' => 'post', 'url' => 'admin/product/osusume-rental', 'enctype'=>'multipart/form-data'] ); ?>
+  <?php echo Form::open( ['method' => 'post', 'url' => 'admin/product/osusume-sell', 'enctype'=>'multipart/form-data'] ); ?>
 
   <tr>
     <td align="left">※商品管理でおすすめ商品として表示するにチェックが入っている商品のみを表示しております。<br />
