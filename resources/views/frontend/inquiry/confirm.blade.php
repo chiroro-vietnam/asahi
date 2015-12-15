@@ -1,7 +1,9 @@
 @extends('frontend')
 
 @section('content')
-
+<?php
+//print_r($items);
+?>
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="index.html" title="TOP" class="now">TOP</a></li>
@@ -24,8 +26,7 @@
             <tbody>
               <tr>
                 <th>お問い合わせ内容</th>
-                <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td></td>
+                <td>{{}}</td>
               </tr>
               <tr>
                 <th>お名前</th>

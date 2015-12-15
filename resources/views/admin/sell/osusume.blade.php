@@ -10,13 +10,6 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="left">※商品管理でおすすめ商品として表示するにチェックが入っている商品のみを表示しております。<br />
-    ※TOPページにおすすめ＜販売＞商品を●点まで表示することができます。<br /></td>
-  </tr> 
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
       <td>
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
