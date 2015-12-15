@@ -15,19 +15,121 @@ use File;
 use Image;
 
 class SellingController extends Controller
-{
-   
-        
+{   
+   //get sell osusume     
     public function getOsusume()
     {
-        return view('admin.sell.osusume');
+        //list sell product
+        $lsp = SellProduct::getAllSellPro();
+        return view('admin.sell.osusume', compact('lsp'));
     }
-    
+        //update sell osusume order
     public function postOsusume()
     {
-        
+         $orders = DB::table('sell_product')
+                        ->select('id', 'order')
+                        ->where('is_deleted', NO_DELLETE)
+                        ->get();
+
+        $orderUpdate = array();
+        foreach ($orders as $order){
+            $id = $order->id;
+            $orderUpdate[$id] = Input::get('order_'.$id);
+        }
+
+        //update order sell product
+        foreach ($orderUpdate as $id => $val) {
+                DB::table('sell_product')
+                        ->where('id', '=', $id)
+                        ->update(array('order' => $val));
+        }
+        Session::flash('success', 'Order sell product updated successfully.');
+        return redirect::route('admin.sell.osusume');
+    }
+    //delete sell osusume
+    public function delRenOsusume($id)
+    {
+        DB::table('sell_product')
+                ->where('id', '=', $id)
+                ->update(array('is_deleted' => DELETED));
+        Session::flash('success', 'The sell product deleted successfully.');
+        return redirect::route('admin.sell.osusume');
     }
     
+     //product sell add
+   public function postProSellAdd($cs_id)
+    {
+        $validator = Validator::make(Input::all(), SellProduct::$rules, SellProduct::$messages);
+        if($validator->passes()){
+             
+                $display = !empty(Input::get('display')) ? 1 : 0;
+                $display_top = !empty(Input::get('display_top')) ? 1 : 0;
+                
+               $inputData['display_type']              = Input::get('display_type');
+                
+                $inputData['product_name']              = Input::get('product_name');
+                $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
+                $inputData['copy']                      = Input::get('copy');
+                $inputData['overview']                  = Input::get('overview');
+                $inputData['set_content']               = Input::get('set_content');
+                $inputData['annotation']                = Input::get('annotation');
+                //$inputData['display_rate']              = Input::get('display_rate');
+                $inputData['display_rate']              = 1;                  
+                $inputData['sell_price']                = Input::get('sell_price');
+                $inputData['annotation_price']          = Input::get('annotation_price');
+                $inputData['omotekumi']                 = Input::get('omotekumi');                
+                $inputData['url']                       = Input::get('url');
+                 $inputData['open_tab']                 = Input::get('open_tab');                
+                $inputData['display']                   = $display;
+                $inputData['display_top']				= $display_top;               
+                $inputData['updated_at']                = date('Y-m-d H:i:s');
+                $inputData['cat_product_id']			= $cs_id;
+
+               $image_first = Input::file('image_first');             
+
+                if(Input::file('image_first')){
+                        $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
+                        $fileName1 = rand(date("Ymd"), time()).".".$extension1;
+                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
+                        $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
+                }
+                
+                $image_second = Input::file('image_second');
+                
+                if(Input::file('image_second')){
+                        $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
+                        $fileName2 = rand(date("Ymd"), time()).".".$extension2;
+                        Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
+                        $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
+                }
+                
+                $file = Input::file('file');
+                if(Input::file('file')){
+                        $extension = Input::file('file')->getClientOriginalExtension(); // getting image extension  
+                        $fileName = rand(date("Ymd"), time()).".".$extension;
+                       $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
+                        $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
+                }                 
+                
+                DB::table('sell_product')->insert($inputData);
+                Session::flash('success', 'The rental product insert successfully.');
+                return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
+        }
+
+        return Redirect::to('admin/product/sell/add/'.$cs_id)
+                ->with('message'. 'Edit sell product fail, try again!')
+                ->withErrors($validator)
+                ->withInput();  
+    }
+
+      //product sell add
+    public function getProSellAdd($cs_id)            
+    {
+        $cat_sell = DB::table('category_product')
+                ->where('is_deleted', NO_DELLETE)
+                ->select('id','name')->find($cs_id);
+        return view('admin.product.sell.add', compact('cs_id', 'cat_sell'));
+    }
     //product sell list
     public function listProSell($cs_id=null)
     {
@@ -52,7 +154,6 @@ class SellingController extends Controller
             return view('admin.product.sell.list', compact('csp'));
             }
         }
-
     }
     
      //Search rental product
@@ -62,19 +163,8 @@ class SellingController extends Controller
                 ->where('is_deleted', NO_DELLETE)
                 ->where('cat_product_id', $cat_product_id)
                 ->paginate(LIMIT_PAGE);        
-    }
+    }   
     
-    //product sell add
-    public function getProSellAdd()
-    {
-        return view('admin.product.sell.add');
-    }
-    
-    //product sell add
-    public function postProSellAdd()
-    {
-        
-    }
     //product sell edit
     public function getProSellEdit($id)
     {       
@@ -128,8 +218,8 @@ class SellingController extends Controller
                 if(Input::file('image_first')){
                         $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
                         $fileName1 = rand(date("Ymd"), time()).".".$extension1;
-                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName1);
-                        $inputData['image_first'] = '/uploads/images/rental_product/'.$fileName1;
+                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
+                        $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
                 }
                 
                 $image_second = Input::file('image_second');
@@ -144,8 +234,8 @@ class SellingController extends Controller
                 if(Input::file('image_second')){
                         $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
                         $fileName2 = rand(date("Ymd"), time()).".".$extension2;
-                        Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName2);
-                        $inputData['image_second'] = '/uploads/images/rental_product/'.$fileName2;
+                        Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
+                        $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
                 }
                 
                 $file = Input::file('file');
