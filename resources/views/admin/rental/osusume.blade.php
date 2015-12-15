@@ -60,7 +60,18 @@
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
+  <tr>
+      <td>
+          <div class="pull-right">
+            <ul class="pagination">
+                {!! $lrp->render() !!}          
+            </ul>
+        </div>
+     </td>
+  </tr>
+  
 </table>
+
   {!! Form::close() !!}
 @endsection
 

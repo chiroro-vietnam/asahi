@@ -39,15 +39,15 @@
         <td width="10%" align="center">表示順序</td>
       </tr>
       
-      @if(count($lrp) > 0)
-        @foreach($lrp as $rp)
+      @if(count($lsp) > 0)
+        @foreach($lsp as $sp)
             <tr>
                 <td align="center">                   
-                    <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('admin/product/osusume-rental/del/'.$rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
-                <td>{{$rp->product_name}}</td>
-                <td>{{$rp->product_name_auxiliary}}</td>
+                    <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('admin/product/osusume-sell/del/'.$sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                <td>{{$sp->product_name}}</td>
+                <td>{{$sp->product_name_auxiliary}}</td>
                 <td align="center">
-                  <input style="text-align:center" name="order_{{$rp->id}}" type="text" id="order_{{$rp->id}}" value="{{$rp->order}}" size="5" />
+                  <input style="text-align:center" name="order_{{$sp->id}}" type="text" id="order_{{$sp->id}}" value="{{$sp->order}}" size="5" />
                 </td>
             </tr>
 
@@ -67,7 +67,17 @@
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
+  <tr>
+      <td>
+          <div class="pull-right">
+            <ul class="pagination">
+                {!! $lsp->render() !!}          
+            </ul>
+        </div>
+     </td>
+  </tr>
 </table>
+
   {!! Form::close() !!}
 @endsection
 

@@ -323,7 +323,7 @@ a.label:focus {
 }
 
 div.pull-right ul.pagination {
-    margin-left: -170px;
+   /* margin-left: -170px;*/
     margin-top: -3px;
 }
 

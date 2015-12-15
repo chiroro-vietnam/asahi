@@ -186,8 +186,7 @@ class SellingController extends Controller
                 $display = !empty(Input::get('display')) ? 1 : 0;
                 $display_top = !empty(Input::get('display_top')) ? 1 : 0;
                 
-                $inputData['display_type']              = Input::get('display_type');
-                
+                $inputData['display_type']              = Input::get('display_type');                
                 $inputData['product_name']              = Input::get('product_name');
                 $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
                 $inputData['copy']                      = Input::get('copy');
