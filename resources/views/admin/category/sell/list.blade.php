@@ -73,13 +73,17 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-  
+  <tr>
+      <td>
+          <div class="pull-right">
+            <ul class="pagination">
+                {!! $cat_sell->render() !!}          
+            </ul>
+        </div>
+      </td>
+  </tr>
 </table> 
-    <div class="pull-right">
-        <ul class="pagination">
-            {!! $cat_sell->render() !!}          
-        </ul>
-    </div>
+    
 
 {!! Form::close() !!}
   

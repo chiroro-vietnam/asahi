@@ -52,15 +52,32 @@ class CategoryController extends Controller
     }
     
     //category rental
-    public function getCatRentalEdit()
+    public function getCatRentalEdit($id)
     {
-       return view('admin.category.rental.edit'); 
+       $cat_rental = CategoryRental::getCatRentalEdit($id);
+       return view('admin.category.rental.edit', compact('cat_rental'));  
     }
     
     //category rental
-    public function postCatRentalEdit()
+    public function postCatRentalEdit($id)
     {
-        
+        $validator = Validator::make(Input::all(), CategoryRental::$rules, CategoryRental::$messages);
+        if($validator->passes()){
+                $set_display = !empty(Input::get('display')) ? 1 : 0;
+                $inputData['name']              = Input::get('name');
+                $inputData['display']		= $set_display;              
+                $inputData['updated_at']	= date('Y-m-d H:i:s');
+
+                DB::table('category_rental')
+                        ->where('id', $id)
+                        ->update($inputData);
+                Session::flash('success', 'The category rental edit successfully.');
+                return Redirect::route('admin.category.rental.list');
+        }
+        return Redirect::to('admin/category/rental/edit/'.$id)
+                ->with('message'. 'Edit category rental fail, try again!')
+                ->withErrors($validator)
+                ->withInput();   
     }
     
     //deletel category rental
@@ -79,6 +96,7 @@ class CategoryController extends Controller
         $cat_sell = CategoryProduct::getCatSell();
         return view('admin.category.sell.list', compact('cat_sell'));
     }
+    
     
     //category sell
     public function getCatSellAdd()
@@ -141,7 +159,7 @@ class CategoryController extends Controller
                 ->withErrors($validator)
                 ->withInput();   
     }
-    
+  
         //deletel category rental
     public function delCatSell($id){
         DB::table('category_product')

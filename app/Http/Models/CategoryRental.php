@@ -23,6 +23,12 @@ class CategoryRental extends Model {
                         ->update(array('is_deleted' => DELETED));
                         
 	}
+        public static function getCatRentalEdit($id){
+		return DB::table(static::$table)
+                        ->where('is_deleted', NO_DELLETE)
+                        ->find($id);
+                        
+	}
         
         public static $rules = array(
 		'name'    => 'required'
@@ -31,4 +37,5 @@ class CategoryRental extends Model {
 	public static $messages = array(
 		'name.required'	=> 'Please enter category rental'		
 	);
+        
 }

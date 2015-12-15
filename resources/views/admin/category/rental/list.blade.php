@@ -43,7 +43,7 @@
                 </td>
                 <td align="center"><span class={{@$class_arr[$cat->display]}}>{{@$display_arr[$cat->display]}}</span></td>
                 <td>{{$cat->name}}</td>
-                <td><input type="button" onclick="location.href='<?php echo route('admin.category.rental.edit'); ?>'" value="詳細・編集" /></td>
+                <td><input type="button" onclick="location.href='<?php echo url('admin/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
                 <td><input type="submit" name="button6" id="button6" value="TOP" /></td>
                 <td><input type="submit" name="button7" id="button7" value="↑" /></td>
                 <td><input type="submit" name="button8" id="button8" value="↓" /></td>
@@ -73,14 +73,16 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-  
+  <tr>
+      <td>
+         <div class="pull-right">
+            <ul class="pagination">
+                {!! $cat_rental->render() !!}          
+            </ul>
+        </div>
+      </td>
+  </tr>
 </table> 
-    <div class="pull-right">
-        <ul class="pagination">
-            {!! $cat_rental->render() !!}          
-        </ul>
-    </div>
-
 {!! Form::close() !!}
   
 @endsection

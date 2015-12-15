@@ -75,7 +75,8 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/category/rental/edit', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@getCatRentalEdit'));
     Route::post('admin/category/rental/edit', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@postCatRentalEdit'));
     Route::get('admin/category/rental/del/{id}', array('as' => 'admin.category.rental.del', 'uses' => 'CategoryController@delCatRental'));
-    
+    Route::get('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@getCatRentalEdit'));
+    Route::post('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@postCatRentalEdit'));
 
     //category sell list
     Route::get('admin/category/sell', array('as' => 'admin.category.sell.list', 'uses' => 'CategoryController@listCatSell'));
