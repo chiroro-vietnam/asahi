@@ -8,7 +8,6 @@ class RentalProduct extends Model {
     public static $rules = array(
         'product_name'    => 'required',
         'show_rate'       => 'required',
-
     );
 
     public static $messages = array(
@@ -35,6 +34,7 @@ class RentalProduct extends Model {
      public static function getAllRentalPro(){
         return DB::table(static::$table)->select('id', 'product_name', 'product_name_auxiliary', 'order')
                                         ->where('is_deleted', NO_DELLETE)
+                                        ->where('display_top',1)
                                         ->paginate(LIMIT_PAGE);                        
     }
 }
