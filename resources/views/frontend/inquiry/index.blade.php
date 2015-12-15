@@ -1,7 +1,7 @@
 @extends('frontend')
 
 @section('content')
-
+    {!! HTML::style('backend/css/custom.css') !!}
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="index.html" title="TOP" class="now">TOP</a></li>
@@ -14,57 +14,69 @@
   <div id="topLeft">
   	<h2><span class="h2_title">お問い合わせ</span></h2>
     <h3 class="h3_title">入力画面</h3>
+    
+    @if($errors->any())
+        <div class="errors">
+            <ul class="msg-validate">
+                  <div class="alert alert-danger" style="margin-left: -43px; padding-left: 30px;">
+                      @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                  </div>               
+            </ul>
+        </div>
+      @endif 
 
       <p>下記のフォームへお問い合わせ内容をご入力し、「確認画面へ進む」ボタンを押してください。
       <p>※半角カナは使用しないでください。
       <p>※<img src="frontend/image/require.png" alt="必須" />の印がついているものは必要項目です。</p>
       <section class="form">
-        {!! Form::open( ['method' => 'post', 'url' => 'inquiry/confirm']) !!}  
+        {!! Form::open( ['method' => 'post', 'url' => 'inquiry']) !!}  
           <table>
             <tbody>
               <tr>
                 <th>お問い合わせ内容</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><textarea rows="7" name="txtContent" ></textarea></td>
+                <td><textarea rows="7" name="content" ></textarea></td>
               </tr>
               <tr>
                 <th>お名前</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtName" /></td>
+                <td><input type="text" name="name" /></td>
               </tr>
               <tr>
                 <th>ふりがな</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtPhonetic"/></td>
+                <td><input type="text" name="furigana"/></td>
               </tr>
               <tr>
                 <th>会社名</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtCompany"/></td>
+                <td><input type="text" name="company"/></td>
               </tr>
               <tr>
                 <th>部署</th>
                 <td></td>
-                <td><input type="text" name="txtDepartment"/></td>
+                <td><input type="text" name="department"/></td>
               </tr>
               <tr>
                 <th>役職</th>
                 <td></td>
-                <td><input type="text" name="txtPosition" /></td>
+                <td><input type="text" name="position" /></td>
               </tr>
               <tr>
                 <th>郵便番号</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td class="w_auto"><input type="text" size="3" name="txtPostalCode1"/>
+                <td class="w_auto"><input type="text" size="3" name="postalCode1"/>
                   &nbsp;-&nbsp;
-                  <input type="text" size="4" name="txtPostalCode2"/>
+                  <input type="text" size="4" name="postalCode2"/>
                   &nbsp;&nbsp;
                   <button>郵便番号検索</button></td>
               </tr>
               <tr>
                 <th>都道府県</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><select name="dlPrefectures">
+                <td><select name="state">
                     <option>都道府県名選択</option>
                     <option value="北海道">北海道</option>
                     <option value="青森県">青森県</option>
@@ -118,23 +130,22 @@
               <tr>
                 <th>ご住所</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtAddress"/></td>
+                <td><input type="text" name="address"/></td>
               </tr>
             <th>電話番号</th>
               <td><img src="frontend/image/require.png" alt="必須" /></td>
-              <td><input type="text" name="txtPhone"/></td>
+              <td><input type="text" name="phone"/></td>
             </tr>
             
               <th>FAX番号</th>
               <td></td>
-              <td><input type="text" name="txtFax"/></td>
+              <td><input type="text" name="fax"/></td>
             </tr>
             <tr>
               <th>メールアドレス</th>
               <td><img src="frontend/image/require.png" alt="必須" /></td>
-              <td><input type="text" name="txtEmail"/></td>
-            </tr>
-            
+              <td><input type="text" name="email"/></td>
+            </tr>            
               </tbody>
           </table>
           <div class="btn">
