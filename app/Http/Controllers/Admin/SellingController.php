@@ -115,7 +115,7 @@ class SellingController extends Controller
                 Session::flash('success', 'The rental product insert successfully.');
                 return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
         }
-
+        
         return Redirect::to('admin/product/sell/add/'.$cs_id)
                 ->with('message'. 'Edit sell product fail, try again!')
                 ->withErrors($validator)
@@ -186,8 +186,7 @@ class SellingController extends Controller
                 $display = !empty(Input::get('display')) ? 1 : 0;
                 $display_top = !empty(Input::get('display_top')) ? 1 : 0;
                 
-                $inputData['display_type']              = Input::get('display_type');
-                
+                $inputData['display_type']              = Input::get('display_type');                
                 $inputData['product_name']              = Input::get('product_name');
                 $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
                 $inputData['copy']                      = Input::get('copy');
@@ -245,7 +244,6 @@ class SellingController extends Controller
                         $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
                         $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
                 }
-
 
                 DB::table('sell_product')
                         ->where('id', $id)
