@@ -58,11 +58,11 @@
       <table border="0" cellspacing="2" cellpadding="5">
         <tr>
           <th width="143" bgcolor="#EBF2FC">1日レンタル料金</th>
-          <td width="517" align="right">00,000円</td>
+          <td width="517" align="right">{{}}円</td>
         </tr>
         <tr>
           <th bgcolor="#EBF2FC">1ヶ月レンタル料金</th>
-          <td align="right">00,000円</td>
+          <td align="right">円</td>
         </tr>
         <tr>
           <th bgcolor="#EBF2FC">整備点検費</th>
