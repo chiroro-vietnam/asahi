@@ -22,19 +22,20 @@
   </div>
 </div>
 <header>
-  <h1><a href="index.html">アサヒ産業株式会社</a></h1>
-  <div class="h_inq_btn"><a href="inquiry.html"><img src="frontend/image/h_inq_btn.png" alt="メールでのお問い合わせ"></a></div>
+  <h1><a href="<?php echo route('frontend.homepage'); ?>">アサヒ産業株式会社</a></h1>
+  <div class="h_inq_btn"><a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="../../frontend/image/h_inq_btn.png" alt="メールでのお問い合わせ"></a></div>
   <div class="h_tel">
-
-      <img src="frontend/image/h_tel.png" alt="電話でのお問い合わせ：086-244-1201">
+      <img src="../../frontend/image/h_tel.png" alt="電話でのお問い合わせ：086-244-1201">
   </div>
 </header>
 <nav>
   <ul class="clear">
-    <li id="nav01"><a href="<?php echo route('frontend.homepage'); ?>" title="TOP">TOP</a></li>
-    <li id="nav02"><a href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス" class="now">レンタルサービス</a></li>
-    <li id="nav03"><a href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
-    <li id="nav04"><a href="<?php echo route('frontend.maker.list'); ?>" title="取扱いメーカー">取扱いメーカー</a></li>
-    <li id="nav05"><a href="<?php echo route('frontend.company.index'); ?>" title="会社概要">会社概要</a></li>
+    <?php   $active = '';
+            $curr_page = Request::route()->getName(); ?>
+    <li id="nav01"><a @if($curr_page == 'frontend.homepage') class="now" @endif href="<?php echo route('frontend.homepage'); ?>" title="TOP">TOP</a></li>
+    <li id="nav02"><a @if($curr_page == 'frontend.rental.list') class="now" @endif href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">レンタルサービス</a></li>
+    <li id="nav03"><a @if($curr_page == 'frontend.product.list') class="now" @endif href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
+    <li id="nav04"><a @if($curr_page == 'frontend.maker.list') class="now" @endif href="<?php echo route('frontend.maker.list'); ?>" title="取扱いメーカー">取扱いメーカー</a></li>
+    <li id="nav05"><a @if($curr_page == 'frontend.company.index') class="now" @endif href="<?php echo route('frontend.company.index'); ?>" title="会社概要">会社概要</a></li>
   </ul>
 </nav>

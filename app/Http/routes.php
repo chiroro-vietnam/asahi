@@ -43,6 +43,9 @@ Route::group(array('namespace' => 'Frontend'), function () {
     Route::post('inquiry/confirm', ['as' => 'frontend.inquiry.confirm', 'uses' => 'InquiryController@postConfirm']);
     Route::get('inquiry/complete', ['as' => 'frontend.inquiry.complete', 'uses' => 'InquiryController@getComplete']);
     
+   //site map
+    Route::get('sitemap/', ['as' => 'frontend.sitemap.index', 'uses' => 'SitemapController@siteMap']);
+    
 });
 
 //Admin

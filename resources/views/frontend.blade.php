@@ -13,6 +13,7 @@
 
  @yield('style')
     {!! HTML::style('frontend/css/import.css') !!}
+    {!! HTML::style('frontend/css/common.css') !!}
     
 @yield('script')
 {!! HTML::script('frontend/js/jquery.cookie.js'); !!}
@@ -20,17 +21,7 @@
 {!! HTML::script('frontend/js/function.js'); !!}
 {!! HTML::script('frontend/js/jquery.bxslider.min.js'); !!}
 {!! HTML::script('frontend/js/top.js'); !!}
-
-
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-
-<!--<link href="common/css/import.css" rel="stylesheet" type="text/css" media="all">-->
-<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="common/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="common/js/function.js"></script>
-<script type="text/javascript" src="common/js/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="common/js/top.js"></script>-->
 </head>
 
 <body id="ptop">

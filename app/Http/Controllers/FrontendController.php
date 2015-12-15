@@ -8,7 +8,7 @@ use DB;
 use Illuminate\Support\Facades\Request;
 
 use Config;
-use Auth;
+
 use Redirect;
 
 abstract class FrontendController extends BaseController {
@@ -16,8 +16,8 @@ abstract class FrontendController extends BaseController {
 	use DispatchesCommands, ValidatesRequests;
         public function __construct()
 	{
-            
-        }
+            //$curr_route = Request::route()->getName();
 
+        }
 	
 }

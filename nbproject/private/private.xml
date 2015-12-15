@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Rental.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/edit.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/inquiry/index.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/detail.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/element/footer.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/routes.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/list.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/RentalController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/company/index.blade.php</file>
+        </group>
     </open-files>
 </project-private>

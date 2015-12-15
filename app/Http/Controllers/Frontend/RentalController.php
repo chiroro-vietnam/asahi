@@ -11,9 +11,6 @@ use URL;
 use Form;
 
 
-
-
-
 class RentalController extends FrontendController{
     
 
@@ -51,7 +48,7 @@ class RentalController extends FrontendController{
         *
 	/************************************************************************/
         public function rentalAgree(){
-            
+           return view('frontend.rental.agree'); 
         }
         
 }
