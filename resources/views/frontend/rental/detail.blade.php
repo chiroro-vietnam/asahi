@@ -4,9 +4,9 @@
 
 <div id="breadcrumbs">
   <ul class="pan clear">
-    <li><a href="index.html" title="TOP" class="now">TOP</a></li>
-    <li><a href="rental_list.html" title="レンタルサービス">レンタルサービス</a></li>
-    <li><a href="rental_list.html" title="レンタルサービス">配水ポリエチレン管融着工具</a></li>
+    <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
+    <li><a href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">レンタルサービス</a></li>
+    <li><a href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">配水ポリエチレン管融着工具</a></li>
     <li>JWEF200-Ⅱ</li>
   </ul>
 </div>　

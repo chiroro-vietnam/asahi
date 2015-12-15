@@ -16,7 +16,7 @@
   	<h2><span class="h2_title">販売</span></h2>
     <h3 class="h3_title">自社ブランド</h3>
 
-    <div class="productsList clear"> <a href="products_detail.html">
+    <div class="productsList clear"> <a href="<?php echo url('product/detail/'); ?>">
       <div class="listFrame">
         <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
         <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>

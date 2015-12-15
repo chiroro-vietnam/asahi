@@ -45,8 +45,8 @@
     <?php   $active = '';
             $curr_page = Request::route()->getName(); ?>
     <li id="nav01"><a @if($curr_page == 'frontend.homepage') class="now" @endif href="<?php echo route('frontend.homepage'); ?>" title="TOP">TOP</a></li>
-    <li id="nav02"><a @if($curr_page == 'frontend.rental.list') class="now" @endif href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">レンタルサービス</a></li>
-    <li id="nav03"><a @if($curr_page == 'frontend.product.list') class="now" @endif href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
+    <li id="nav02"><a @if($curr_page == 'frontend.rental.list' || $curr_page == 'frontend.rental.detail') class="now" @endif href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">レンタルサービス</a></li>
+    <li id="nav03"><a @if($curr_page == 'frontend.product.list' || $curr_page == 'frontend.product.detail') class="now" @endif href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
     <li id="nav04"><a @if($curr_page == 'frontend.maker.list') class="now" @endif href="<?php echo route('frontend.maker.list'); ?>" title="取扱いメーカー">取扱いメーカー</a></li>
     <li id="nav05"><a @if($curr_page == 'frontend.company.index') class="now" @endif href="<?php echo route('frontend.company.index'); ?>" title="会社概要">会社概要</a></li>
   </ul>

@@ -15,8 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
-
 class ProductController extends FrontendController{
 
 	/************************************************************************
@@ -26,5 +24,17 @@ class ProductController extends FrontendController{
         {
             return view('frontend.product.list');
 	}
+        
+                /************************************************************************
+	*@Rental detail
+        * 
+        * 
+        *
+	/************************************************************************/
+        public function productDetail(){
+            $title_product = 'レンタルサービス';
+            //$product = Product::getProductDetail($id);
+            return view('frontend.product.detail');
+        }
 
 }

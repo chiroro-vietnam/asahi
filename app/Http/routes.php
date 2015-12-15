@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -24,16 +23,15 @@ Route::group(array('namespace' => 'Frontend'), function () {
     Route::get('rental/', ['as' => 'frontend.rental.list', 'uses' => 'RentalController@index']);
     Route::get('rental/detail/{id}', ['as' => 'frontend.rental.detail', 'uses' => 'RentalController@rentalDetail']);    
     Route::get('rental/agree', ['as' => 'frontend.rental.agree', 'uses' => 'RentalController@rentalAgree']);
-
   
     //product
     Route::get('product/', ['as' => 'frontend.product.list', 'uses' => 'ProductController@index']);
-    Route::get('product/{id?}', ['as' => 'frontend.product.detail', 'uses' => 'ProductController@productDetail']);
+    Route::get('product/detail', ['as' => 'frontend.product.detail', 'uses' => 'ProductController@productDetail']);
     
     //maker
     Route::get('maker/', ['as' => 'frontend.maker.list', 'uses' => 'MakerController@index']);
     
-     //Company
+    //Company
     Route::get('company/', ['as' => 'frontend.company.index', 'uses' => 'CompanyController@index']);
     
     //Inquiry
