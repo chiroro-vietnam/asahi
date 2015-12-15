@@ -17,11 +17,11 @@
         @if($errors->any())
             <div class="errors">
                 <ul class="msg-validate">
-                    @foreach($errors->all() as $error)
                       <div class="alert alert-danger">
-                          <li>{{ $error }}</li>
+                          @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                          @endforeach
                       </div>               
-                    @endforeach
                 </ul>
             </div>
           @endif   
