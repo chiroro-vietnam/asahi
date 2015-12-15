@@ -15,8 +15,7 @@ use File;
 use Image;
 
 class SellingController extends Controller
-{
-   
+{   
    //get sell osusume     
     public function getOsusume()
     {
