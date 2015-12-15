@@ -1,3 +1,15 @@
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+@yield('style')
+    {!! HTML::style('frontend/css/import.css') !!}
+    {!! HTML::style('frontend/css/common.css') !!}
+
+@yield('script')
+    {!! HTML::script('frontend/js/jquery.cookie.js'); !!}
+    {!! HTML::script('frontend/js/jquery.bxslider.min.js'); !!}
+    {!! HTML::script('frontend/js/function.js'); !!}
+    {!! HTML::script('frontend/js/jquery.bxslider.min.js'); !!}
+    {!! HTML::script('frontend/js/top.js'); !!}
+       
 <div id="header_top">
 	<div class="ht_wrap clear">
     <div class="ht_text">機械工具・販売・レンタル・メンテナンスの総合商社</div>
