@@ -81,9 +81,9 @@ class SellingController extends Controller
                 $inputData['url']                       = Input::get('url');
                  $inputData['open_tab']                 = Input::get('open_tab');                
                 $inputData['display']                   = $display;
-                $inputData['display_top']		= $display_top;               
+                $inputData['display_top']				= $display_top;               
                 $inputData['updated_at']                = date('Y-m-d H:i:s');
-                $inputData['cat_product_id']		= $cs_id;
+                $inputData['cat_product_id']			= $cs_id;
 
                $image_first = Input::file('image_first');             
 
