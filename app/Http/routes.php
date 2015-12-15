@@ -88,7 +88,6 @@ Route::group(array('namespace' => 'Admin'), function () {
     
     //product rental
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
-    //Route::get('admin/product/rental/{cr_id}', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
     Route::post('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
    
     Route::get('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
