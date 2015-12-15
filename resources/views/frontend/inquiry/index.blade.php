@@ -25,32 +25,32 @@
               <tr>
                 <th>お問い合わせ内容</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><textarea rows="7"></textarea></td>
+                <td><textarea rows="7" name="txtContent" ></textarea></td>
               </tr>
               <tr>
                 <th>お名前</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" /></td>
+                <td><input type="text" name="txtName" /></td>
               </tr>
               <tr>
                 <th>ふりがな</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" /></td>
+                <td><input type="text" name="txtPhone"/></td>
               </tr>
               <tr>
                 <th>会社名</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" /></td>
+                <td><input type="text" name="txtCompany"/></td>
               </tr>
               <tr>
                 <th>部署</th>
                 <td></td>
-                <td><input type="text" /></td>
+                <td><input type="text" name="txtDepartment"/></td>
               </tr>
               <tr>
                 <th>役職</th>
                 <td></td>
-                <td><input type="text" /></td>
+                <td><input type="text" name="txtPosition" /></td>
               </tr>
               <tr>
                 <th>郵便番号</th>
