@@ -40,8 +40,6 @@
   </tr>
   <tr>
     <td align="center"><input type="submit" name="button" id="button" value="登録する" />
-      　　　　　
-    <input type="reset" name="button2" id="button2" value="クリア" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

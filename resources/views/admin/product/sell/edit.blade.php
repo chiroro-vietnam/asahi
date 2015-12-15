@@ -134,7 +134,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display_top" id="display_top" value="{{$val->display_top}}" <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
+          <td><input type="checkbox" name="display_top" id="display_top"  <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
             おすすめの＜販売＞商品として表示する</td>
         </tr>
         <tr>
@@ -142,7 +142,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display" id="display" value="{{$val->display}}" <?php if($val->display == 1) echo 'checked="checked"'; ?>/>
+          <td><input type="checkbox" name="display" id="display" <?php if($val->display == 1) echo 'checked="checked"'; ?> />{{$val->display}}
             一時的に一般側画面へ表示しない</td>
         </tr>
       </table></td>

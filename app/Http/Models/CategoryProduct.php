@@ -28,4 +28,5 @@ class CategoryProduct extends Model {
                         ->find($id);
                         
 	}
+         
 }

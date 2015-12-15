@@ -59,11 +59,12 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin', array('as' => 'admin.dashboard.index', 'uses' => 'DashboardController@index'));
     Route::get('admin/dashboard', array('as' => 'admin.dashboard.index', 'uses' => 'DashboardController@index'));
     
-    //product osusume rental
+    //product osusume sell
     Route::get('admin/product/osusume-sell', array('as' => 'admin.sell.osusume', 'uses' => 'SellingController@getOsusume'));
     Route::post('admin/product/osusume-sell', array('as' => 'admin.sell.osusume', 'uses' => 'SellingController@postOsusume'));
+    Route::get('admin/product/osusume-sell/del/{id}', array('as' => 'admin.sell.osusume.del', 'uses' => 'SellingController@delSellOsusume'));
     
-    //product osusume sell
+    //product osusume rental
     Route::get('admin/product/osusume-rental', array('as' => 'admin.rental.osusume', 'uses' => 'RentalController@getOsusume'));
     Route::post('admin/product/osusume-rental', array('as' => 'admin.rental.osusume', 'uses' => 'RentalController@postOsusume'));
     Route::get('admin/product/osusume-rental/del/{id}', array('as' => 'admin.rental.osusume.del', 'uses' => 'RentalController@delRenOsusume'));

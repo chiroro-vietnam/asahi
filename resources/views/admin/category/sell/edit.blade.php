@@ -23,8 +23,7 @@
             </div>
           @endif          
       </td>    
-  </tr>
-  
+  </tr> 
    {!! Form::open( ['method' => 'post', 'url' => 'admin/category/sell/edit/'.$cat_sell->id, 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
@@ -41,8 +40,6 @@
   </tr>
   <tr>
     <td align="center"><input type="submit" name="button" id="button" value="登録する" />
-      　　　　　
-    <input type="reset" name="button2" id="button2" value="クリア" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

@@ -69,7 +69,7 @@
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>
-        <td><input type="checkbox" name="display" value="{{$rp->display}}" id="display" 
+        <td><input type="checkbox" name="display" id="display" 
              <?php  if($rp->display) echo 'checked="checked"'; ?>/>
           一時的に一般側画面へ表示しない</td>
       </tr>
@@ -114,7 +114,7 @@
         </tr>
         <tr>
             <td class="col3">表示設定</td>
-            <td><input type="checkbox" name="display_top" id="display_top" value="{{$rp->display_top}}" 
+            <td><input type="checkbox" name="display_top" id="display_top" 
                        <?php  if($rp->display_top) echo 'checked="checked"'; ?>
                        />おすすめ＜レンタル＞商品として表示する</td>
         </tr>

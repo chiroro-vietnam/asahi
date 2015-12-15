@@ -73,9 +73,9 @@
         </tr>
       <tr>
         <td width="20%" class="col3">料金の表示 <span class="notnull">[*]</span></td>
-        <td><input name="show_rate" type="radio" id="show_rate" value="show_rate" checked="checked" />
+        <td><input name="show_rate" type="radio" id="show_rate" value="1" checked="checked" />
           する（以下を埋めてください）<br />
-          <input type="radio" name="show_rate" id="show_rate2" value="show_rate2" />
+          <input type="radio" name="show_rate" id="show_rate2" value="2"/>
           しない（「価格はお問い合わせください」を表示します）</td>
       </tr>
       <tr>
