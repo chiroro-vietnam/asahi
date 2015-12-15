@@ -154,7 +154,6 @@ class SellingController extends Controller
             return view('admin.product.sell.list', compact('csp'));
             }
         }
-
     }
     
      //Search rental product
@@ -164,8 +163,7 @@ class SellingController extends Controller
                 ->where('is_deleted', NO_DELLETE)
                 ->where('cat_product_id', $cat_product_id)
                 ->paginate(LIMIT_PAGE);        
-    }
-    
+    }   
     
     //product sell edit
     public function getProSellEdit($id)
