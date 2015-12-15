@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2015 at 12:17 AM
+-- Generation Time: Dec 15, 2015 at 05:00 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.5.30
 
@@ -147,7 +147,7 @@ CREATE TABLE `rental_product` (
 --
 
 INSERT INTO `rental_product` (`id`, `product_name`, `product_name_auxiliary`, `cat_rental_id`, `copy`, `overview`, `set_content`, `annotation`, `image_first`, `image_second`, `display`, `show_rate`, `rental_first_price`, `rental_one_month_price`, `service_cost`, `omotekumi`, `display_top`, `order`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'JWEF200-II123', 'EFコントローラ', 1, '1', '1', '1', '1', '/uploads/images/rental_product/728114676.jpg', '/uploads/images/rental_product/1227712414.jpg', 0, 1, '111', '2134', '3466', 'Hello World! 123456', 0, 3, 0, '2015-12-10 09:00:00', '2015-12-13 21:25:16'),
+(1, 'JWEF200-II123', 'EFコントローラ', 1, '1', '1', '商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n', '1', '/uploads/images/rental_product/1172462214.jpg', '/uploads/images/rental_product/549701088.jpg', 0, 1, '111', '2134', '3466', 'Hello World! 123456', 0, 3, 0, '2015-12-10 09:00:00', '2015-12-14 10:28:31'),
 (2, 'EF2800iSE', 'インバーター発電機', 3, '3', '3', '4', '3', '3', '4', 1, 1, '100', '200', '300', 'Konnichiwa', 1, 9, 0, '2015-12-17 00:00:00', '2015-12-10 00:22:00'),
 (3, 'AAAAA', 'bnvbn', 0, 'vmvb', 'mvbmv', 'bmvbm', 'vmvb', '/uploads/images/rental_product/1026306406.jpg', '/uploads/images/rental_product/1284117041.jpg', 1, 0, '4989', '978978', '9789', '9878olhj,j,hj,hjkgktkt', 1, 5, 0, NULL, '2015-12-11 09:00:01'),
 (4, 'AAAAA', '46', 1, '645645', '6456', '456456', '456456', '/uploads/images/rental_product/1439707797.jpg', '/uploads/images/rental_product/348993047.jpg', 1, 0, '54645645', '6456', '456', '456456456', 1, 6, 0, NULL, '2015-12-11 10:33:54');
@@ -191,7 +191,7 @@ CREATE TABLE `sell_product` (
 
 INSERT INTO `sell_product` (`id`, `product_name`, `product_name_auxiliary`, `display_type`, `cat_product_id`, `copy`, `overview`, `set_content`, `annotation`, `image_first`, `image_second`, `display_rate`, `sell_price`, `annotation_price`, `omotekumi`, `url`, `file`, `display_top`, `order`, `display`, `open_tab`, `is_deleted`, `created_at`, `updated_at`) VALUES
 (1, 'JWEF200-II', 'EFコントローラ', 1, 1, '1', '1', '1', '1', '1', '/uploads/files/sell_product/1396764068.xls', 1, 12345, 35366, 'Hello World!!!!!!!!', 'http://www.google.com', '/uploads/files/sell_product/48035234.pdf', 1, 1, 1, 1, 0, '2015-12-12 11:30:00', '2015-12-13 22:55:06'),
-(2, 'JWEF200-II', '	EFコントローラ', 1, 1, '1', '1', '1', '1', '1', '/uploads/files/sell_product/688057459.pdf', 1, 111, 234535, '4756567567', 'http://www.google.com', '/uploads/files/sell_product/90406725.docx', 0, 3, 1, 1, 0, '2015-12-12 09:26:28', '2015-12-13 22:54:19'),
+(2, 'JWEF200-II', '	EFコントローラ', 1, 1, '1', '1', '1', '1', '1', '/uploads/files/sell_product/688057459.pdf', 1, 111, 234535, '4756567567', 'http://www.google.com', '/uploads/files/sell_product/925926227.pdf', 0, 3, 1, 1, 0, '2015-12-12 09:26:28', '2015-12-14 00:01:17'),
 (3, '転造ヘッド', '転造ヘッド	転造ヘッド', 3, 2, '23', '45', '1', '1', '1', '1', 1, 2445, 45767, '768678658', 'hjrfjh', 'fghjgj', 7, 1, 1, 1, 0, '2015-12-31 00:00:22', '2015-12-12 00:00:00'),
 (4, '配水PE用手動穿孔機', '配水PE用手動穿孔機', 2, 2, '3', '2', '2', '1', '1', '1', 1, 10000000, 2000000, '11', '1', '1', 1, 1, 1, 1, 0, '2015-12-12 05:00:00', '2015-12-12 09:25:22');
 
