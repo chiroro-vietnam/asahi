@@ -19,52 +19,52 @@
       <p>※半角カナは使用しないでください。
       <p>※<img src="frontend/image/require.png" alt="必須" />の印がついているものは必要項目です。</p>
       <section class="form">
-        {!! Form::open( ['method' => 'post', 'url' => 'inquiry/confirm']) !!}  
+        <form>
           <table>
             <tbody>
               <tr>
                 <th>お問い合わせ内容</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><textarea rows="7" name="txtContent" ></textarea></td>
+                <td></td>
               </tr>
               <tr>
                 <th>お名前</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtName" /></td>
+                <td></td>
               </tr>
               <tr>
                 <th>ふりがな</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtPhonetic"/></td>
+                <td></td>
               </tr>
               <tr>
                 <th>会社名</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtCompany"/></td>
+                <td></td>
               </tr>
               <tr>
                 <th>部署</th>
                 <td></td>
-                <td><input type="text" name="txtDepartment"/></td>
+                <td></td>
               </tr>
               <tr>
                 <th>役職</th>
                 <td></td>
-                <td><input type="text" name="txtPosition" /></td>
+                <td></td>
               </tr>
               <tr>
                 <th>郵便番号</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td class="w_auto"><input type="text" size="3" name="txtPostalCode1"/>
+                <td class="w_auto">
                   &nbsp;-&nbsp;
-                  <input type="text" size="4" name="txtPostalCode2"/>
+                  
                   &nbsp;&nbsp;
                   <button>郵便番号検索</button></td>
               </tr>
               <tr>
                 <th>都道府県</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><select name="dlPrefectures">
+                <td><select>
                     <option>都道府県名選択</option>
                     <option value="北海道">北海道</option>
                     <option value="青森県">青森県</option>
@@ -118,29 +118,29 @@
               <tr>
                 <th>ご住所</th>
                 <td><img src="frontend/image/require.png" alt="必須" /></td>
-                <td><input type="text" name="txtAddress"/></td>
+                <td></td>
               </tr>
             <th>電話番号</th>
               <td><img src="frontend/image/require.png" alt="必須" /></td>
-              <td><input type="text" name="txtPhone"/></td>
+              <td></td>
             </tr>
             
               <th>FAX番号</th>
               <td></td>
-              <td><input type="text" name="txtFax"/></td>
+              <td><input type="text" /></td>
             </tr>
             <tr>
               <th>メールアドレス</th>
               <td><img src="frontend/image/require.png" alt="必須" /></td>
-              <td><input type="text" name="txtEmail"/></td>
+              <td></td>
             </tr>
             
               </tbody>
           </table>
           <div class="btn">
-            <input type="submit" value="確認画面へ進む" alt="確認画面へ進む" name="btSubmit"/>
+            <input type="submit" value="確認画面へ進む" alt="確認画面へ進む" />
           </div>
-{!! Form::close() !!}
+        </form>
       </section>
   </div>
   <div id="topRight">

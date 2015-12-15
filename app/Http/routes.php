@@ -38,6 +38,9 @@ Route::group(array('namespace' => 'Frontend'), function () {
     
     //Inquiry
     Route::get('inquiry/', ['as' => 'frontend.inquiry.index', 'uses' => 'InquiryController@index']);
+        Route::get('inquiry/confirm', ['as' => 'frontend.inquiry.confirm', 'uses' => 'InquiryController@getConfirm']);
+    Route::post('inquiry/confirm', ['as' => 'frontend.inquiry.confirm', 'uses' => 'InquiryController@postConfirm']);
+    Route::get('inquiry/complete', ['as' => 'frontend.inquiry.complete', 'uses' => 'InquiryController@getComplete']);
     
 });
 
@@ -89,7 +92,6 @@ Route::group(array('namespace' => 'Admin'), function () {
     
     //product rental
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
-    //Route::get('admin/product/rental/{cr_id}', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
     Route::post('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
    
     Route::get('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
