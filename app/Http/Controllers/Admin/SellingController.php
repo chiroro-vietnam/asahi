@@ -109,9 +109,7 @@ class SellingController extends Controller
                         $fileName = rand(date("Ymd"), time()).".".$extension;
                        $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
                         $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
-                }
-
-                  
+                }                 
                 
                 DB::table('sell_product')->insert($inputData);
                 Session::flash('success', 'The rental product insert successfully.');
