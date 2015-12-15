@@ -201,7 +201,7 @@ class SellingController extends Controller
                 $inputData['url']                       = Input::get('url');
                  $inputData['open_tab']                 = Input::get('open_tab');                
                 $inputData['display']                   = $display;
-                $inputData['display_top']		= $display_top;               
+                $inputData['display_top']		        = $display_top;               
                 $inputData['updated_at']                = date('Y-m-d H:i:s');
                 
                 $cs_id          = Input::get('cat_product_id');    
@@ -245,7 +245,6 @@ class SellingController extends Controller
                         $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
                         $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
                 }
-
 
                 DB::table('sell_product')
                         ->where('id', $id)
