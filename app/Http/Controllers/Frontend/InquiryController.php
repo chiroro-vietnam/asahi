@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 class InquiryController extends FrontendController{
 
 	/************************************************************************
@@ -26,24 +27,60 @@ class InquiryController extends FrontendController{
         {
             return view('frontend.inquiry.index');
 	}
-        public function postConfirm()
+        public function postInquiry() 
         {
-
-            echo '<pre>';
-            print_r(Input::get('dlPrefectures'));exit;
-//            print Form::text('content');
-//            exit();
-            //$inputData['content'] = Input::get('txtContent');
-            //$inputData['name'] = Input::get('txtName');
-            //Session::put('content', Input::get('txtContent'));
-            //Session::push('content_contact',$inputData);
-            return redirect::route('frontend.inquiry.confirm');
-        }
-        public function listConfirm()
+           $inputData['content'] = Input::get('txtContent');
+            $inputData['name'] = Input::get('txtName');
+            $inputData['phonetic'] = Input::get('txtPhonetic');
+            $inputData['company'] = Input::get('txtCompany');
+            $inputData['department'] = Input::get('txtDepartment');
+            $inputData['position'] = Input::get('txtPosition');
+            $inputData['posttalcode1'] = Input::get('txtPostalCode1');
+            $inputData['postalcode2'] = Input::get('txtPostalCode2');
+            $inputData['prefecture'] = Input::get('dlPrefectures');
+            $inputData['address'] = Input::get('txtAddress');
+            $inputData['phone'] = Input::get('txtPhone');
+            $inputData['fax'] = Input::get('txtFax');
+            $inputData['email'] = Input::get('txtEmail');
+            
+             Session::push('inputdata', $inputData);
+             
+            return view('frontend.inquiry.confirm');
+	}
+        
+        public function getConfirm()
         {
+              $items = Session::get('inputdata');
+    //          session()->forget('inputdata');
+              echo '<pre>';
+              var_dump($items);
+              return view('frontend.inquiry.confirm');
+//              foreach($items as $item)
+//              {
+//                  
+//              }
 //            $value = Session::get('content');
 //            print $value;
 //            exit();
 
+        }
+        public function postConfirm()
+        {
+//            $inputData['content'] = Input::get('txtContent');
+//            $inputData['name'] = Input::get('txtName');
+//            $inputData['phonetic'] = Input::get('txtPhonetic');
+//            $inputData['company'] = Input::get('txtCompany');
+//            $inputData['department'] = Input::get('txtDepartment');
+//            $inputData['position'] = Input::get('txtPosition');
+//            $inputData['posttalcode1'] = Input::get('txtPostalCode1');
+//            $inputData['postalcode2'] = Input::get('txtPostalCode2');
+//            $inputData['prefecture'] = Input::get('dlPrefectures');
+//            $inputData['address'] = Input::get('txtAddress');
+//            $inputData['phone'] = Input::get('txtPhone');
+//            $inputData['fax'] = Input::get('txtFax');
+//            $inputData['email'] = Input::get('txtEmail');
+//            
+//            Session::push('inputdata', $inputData);
+//            return redirect::route('frontend.inquiry.confirm');
         }
 }
