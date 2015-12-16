@@ -1,28 +1,28 @@
-<?php echo $data[0]['name'];?> さま
+<?php echo $data['name'];?> さま
 
-お問い合わせ内容: <?php echo $data[0]['content'];?>
+お問い合わせ内容: <?php echo $data['content'];?>
 
-お名前: <?php echo $data[0]['name'];?>
+お名前: <?php echo $data['name'];?>
 
-ふりがな: <?php echo $data[0]['furigana'];?>
+ふりがな: <?php echo $data['furigana'];?>
 
-会社名: <?php echo $data[0]['company'];?>
+会社名: <?php echo $data['company'];?>
 
-部署: <?php echo $data[0]['department'];?>
+部署: <?php echo $data['department'];?>
 
-役職: <?php echo $data[0]['position'];?>
+役職: <?php echo $data['position'];?>
 
-郵便番号: <?php echo $data[0]['postalCode1'];?> - <?php echo $data[0]['postalCode2'];?>
+郵便番号: <?php echo $data['postalCode1'];?> - <?php echo $data['postalCode2'];?>
 
-都道府県: <?php echo $data[0]['state'];?>
+都道府県: <?php echo $data['state'];?>
 
-ご住所: <?php echo $data[0]['address'];?>
+ご住所: <?php echo $data['address'];?>
 
-電話番号: <?php echo $data[0]['phone'];?>
+電話番号: <?php echo $data['phone'];?>
 
-FAX番号: <?php echo $data[0]['fax'];?>
+FAX番号: <?php echo $data['fax'];?>
 
-メールアドレス:<?php echo $data[0]['email'];?>
+メールアドレス:<?php echo $data['email'];?>
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━

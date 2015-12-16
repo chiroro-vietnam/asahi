@@ -18,61 +18,58 @@
 
       <section class="form">
         <form>
-            @if(isset($data))
-                @foreach($data as $val) @endforeach 
-            @endif
+           
           <table>
             <tbody>
-              <tr>
+             <tr>
                 <th>お問い合わせ内容</th>
-                <td>{{$val['content']}}</td>
+                <td>{{$data['content']}}</td>
               </tr>
               <tr>
                 <th>お名前</th>                
-                <td>{{$val['name']}}</td>
+                <td>{{$data['name']}}</td>
               </tr>
               <tr>
                 <th>ふりがな</th>              
-                <td>{{$val['furigana']}}</td>
+                <td>{{$data['furigana']}}</td>
               </tr>
               <tr>
                 <th>会社名</th>               
-                <td>{{$val['company']}}</td>
+                <td>{{$data['company']}}</td>
               </tr>
               <tr>
                 <th>部署</th>
-                <td>{{$val['department']}}</td>
+                <td>{{$data['department']}}</td>
               </tr>
               <tr>
                 <th>役職</th>
-                <td>{{$val['position']}}</td>
+                <td>{{$data['position']}}</td>
               </tr>
               <tr>
                 <th>郵便番号</th>                
                 <td class="w_auto">
-                  {{$val['postalCode1']}}&nbsp;-&nbsp;{{$val['postalCode2']}}                  
+                  {{$data['postalCode1']}}&nbsp;-&nbsp;{{$data['postalCode2']}}                  
               </tr>
               <tr>
                 <th>都道府県</th>                
-                <td>{{$val['state']}}</td>
+                <td>{{$data['state']}}</td>
               </tr>
               <tr>
                 <th>ご住所</th>               
-                <td>{{$val['address']}}</td>
+                <td>{{$data['address']}}</td>
               </tr>
             <th>電話番号</th>             
-              <td>{{$val['phone']}}</td>
+              <td>{{$data['phone']}}</td>
             </tr>
             
               <th>FAX番号</th>
-              <td>{{$val['fax']}}</td>
+              <td>{{$data['fax']}}</td>
               <td></td>
             </tr>
             <tr>
               <th>メールアドレス</th>              
-              <td>{{$val['email']}}</td>
+              <td>{{$data['email']}}</td>
             </tr>
-            
               </tbody>
           </table>
           <div class="btn">

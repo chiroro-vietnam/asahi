@@ -32,22 +32,42 @@ class InquiryController extends FrontendController
     public function postInquiry() 
     {
         $validator = Validator::make(Input::all(), Inquiry::$rules, Inquiry::$messages);
-        if($validator->passes()){                                   
-            $inputData['content'] = Input::get('content');
-            $inputData['name'] = Input::get('name');
-            $inputData['furigana'] = Input::get('furigana');
-            $inputData['company'] = Input::get('company');
-            $inputData['department'] = Input::get('department');
-            $inputData['position'] = Input::get('position');
-            $inputData['postalCode1'] = Input::get('postalCode1');
-            $inputData['postalCode2'] = Input::get('postalCode2');
-            $inputData['state'] = Input::get('dlPrefectures');
-            $inputData['address'] = Input::get('address');
-            $inputData['phone'] = Input::get('phone');
-            $inputData['fax'] = Input::get('fax');
-            $inputData['email'] = Input::get('email');
-
-            Session::push('inputdata', $inputData);
+        if($validator->passes()){
+            $inputData = [
+                'content'       => Input::get('content'),
+                'name'          => Input::get('name'),
+                'furigana'      => Input::get('furigana'),
+                'company'       => Input::get('company'),
+                'department'    => Input::get('department'),
+                'position'      => Input::get('position'),
+                'postalCode1'   => Input::get('postalCode1'),
+                'postalCode2'   => Input::get('postalCode2'),
+                'state'         => Input::get('state'),
+                'address'       => Input::get('address'),
+                'phone'         => Input::get('phone'),
+                'fax'           => Input::get('fax'),
+                'email'         => Input::get('email')
+            ];
+//            $inputData['content'] = Input::get('content');
+//            $inputData['name'] = Input::get('name');
+//            $inputData['furigana'] = Input::get('furigana');
+//            $inputData['company'] = Input::get('company');
+//            $inputData['department'] = Input::get('department');
+//            $inputData['position'] = Input::get('position');
+//            $inputData['postalCode1'] = Input::get('postalCode1');
+//            $inputData['postalCode2'] = Input::get('postalCode2');
+//            $inputData['state'] = Input::get('dlPrefectures');
+//            $inputData['address'] = Input::get('address');
+//            $inputData['phone'] = Input::get('phone');
+//            $inputData['fax'] = Input::get('fax');
+//            $inputData['email'] = Input::get('email');
+//            foreach($inputData as $data)
+//            {
+//                
+//            }
+//            print "<pre>";
+//            print_r($data);exit;
+            Session::put('inputdata', $inputData);
             return Redirect::route('frontend.inquiry.confirm');
         }
 
@@ -61,6 +81,7 @@ class InquiryController extends FrontendController
     {
         $data = Session::get('inputdata');
         if(!isset($data)){
+        
           return Redirect::route('frontend.inquiry.index');  
         }             
         return view('frontend.inquiry.confirm', compact('data'));
@@ -75,9 +96,9 @@ class InquiryController extends FrontendController
         
 
         Mail::send('frontend.inquiry.email', $data, function($message) use ($data)  {
-        $message->to('phuong.nd@chiroro.com.vn', 'Chiroro Viet Nam');
+        $message->to('dao.at@chiroro.com.vn', 'Chiroro Viet Nam');
         $message->subject('お問い合わせ');
-        $message->from($data[0]['email'], $data[0]['furigana']);
+        $message->from($data['email'], $data['furigana']);
         });
         return Redirect::route('frontend.inquiry.complete');
     }
