@@ -31,10 +31,24 @@ class RentalProduct extends Model {
 
     
     //get all rental product
-     public static function getAllRentalPro(){
+    public static function getAllRentalPro()
+    {
         return DB::table(static::$table)->select('id', 'product_name', 'product_name_auxiliary', 'order')
                                         ->where('is_deleted', NO_DELLETE)
                                         ->where('display_top',1)
                                         ->paginate(LIMIT_PAGE);                        
     }
+    
+//    public function CategoryRental()
+//    {
+//            return $this->belongsToMany('App\Http\CategoryRental', 'rental_product');
+//    }
+    
+    
+        public static function getListRental()
+        {
+            return DB::table(static::$table)->where('is_deleted', NO_DELLETE)                                        
+                                        ->lists('product_name', 'cat_rental_id'); 
+        }
+    
 }

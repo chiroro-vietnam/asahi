@@ -41,24 +41,23 @@
     <div class="subMenu">
     	<div class="sub_title"><img src="frontend/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
       <ul class="sub_rental">
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
+       @if(count($catRentals) > 0)
+        @foreach($catRentals as $cr)        
+
+            <li class="acrd-ctrl"><a href="#">{{$cr->name}}</a>
+                @if(!empty($lrs[$cr->id]))
+                    <ul class="acrd-pl">                  
+                    <!--$catRent->product_name-->
+                            <li><a href="#">{{$lrs[$cr->id]}}</a></li>   
+
+                    </ul>
+                @endif
+            </li>
+        @endforeach
+       @endif
+
+        
+        
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">

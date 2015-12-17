@@ -7,8 +7,10 @@
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>endforeach</word>
+            <word>fff</word>
             <word>foreach</word>
-            <word>lsp</word>
+            <word>foreeach</word>
+            <word>mystyle</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

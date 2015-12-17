@@ -25,13 +25,12 @@
         <div class="dtlName">
           <span class="dn_cat">{{$rental->product_name}}</span>
           <span class="dn_name">{{$rental->product_name_auxiliary}}</span>
-          <span class="dn_notice">1台で3社のEF継手に対応!!</span>
+          <span class="dn_notice">{{$rental->copy}}</span>
         </div>
         <div class="dtlHr"></div>
         <div class="dtlText">
           <div class="dt_text">
-            融着履歴を1,000件自動記録<br />
-            バーコード読み取りで通電制御<br />
+              <?php echo nl2br($rental->overview);?>
           </div>
         </div>
         <div class="dtlSet">
@@ -39,10 +38,9 @@
         	<div class="ds_text"><?php echo nl2br($rental->set_content);?></div>
         </div>
         <div class="dtlNotes">
-        	<div class="dn_text">
-            JW (日本水道協会)規格対応<br />
-            PWA (配水用ポリエチレン管協会)規格　対応<br />
-          </div>
+            <div class="dn_text">
+                <?php echo nl2br($rental->annotation);?>
+            </div>
         </div>
       </div>
   	</div>
@@ -53,127 +51,51 @@
       <div class="di_inq_btn"><a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="../../frontend/image/di_inq_btn.jpg" alt="メールでのお問い合わせ"></a></div>
     </div>
     
-    
-    <div class="inqInput2">
-      <table border="0" cellspacing="2" cellpadding="5">
-        <tr>
-          <th width="143" bgcolor="#EBF2FC">1日レンタル料金</th>
-          <td width="517" align="right">{{number_format($rental->rental_first_price)}}円</td>
-        </tr>
-        <tr>
-          <th bgcolor="#EBF2FC">1ヶ月レンタル料金</th>
-          <td align="right">{{number_format($rental->rental_one_month_price)}}円</td>
-        </tr>
-        <tr>
-          <th bgcolor="#EBF2FC">整備点検費</th>
-          <td align="right">{{number_format($rental->service_cost)}}円</td>
-        </tr>
-      </table>
-      </div>
-      
-      <div class="inqInput">
-      <table border="0" cellspacing="2" cellpadding="5">
-        <tr>
-          <th>サイズ</th>
-          <th>1日</th>
-          <th>5日</th>
-          <th>10日</th>
-        </tr>
-<!--        <tr>
-          <td>75～100</td>
-          <td>7,500円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr>
-          <td>100～200</td>
-          <td>13,200円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr>
-          <td>150～300</td>
-          <td>17,500円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr>
-          <td>200～400</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>300～525</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>350～600</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>375～750</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>500～1000</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>延長ホース・ポンプ</td>
-          <td>2,000円</td>
-          <td>2,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>延長ホース・ポンプ2</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>延長ホース・ポンプ3</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>
-        <tr> <td>延長ホース・ポンプ4</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-          <td>00,000円</td>
-        </tr>-->
-      </table>
-    </div>
+    @if($rental->show_rate == 1)
+        <div class="inqInput2">
+          <table border="0" cellspacing="2" cellpadding="5">
+            <tr>
+              <th width="143" bgcolor="#EBF2FC">1日レンタル料金</th>
+              <td width="517" align="right">{{number_format($rental->rental_first_price)}}円</td>
+            </tr>
+            <tr>
+              <th bgcolor="#EBF2FC">1ヶ月レンタル料金</th>
+              <td align="right">{{number_format($rental->rental_one_month_price)}}円</td>
+            </tr>
+            <tr>
+              <th bgcolor="#EBF2FC">整備点検費</th>
+              <td align="right">{{number_format($rental->service_cost)}}円</td>
+            </tr>
+          </table>
+          </div>
+
+        <div class="inqInput">
+          <?php echo nl2br($rental->omotekumi);?>
+        </div>
+    @endif
 
     
   </div>
   <div id="topRight">
     <div class="subMenu">
-    	<div class="sub_title"><img src="common/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
+    	<div class="sub_title"><img src="../../frontend/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
       <ul class="sub_rental">
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
+          @if(count($catRentals) > 0)
+          @foreach($catRentals as $catr)
+            <li class="acrd-ctrl"><a href="#">{{$catr->name}}</a>
+                @if(!empty($lrs[$catr->id]))
+                <ul class="acrd-pl">
+                  <li><a href="#">{{$lrs[$catr->id]}}</a></li>                  
+                </ul>
+                @endif
+              </li>
+          @endforeach            
+          @endif
+        
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">
-      <a href="inquiry.html"><img src="common/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
+      <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="../../frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
   </div>
   

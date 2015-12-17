@@ -60,60 +60,83 @@ class SellingController extends Controller
    public function postProSellAdd($cs_id)
     {
         $validator = Validator::make(Input::all(), SellProduct::$rules, SellProduct::$messages);
-        if($validator->passes()){
+        if($validator->passes())
+        {
              
-                $display = !empty(Input::get('display')) ? 1 : 0;
-                $display_top = !empty(Input::get('display_top')) ? 1 : 0;
-                
-               $inputData['display_type']              = Input::get('display_type');
-                
-                $inputData['product_name']              = Input::get('product_name');
-                $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
-                $inputData['copy']                      = Input::get('copy');
-                $inputData['overview']                  = Input::get('overview');
-                $inputData['set_content']               = Input::get('set_content');
-                $inputData['annotation']                = Input::get('annotation');
-                //$inputData['display_rate']              = Input::get('display_rate');
-                $inputData['display_rate']              = 1;                  
-                $inputData['sell_price']                = Input::get('sell_price');
-                $inputData['annotation_price']          = Input::get('annotation_price');
-                $inputData['omotekumi']                 = Input::get('omotekumi');                
-                $inputData['url']                       = Input::get('url');
-                 $inputData['open_tab']                 = Input::get('open_tab');                
-                $inputData['display']                   = $display;
-                $inputData['display_top']				= $display_top;               
-                $inputData['updated_at']                = date('Y-m-d H:i:s');
-                $inputData['cat_product_id']			= $cs_id;
+            $display = !empty(Input::get('display')) ? 1 : 0;
+            $display_top = !empty(Input::get('display_top')) ? 1 : 0;
+            $open_tab = !empty(Input::get('open_tab')) ? 1 : 0;
+            
+            $max_order = DB::table('sell_product')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->max('order');
+            $order = $max_order + 1;
 
-               $image_first = Input::file('image_first');             
+            $inputData['display_type']              = Input::get('display_type');
 
-                if(Input::file('image_first')){
-                        $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
-                        $fileName1 = rand(date("Ymd"), time()).".".$extension1;
-                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
-                        $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
-                }
-                
-                $image_second = Input::file('image_second');
-                
-                if(Input::file('image_second')){
-                        $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
-                        $fileName2 = rand(date("Ymd"), time()).".".$extension2;
-                        Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
-                        $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
-                }
-                
-                $file = Input::file('file');
-                if(Input::file('file')){
-                        $extension = Input::file('file')->getClientOriginalExtension(); // getting image extension  
-                        $fileName = rand(date("Ymd"), time()).".".$extension;
-                       $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
-                        $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
-                }                 
-                
-                DB::table('sell_product')->insert($inputData);
-                Session::flash('success', 'The rental product insert successfully.');
-                return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
+            $inputData['product_name']              = Input::get('product_name');
+            $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
+            $inputData['copy']                      = Input::get('copy');
+            $inputData['overview']                  = Input::get('overview');
+            $inputData['set_content']               = Input::get('set_content');
+            $inputData['annotation']                = Input::get('annotation');
+            $inputData['display_rate']              = Input::get('display_rate');
+            //$inputData['display_rate']              = 1;                  
+            $inputData['sell_price']                = Input::get('sell_price');
+            $inputData['annotation_price']          = Input::get('annotation_price');
+            $inputData['omotekumi']                 = Input::get('omotekumi');                
+            $inputData['url']                       = Input::get('url');
+            $inputData['open_tab']                  = $open_tab;                
+            $inputData['display']                   = $display;
+            $inputData['display_top']               = $display_top;               
+            $inputData['updated_at']                = date('Y-m-d H:i:s');
+            $inputData['cat_product_id']            = $cs_id;
+            $inputData['order']                     = $order;
+
+           $image_first = Input::file('image_first');             
+
+            if(Input::file('image_first')){
+                $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
+                $fileName1 = rand(date("Ymd"), time()).".".$extension1;
+                Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
+                $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
+            }
+
+            $image_second = Input::file('image_second');
+
+            if(Input::file('image_second'))
+            {
+                $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
+                $fileName2 = rand(date("Ymd"), time()).".".$extension2;
+                Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
+                $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
+            }
+
+            $file = Input::file('file');
+            if(Input::file('file')){
+                    $extension = Input::file('file')->getClientOriginalExtension(); // getting image extension  
+                    $fileName = rand(date("Ymd"), time()).".".$extension;
+                    $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
+                    $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
+            }   
+
+            //insert to top_page_show
+            if($display_top == 1)
+            {
+                $max_id = DB::table('sell_product')                    
+                ->max('sell_product.id');
+                $sell_product_id = $max_id;
+                $dataTopPage  = array(
+                    'sell_product_id'   => $sell_product_id,
+                    'is_deleted'          => NO_DELLETE,
+                    'created_at'          => date('Y-m-d H:i:s'),
+                    'updated_at'          => date('Y-m-d H:i:s')); 
+                DB::table('top_page_show')->insert($dataTopPage);
+            }
+
+            DB::table('sell_product')->insert($inputData);
+            Session::flash('success', 'The sell product insert successfully.');
+            return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
         }
 
         return Redirect::to('admin/product/sell/add/'.$cs_id)
@@ -130,6 +153,7 @@ class SellingController extends Controller
                 ->select('id','name')->find($cs_id);
         return view('admin.product.sell.add', compact('cs_id', 'cat_sell'));
     }
+    
     //product sell list
     public function listProSell($cs_id=null)
     {
@@ -171,6 +195,7 @@ class SellingController extends Controller
         $sp = DB::table('sell_product')
                 ->where('sell_product.id', $id)
                 ->leftJoin('category_product', 'sell_product.cat_product_id', '=', 'category_product.id')
+                ->select('sell_product.*', 'category_product.name')
                 ->get();
         return view('admin.product.sell.edit', compact('sp', 'id'));
     }
@@ -185,6 +210,7 @@ class SellingController extends Controller
         if($validator->passes()){                  
                 $display = !empty(Input::get('display')) ? 1 : 0;
                 $display_top = !empty(Input::get('display_top')) ? 1 : 0;
+                $open_tab = !empty(Input::get('open_tab')) ? 1 : 0;
                 
                 $inputData['display_type']              = Input::get('display_type');                
                 $inputData['product_name']              = Input::get('product_name');
@@ -198,20 +224,25 @@ class SellingController extends Controller
                 $inputData['annotation_price']          = Input::get('annotation_price');
                 $inputData['omotekumi']                 = Input::get('omotekumi');                
                 $inputData['url']                       = Input::get('url');
-                 $inputData['open_tab']                 = Input::get('open_tab');                
+                $inputData['open_tab']                  = $open_tab;                
                 $inputData['display']                   = $display;
-                $inputData['display_top']		= $display_top;               
+                $inputData['display_top']		= $display_top;
+                $inputData['order']                     = Input::get('order');
                 $inputData['updated_at']                = date('Y-m-d H:i:s');
                 
                 $cs_id          = Input::get('cat_product_id');    
                 $image_first    = Input::file('image_first');
                 
                 $file1 = DB::table('rental_product')->find($id);
-                if($file1->image_first){
-                        $file1Del = $file1->image_first;
-                        if(File::isFile($file1Del)){
-                                \File::delete($file1Del);
-                        }
+               // echo "<pre>";                print_r($id);exit;
+                if(!empty($file1))
+                {
+                    if($file1->image_first){
+                            $file1Del = $file1->image_first;
+                            if(File::isFile($file1Del)){
+                                    \File::delete($file1Del);
+                            }
+                    }
                 }
 
                 if(Input::file('image_first')){
@@ -223,11 +254,14 @@ class SellingController extends Controller
                 
                 $image_second = Input::file('image_second');
                 $file2 = DB::table('rental_product')->find($id);
-                if($file2->image_second){
-                        $file2Del = $file2->image_second;
-                        if(File::isFile($file2Del)){
-                                \File::delete($file2Del);
-                        }
+                if(!empty($file1))
+                {
+                    if($file2->image_second){
+                            $file2Del = $file2->image_second;
+                            if(File::isFile($file2Del)){
+                                    \File::delete($file2Del);
+                            }
+                    }
                 }
 
                 if(Input::file('image_second')){
@@ -244,6 +278,21 @@ class SellingController extends Controller
                         $file->move(public_path().'/uploads/files/sell_product/', $fileName);                      
                         $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
                 }
+
+                if($display_top == 1)
+                {
+                    $dataTopPage  = array(                       
+                            'top_page_show.is_deleted'          => NO_DELLETE,
+                            'top_page_show.updated_at'          => date('Y-m-d H:i:s')); 
+                }else{
+                    $dataTopPage  = array(                     
+                            'top_page_show.is_deleted'        => DELETED,
+                            'top_page_show.updated_at'        => date('Y-m-d H:i:s'));
+                }
+                DB::table('top_page_show')
+                               ->where('top_page_show.sell_product_id', $id)
+                               ->update($dataTopPage);               
+
 
                 DB::table('sell_product')
                         ->where('id', $id)

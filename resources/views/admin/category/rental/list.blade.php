@@ -24,12 +24,12 @@
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr class="col3">
-        <td width="5%" align="center">削除</td>
+        <td width="8%" align="center">削除</td>
         <td width="8%" align="center">表示</td>
-        <td align="center">カテゴリ名</td>
-        <td width="1%" align="center">詳細・編集</td>
-        <td colspan="4" align="center">表示順序</td>
-        <td align="center">カテゴリ内商品管理</td>
+        <td width="30%" align="center">カテゴリ名</td>
+        <td width="10%" align="center">詳細・編集</td>
+        <td width="15%" colspan="4" align="center">表示順序</td>
+        <td width="13%" align="center">カテゴリ内商品管理</td>
         </tr>
         <?php 
           $display_arr = array('0' => '×', '1' => '○'); 

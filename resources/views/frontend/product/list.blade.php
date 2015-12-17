@@ -4,8 +4,8 @@
 
 <div id="breadcrumbs">
   <ul class="pan clear">
-    <li><a href="index.html" title="TOP" class="now">TOP</a></li>
-    <li><a href="products_list.html" title="販売">販売</a></li>
+    <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
+    <li><a href="<?php echo route('frontend.product.list'); ?>" title="販売">販売</a></li>
     <li>自社ブランド</li>
   </ul>
 </div>
@@ -13,59 +13,38 @@
 <div id="products">
 <div class="clear" id="index">
   <div id="topLeft">
-  	<h2><span class="h2_title">販売</span></h2>
-    <h3 class="h3_title">自社ブランド</h3>
-
-    <div class="productsList clear"> <a href="<?php echo url('product/detail/'); ?>">
-      <div class="listFrame">
-        <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
-        <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>
-      </div>
-      </a> <a href="products_detail.html">
-      <div class="listFrame">
-        <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
-        <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>
-      </div> <a href="products_detail.html">
-      <div class="listFrame">
-        <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
-        <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>
-      </div>
-      </a> <a href="products_detail.html">
-      <div class="listFrame">
-        <div class="listImg"><img src="fronend/image/top_products_img1.jpg" alt=""></div>
-        <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>
-      </div>
-      </a> <a href="products_detail.html">
-      <div class="listFrame">
-        <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
-        <div class="listName"><span class="ln_cat">ダイヤモンドブレード(湿式)</span><br /><span class="ln_name">ハイグレードブレードHG</span></div>
-      </div>
-      </a>
- </div>
+  	<h2><span class="h2_title">{{$title_sell_product}}</span></h2>
+    <h3 class="h3_title">{{$tile_branch}}</h3>   
     
-  </div>
+        @if(count($products) > 0)
+        <div class="productsList clear"> 
+            @foreach($products as $product)            
+                <a href="<?php echo url('product/detail/'.$product->id); ?>">
+                    <div class="listFrame">
+                      <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
+                      <div class="listName"><span class="ln_cat">{{$product->product_name}}</span><br /><span class="ln_name">{{$product->product_name_auxiliary}}</span></div>
+                    </div>            
+                </a>  
+            
+            @endforeach
+            </div>
+        @endif
+  </div> 
   <div id="topRight">
     <div class="subMenu">
     	<div class="sub_title"><img src="frontend/image/sec_products_title.jpg" alt="販売"></div>
       <ul class="sub_products">
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
+       @if(count($catSell) > 0)
+       @foreach($catSell as $cp)
+            <li class="acrd-ctrl"><a href="#">{{$cp->name}}</a>
+                @if(!empty($lps[$cp->id]))
+                    <ul class="acrd-pl">
+                      <li><a href="#">{{@$lps[$cp->id]}}</a></li>
+                    </ul>
+                @endif
+            </li>
+        @endforeach
+        @endif
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">

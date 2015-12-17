@@ -19,6 +19,10 @@ Route::group(array('namespace' => 'Frontend'), function () {
     //homepage
     Route::get('/', ['as' => 'frontend.homepage', 'uses' => 'HomepageController@index']);
     
+    //search
+    Route::get('/search', ['as' => 'frontend.search', 'uses' => 'SearchController@search']);
+    Route::post('/search', ['as' => 'frontend.search', 'uses' => 'SearchController@search']);
+        
     //rental
     Route::get('rental/', ['as' => 'frontend.rental.list', 'uses' => 'RentalController@index']);
     Route::get('rental/detail/{id}', ['as' => 'frontend.rental.detail', 'uses' => 'RentalController@rentalDetail']);    
@@ -26,7 +30,7 @@ Route::group(array('namespace' => 'Frontend'), function () {
   
     //product
     Route::get('product/', ['as' => 'frontend.product.list', 'uses' => 'ProductController@index']);
-    Route::get('product/detail', ['as' => 'frontend.product.detail', 'uses' => 'ProductController@productDetail']);
+    Route::get('product/detail/{id?}', ['as' => 'frontend.product.detail', 'uses' => 'ProductController@productDetail']);
     
     //maker
     Route::get('maker/', ['as' => 'frontend.maker.list', 'uses' => 'MakerController@index']);

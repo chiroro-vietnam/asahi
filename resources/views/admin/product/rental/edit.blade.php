@@ -35,6 +35,7 @@
         <td width="20%" class="col3">商品名 <span class="notnull">[*]</span></td>
         <td>
             <input name="id" type="hidden" id="id" size="60" value="{{$rp->id}}" />
+            <input name="order" type="hidden" id="order" size="60" value="{{$rp->order}}" />
             <input name="cat_rental_id" type="hidden" id="cat_rental_id" size="60" value="{{$rp->cat_rental_id}}" />
             <input name="product_name" type="text" id="product_name" size="60" value="{{$rp->product_name}}" />            
         </td>

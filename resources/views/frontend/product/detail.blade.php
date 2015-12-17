@@ -14,44 +14,39 @@
 <div id="products">
 <div class="clear" id="index">
   <div id="topLeft">
-  	<h2><span class="h2_title">レンタルサービス</span></h2>
+  	<h2><span class="h2_title">{{$title_product}}</span></h2>
 
     <div class="productsDetail clear">
       <div class="dtl_left">
-        <div class="dtlImg1"><img src="../../frontend/image/products/001_img1.jpg" alt=""></div>
-        <div class="dtlImg2"><img src="../../frontend/image/products/001_img2.jpg" alt=""></div>
+        <div class="dtlImg1">{!!HTML::image($product->image_first) !!}</div>
+        <div class="dtlImg2">{!!HTML::image($product->image_first) !!}</div>
       </div>
       <div class="dtl_right">
         <div class="dtlName">
-          <span class="dn_cat">ダイヤモンドブレード(湿式)</span>
-          <span class="dn_name">ハイグレードブレードHG</span>
-          <span class="dn_notice">1枚の刃で一般品ブレードの3枚～5枚分の寿命!!</span>
+          <span class="dn_cat">{{$product->product_name_auxiliary}}</span>
+          <span class="dn_name">{{$product->product_name}}</span>
+          <span class="dn_notice"><?php echo nl2br($product->copy);?></span>
         </div>
         <div class="dtlHr"></div>
         <div class="dtlText">
           <div class="dt_text">
-            5ps～10psの小型コンクリートカッター用に切れ味・耐久性を重視<br />
-            チップの高さが寿命の秘訣!一度使うと手放せない<br />
-            <br />
-            アスファルト・コンクリート兼用となります。<br />
+              <?php echo nl2br($product->overview);?>             
           </div>
         </div>
-        <div class="dtlPrice">
-          <div class="dp_price">000,000<span>円(税別）</span></div>
-          <div class="dp_caption">価格注釈がはいります。価格注釈がはいります。価格注釈がはいります。</div>
-        </div>
+        @if($product->display_rate == 1)
+            <div class="dtlPrice">
+              <div class="dp_price">{{number_format($product->sell_price)}}<span>円(税別）</span></div>
+              <div class="dp_caption">{{$product->annotation_price}}</div>
+            </div>
+        @endif
         <div class="dtlSet">
         	<div class="ds_title"><span>セット内容</span></div>
         	<div class="ds_text">
-            セット内容1<br />
-            セット内容2<br />
-            セット内容3<br />
-            セット内容4<br />
-            セット内容5<br />
+                <?php echo nl2br($product->set_content);?>
           </div>
         </div>
         <div class="dtlNotes">
-          <div class="dn_text">注釈がはいります。注釈がはいります。注釈がはいります。注釈がはいります。注釈がはいります。</div>
+          <div class="dn_text"><?php echo nl2br($product->overview);?></div>
         </div>
       </div>
   	</div>
@@ -64,63 +59,30 @@
     
     
     <h4><span class="h4_title">サイズや料金表について</span></h4>
-      
-      <div class="inqInput">
-        <table border="0" cellspacing="2" cellpadding="5">
-          <tr>
-            <th>種類</th>
-            <th>サイズ</th>
-            <th>料金</th>
-          </tr>
-          <tr>
-            <td>12HG</td>
-            <td>外径323mm／チップ高9mm／チップ厚3.0mm／チップ長47mm／基板厚2.4mm</td>
-            <td>00,000円</td>
-          </tr>
-          <tr>
-            <td>14HG</td>
-            <td>外径323mm／チップ高9mm／チップ厚3.0mm／チップ長47mm／基板厚2.4mm</td>
-            <td>00,000円</td>
-          </tr>
-          <tr>
-            <td nowrap>一般スタンダードタイプ／<br>
-            12インチ</td>
-            <td>外径323mm／チップ高9mm／チップ厚3.0mm／チップ長47mm／基板厚2.4mm</td>
-            <td>00,000円</td>
-          </tr>
-          <tr>
-            <td>一般スタンダードタイプ／<br>
-            14インチ</td>
-            <td>外径323mm／チップ高9mm／チップ厚3.0mm／チップ長47mm／基板厚2.4mm</td>
-            <td>00,000円</td>
-          </tr>
-        </table>
-    </div>
-
+    
+    @if($product->display_rate == 1)
+        <div class="inqInput">
+            <?php echo $product->omotekumi;?>
+        </div>
+    @endif
     
   </div>
   <div id="topRight">
     <div class="subMenu">
-    	<div class="sub_title"><img src="frontend/image/sec_products_title.jpg" alt="販売"></div>
+    	<div class="sub_title"><img src="../../frontend/image/sec_products_title.jpg" alt="販売"></div>
       <ul class="sub_products">
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
-        <li class="acrd-ctrl"><a href="#">電動工具</a>
-          <ul class="acrd-pl">
-            <li><a href="#">ステンレス管端処理機</a></li>
-            <li><a href="#">セーバーソーCR13VBY</a></li>
-            <li><a href="#">セーバーソーCR17Y(バイス付)</a></li>
-            <li><a href="#">インパクトレンチWR16SA</a></li>
-            <li><a href="#">LEDバルーン投光器</a></li>
-          </ul>
-        </li>
+        @if(!empty($catSell))
+        @foreach($catSell as $cs)
+            <li class="acrd-ctrl"><a href="#">{{$cs->name}}</a>
+              @if(!empty($lps[$cs->id]))
+              <ul class="acrd-pl">
+                <li><a href="#">{{$lps[$cs->id]}}</a></li>
+
+              </ul>
+              @endif
+            </li>
+        @endforeach
+        @endif
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">

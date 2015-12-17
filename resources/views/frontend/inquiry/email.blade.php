@@ -1,28 +1,28 @@
-<?php echo $data['name'];?> さま
+{{$name}} さま
 
-お問い合わせ内容: <?php echo $data['content'];?>
+お問い合わせ内容: {{$content}}
 
-お名前: <?php echo $data['name'];?>
+お名前: {{$name}}
 
-ふりがな: <?php echo $data['furigana'];?>
+ふりがな: {{$furigana}}
 
-会社名: <?php echo $data['company'];?>
+会社名: {{$company}}
 
-部署: <?php echo $data['department'];?>
+部署: {{$department}}
 
-役職: <?php echo $data['position'];?>
+役職: {{$position}}
 
-郵便番号: <?php echo $data['postalCode1'];?> - <?php echo $data['postalCode2'];?>
+郵便番号: {{$postalCode1}} - {{$postalCode2}}
 
-都道府県: <?php echo $data['state'];?>
+都道府県: {{$state}}
 
-ご住所: <?php echo $data['address'];?>
+ご住所: {{$address}}
 
-電話番号: <?php echo $data['phone'];?>
+電話番号: {{$phone}}
 
-FAX番号: <?php echo $data['fax'];?>
+FAX番号: {{$fax}}
 
-メールアドレス:<?php echo $data['email'];?>
+メールアドレス: {{$email}}
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━

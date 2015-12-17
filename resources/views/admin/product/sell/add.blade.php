@@ -105,7 +105,7 @@
           
           <td><input name="url" type="text" id="url" size="50" value="{{Input::old('url')}}" />
               
-              <input type="checkbox" name="open_tab" value="{{Input::old('open_tab')}}" id="open_tab" <?php if(Input::old('open_tab', true)) echo 'checked'; ?>/>
+              <input type="checkbox" name="open_tab" id="open_tab" <?php if(Input::old('open_tab' == 1)) echo 'checked="checked"'; ?>/>
             新しいウィンドウを開いて表示する <br />
             入力例） http://www.yahoo.co.jp</td>
         </tr>
@@ -130,7 +130,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display" id="display" value=""/>
+          <td><input type="checkbox" name="display" id="display" <?php if(Input::old('display' == 1)) echo 'checked="checked"'; ?>/>
             一時的に一般側画面へ表示しない</td>
         </tr>
       </table></td>

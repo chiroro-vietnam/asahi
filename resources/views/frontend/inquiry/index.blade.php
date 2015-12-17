@@ -2,6 +2,7 @@
 
 @section('content')
     {!! HTML::style('backend/css/custom.css') !!}
+    {!! HTML::style('frontend/css/mystyle.css') !!}
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="index.html" title="TOP" class="now">TOP</a></li>
@@ -71,7 +72,9 @@
                   &nbsp;-&nbsp;
                   <input type="text" size="4" name="postalCode2"/>
                   &nbsp;&nbsp;
-                  <button>郵便番号検索</button></td>
+<!--                  <button>郵便番号検索</button>-->
+                        <a id="chkBtn" href="#">郵便番号検索</a>
+                </td>
               </tr>
               <tr>
                 <th>都道府県</th>

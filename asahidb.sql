@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2015 at 05:00 AM
+-- Generation Time: Dec 17, 2015 at 11:44 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.5.30
 
@@ -41,13 +41,7 @@ CREATE TABLE `category_product` (
 --
 
 INSERT INTO `category_product` (`id`, `name`, `display`, `order`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, '発電機', 1, 1, 0, '2015-12-12 09:25:25', '2015-12-13 01:21:26'),
-(2, '配水ポリエチレン管融着工具', 1, 2, 0, '2015-12-12 07:00:00', '2015-12-12 09:23:20'),
-(3, '鋳鉄管加工機', 0, 4, 0, '2015-12-12 08:20:20', '2015-12-12 04:13:29'),
-(4, 'パイプ挿入機', 0, 5, 0, '2015-12-13 08:20:22', '2015-12-12 15:46:33'),
-(5, 'SSD', 1, 6, 0, '2015-12-12 14:50:29', '2015-12-12 15:19:58'),
-(6, 'FFFFFFFFF', 1, 1, 1, '2015-12-12 15:42:43', '2015-12-12 15:42:43'),
-(7, 'SASA', 1, 7, 0, '2015-12-12 15:45:15', '2015-12-12 15:46:13');
+(5, 'ASAHI', 1, 6, 0, '2015-12-12 14:50:29', '2015-12-15 09:01:33');
 
 -- --------------------------------------------------------
 
@@ -70,47 +64,7 @@ CREATE TABLE `category_rental` (
 --
 
 INSERT INTO `category_rental` (`id`, `name`, `display`, `is_deleted`, `order`, `created_at`, `updated_at`) VALUES
-(1, '配水ポリエチレン管融着工具', 1, 0, 1, '2015-12-09 04:09:10', '2015-12-09 05:34:22'),
-(2, '配水ポリエチレン管融着工具', 1, 0, 2, '2015-12-09 00:00:00', '2015-12-09 09:24:30'),
-(3, 'パイプ挿入機', 1, 0, 3, '2015-12-16 00:00:00', '2015-12-09 00:00:00'),
-(4, '塩ビパイプ挿入機', 1, 0, 4, '2015-12-09 06:16:19', '2015-12-09 09:20:24'),
-(5, '漏水探知機', 1, 0, 5, '2015-12-09 05:19:23', '2015-12-09 07:22:18'),
-(6, '各種テスト用機器', 0, 1, 6, '2015-12-09 08:00:00', '2015-12-09 09:26:33'),
-(7, 'その他', 0, 0, 8, '2015-12-09 07:20:22', '2015-12-09 06:16:20'),
-(8, 'fcdsfsdfg', 0, 1, 0, '2015-12-10 06:07:12', '2015-12-10 06:07:12'),
-(9, 'CCCCCCCCC', 0, 0, 0, '2015-12-10 06:07:56', '2015-12-10 06:07:56'),
-(10, 'SSSSS', 0, 0, 0, '2015-12-10 06:10:19', '2015-12-10 06:10:19'),
-(11, 'AABBCC', 0, 0, 0, '2015-12-10 06:11:15', '2015-12-10 06:11:15'),
-(12, 'gggg', 0, 1, 0, '2015-12-10 06:32:53', '2015-12-10 06:32:53'),
-(13, 'dfghj', 0, 0, 0, '2015-12-10 06:33:59', '2015-12-10 06:33:59'),
-(14, 'GGGGFSFSGFSG', 0, 1, 0, '2015-12-10 06:34:29', '2015-12-10 06:34:29'),
-(15, 'EEEEEEE', NULL, 1, 0, '2015-12-10 06:35:11', '2015-12-10 06:35:11'),
-(16, 'Hello World', 0, 0, 0, '2015-12-10 06:38:46', '2015-12-10 06:38:46'),
-(17, 'SAKANA', 1, 0, 0, '2015-12-10 06:39:11', '2015-12-10 06:39:11'),
-(18, '7678i67868', 1, 0, 0, '2015-12-10 07:15:44', '2015-12-10 07:15:44');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rental`
---
-
-CREATE TABLE `rental` (
-  `id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `order` int(11) DEFAULT NULL,
-  `is_deleted` tinyint(2) NOT NULL DEFAULT '0',
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `rental`
---
-
-INSERT INTO `rental` (`id`, `category_id`, `product_id`, `order`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 0, '2015-12-10 08:13:33', '2015-12-10 06:17:19');
+(19, 'PTEST', 1, 0, NULL, '2015-12-15 06:25:49', '2015-12-15 23:05:17');
 
 -- --------------------------------------------------------
 
@@ -147,10 +101,9 @@ CREATE TABLE `rental_product` (
 --
 
 INSERT INTO `rental_product` (`id`, `product_name`, `product_name_auxiliary`, `cat_rental_id`, `copy`, `overview`, `set_content`, `annotation`, `image_first`, `image_second`, `display`, `show_rate`, `rental_first_price`, `rental_one_month_price`, `service_cost`, `omotekumi`, `display_top`, `order`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'JWEF200-II123', 'EFコントローラ', 1, '1', '1', '商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n商品名（補助用語）\r\n', '1', '/uploads/images/rental_product/1172462214.jpg', '/uploads/images/rental_product/549701088.jpg', 0, 1, '111', '2134', '3466', 'Hello World! 123456', 0, 3, 0, '2015-12-10 09:00:00', '2015-12-14 10:28:31'),
-(2, 'EF2800iSE', 'インバーター発電機', 3, '3', '3', '4', '3', '3', '4', 1, 1, '100', '200', '300', 'Konnichiwa', 1, 9, 0, '2015-12-17 00:00:00', '2015-12-10 00:22:00'),
-(3, 'AAAAA', 'bnvbn', 0, 'vmvb', 'mvbmv', 'bmvbm', 'vmvb', '/uploads/images/rental_product/1026306406.jpg', '/uploads/images/rental_product/1284117041.jpg', 1, 0, '4989', '978978', '9789', '9878olhj,j,hj,hjkgktkt', 1, 5, 0, NULL, '2015-12-11 09:00:01'),
-(4, 'AAAAA', '46', 1, '645645', '6456', '456456', '456456', '/uploads/images/rental_product/1439707797.jpg', '/uploads/images/rental_product/348993047.jpg', 1, 0, '54645645', '6456', '456', '456456456', 1, 6, 0, NULL, '2015-12-11 10:33:54');
+(18, 'PTEST1', 'PTEST1', 19, 'PTEST1', 'PTEST1', 'PTEST1', 'PTEST1', '/uploads/images/rental_product/1351526239.jpg', '/uploads/images/rental_product/335842127.jpg', 1, 1, '750000', '800000', '860000', 'PTEST1', 1, 3, 0, NULL, '2015-12-17 08:29:02'),
+(19, 'PTEST2', 'PTEST2', 19, 'PTEST2', 'PTEST2', 'PTEST2', 'PTEST2', '/uploads/images/rental_product/97710014.jpg', '/uploads/images/rental_product/230611836.jpg', 1, 1, '50000', '600000', '7000000000', 'PTEST2', 1, 2, 0, NULL, '2015-12-17 08:24:36'),
+(20, 'PTEST3', 'PTEST3', 19, 'PTEST3', 'PTEST3', 'PTEST3', 'PTEST3', '/uploads/images/rental_product/56464622.jpg', '/uploads/images/rental_product/226552772.jpg', 1, 1, '8000000', '6000000', '9999999', 'PTEST3', 1, 1, 0, NULL, '2015-12-17 08:55:44');
 
 -- --------------------------------------------------------
 
@@ -190,10 +143,8 @@ CREATE TABLE `sell_product` (
 --
 
 INSERT INTO `sell_product` (`id`, `product_name`, `product_name_auxiliary`, `display_type`, `cat_product_id`, `copy`, `overview`, `set_content`, `annotation`, `image_first`, `image_second`, `display_rate`, `sell_price`, `annotation_price`, `omotekumi`, `url`, `file`, `display_top`, `order`, `display`, `open_tab`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 'JWEF200-II', 'EFコントローラ', 1, 1, '1', '1', '1', '1', '1', '/uploads/files/sell_product/1396764068.xls', 1, 12345, 35366, 'Hello World!!!!!!!!', 'http://www.google.com', '/uploads/files/sell_product/48035234.pdf', 1, 1, 1, 1, 0, '2015-12-12 11:30:00', '2015-12-13 22:55:06'),
-(2, 'JWEF200-II', '	EFコントローラ', 1, 1, '1', '1', '1', '1', '1', '/uploads/files/sell_product/688057459.pdf', 1, 111, 234535, '4756567567', 'http://www.google.com', '/uploads/files/sell_product/925926227.pdf', 0, 3, 1, 1, 0, '2015-12-12 09:26:28', '2015-12-14 00:01:17'),
-(3, '転造ヘッド', '転造ヘッド	転造ヘッド', 3, 2, '23', '45', '1', '1', '1', '1', 1, 2445, 45767, '768678658', 'hjrfjh', 'fghjgj', 7, 1, 1, 1, 0, '2015-12-31 00:00:22', '2015-12-12 00:00:00'),
-(4, '配水PE用手動穿孔機', '配水PE用手動穿孔機', 2, 2, '3', '2', '2', '1', '1', '1', 1, 10000000, 2000000, '11', '1', '1', 1, 1, 1, 1, 0, '2015-12-12 05:00:00', '2015-12-12 09:25:22');
+(11, 'ASAHI1', 'ASAHI1', 1, 5, 'ASAHI1', 'ASAHI1', 'ASAHI1', 'ASAHI1', '/uploads/images/sell_product/984160075.jpg', '/uploads/images/sell_product/181641359.jpg', 1, 9999999999, 0, 'ASAHI1<br />\r\nASAHI1<br />\r\nASAHI1', 'http://www.yahoo.co.jp', '/uploads/files/sell_product/587375226.xls', 1, 1, 1, 1, 0, NULL, '2015-12-17 09:34:00'),
+(12, 'ASAH2', 'ASAH2', 1, 5, 'ASAH2', 'ASAH2', 'ASAH2', 'ASAH2', '/uploads/images/sell_product/1086641673.jpg', '/uploads/images/sell_product/1072544009.jpg', 1, 800000000000, 0, 'ASAH2<br />\r\nASAH2<br />\r\nASAH2<br />\r\nASAH2', 'http://www.yahoo.co.jp', '/uploads/files/sell_product/796614099.xls', 1, 2, 1, 1, 0, NULL, '2015-12-17 09:25:43');
 
 -- --------------------------------------------------------
 
@@ -203,12 +154,23 @@ INSERT INTO `sell_product` (`id`, `product_name`, `product_name_auxiliary`, `dis
 
 CREATE TABLE `top_page_show` (
   `id` int(11) NOT NULL,
-  `total_rental_display` int(11) DEFAULT NULL,
-  `total_product_display` int(11) DEFAULT NULL,
-  `is_deleted` tinyint(2) NOT NULL DEFAULT '0',
+  `rental_product_id` int(11) DEFAULT NULL,
+  `sell_product_id` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `top_page_show`
+--
+
+INSERT INTO `top_page_show` (`id`, `rental_product_id`, `sell_product_id`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(12, 18, NULL, 0, '2015-12-17 08:23:12', '2015-12-17 08:29:02'),
+(13, 19, NULL, 0, '2015-12-17 08:24:36', '2015-12-17 08:24:36'),
+(14, 20, NULL, 0, '2015-12-17 08:25:21', '2015-12-17 08:55:44'),
+(15, NULL, 11, 0, '2015-12-17 09:00:34', '2015-12-17 09:34:00'),
+(16, NULL, 12, 0, '2015-12-17 09:19:03', '2015-12-17 09:24:37');
 
 --
 -- Indexes for dumped tables
@@ -224,12 +186,6 @@ ALTER TABLE `category_product`
 -- Indexes for table `category_rental`
 --
 ALTER TABLE `category_rental`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rental`
---
-ALTER TABLE `rental`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -263,22 +219,22 @@ ALTER TABLE `category_product`
 -- AUTO_INCREMENT for table `category_rental`
 --
 ALTER TABLE `category_rental`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT for table `rental`
---
-ALTER TABLE `rental`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `rental_product`
 --
 ALTER TABLE `rental_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `sell_product`
 --
 ALTER TABLE `sell_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `top_page_show`
+--
+ALTER TABLE `top_page_show`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

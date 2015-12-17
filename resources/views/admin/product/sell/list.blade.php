@@ -51,12 +51,12 @@
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
     <tr class="col3">
-        <td width="5%" align="center">削除</td>
-        <td width="5%" align="center">表示</td>
-        <td width="30%" align="center">商品名</td>
-        <td width="30%" align="center">商品名（補助）</td>
+        <td width="8%" align="center">削除</td>
+        <td width="8%" align="center">表示</td>
+        <td width="29%" align="center">商品名</td>
+        <td width="29%" align="center">商品名（補助）</td>
         <td width="10%" align="center">詳細・編集</td>
-        <td width="20%" colspan="4" align="center">表示順序</td>
+        <td width="10%" colspan="4" align="center">表示順序</td>
     </tr>
     
       <?php 
@@ -66,13 +66,13 @@
             @if(isset($sp) && count($sp) > 0)
                 @foreach($sp as $val_sp)
                       <tr>
-                          <td width="5%">
+                          <td>
                               <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                           </td>
-                          <td  width="8%" align="center"><span class={{@$class_arr[$val_sp->display]}}>{{@$display_arr[$val_sp->display]}}</span></td>
+                          <td align="center"><span class={{@$class_arr[$val_sp->display]}}>{{@$display_arr[$val_sp->display]}}</span></td>
                           <td>{{$val_sp->product_name}}</td>
                           <td>{{$val_sp->product_name_auxiliary}}</td>
-                          <td width="10%"><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
+                          <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
                           <td align="center"><input type="submit" name="button6" id="button6" value="TOP" /></td>
                           <td align="center"><input type="submit" name="button7" id="button7" value="↑" /></td>
                           <td align="center"><input type="submit" name="button8" id="button8" value="↓" /></td>

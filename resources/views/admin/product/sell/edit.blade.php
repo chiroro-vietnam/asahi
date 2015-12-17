@@ -44,6 +44,7 @@
             <input type="radio" name="display_type" id="display_type" <?php if($val->display_type == 3) echo 'checked="checked"'; ?> value="3" />
             ファイルタイプ
             <input name="id" type="hidden" id="id" value="{{$id}}"/>
+            <input name="order" type="hidden" id="id" value="{{$val->order}}"/>
             <input name="cat_product_id" type="hidden" id="cat_product_id" value="{{$val->cat_product_id}}"/>
           </td>
         </tr>
@@ -117,7 +118,7 @@
           
           <td><input name="url" type="text" id="url" size="50" value="{{$val->url}}" />
               
-              <input type="checkbox" name="open_tab" id="open_tab" value="{{$val->open_tab}}" <?php if($val->open_tab == 1) echo 'checked="checked"'; ?>/>
+              <input type="checkbox" name="open_tab" id="open_tab" <?php if($val->open_tab == 1) echo 'checked="checked"'; ?>/>
             新しいウィンドウを開いて表示する <br />
             入力例） http://www.yahoo.co.jp</td>
         </tr>
@@ -134,7 +135,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display_top" id="display_top"  <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
+          <td><input type="checkbox" name="display_top" id="display_top" <?php if($val->display_top == 1) echo 'checked="checked"'; ?> />
             おすすめの＜販売＞商品として表示する</td>
         </tr>
         <tr>
@@ -142,7 +143,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display" id="display" <?php if($val->display == 1) echo 'checked="checked"'; ?> />{{$val->display}}
+          <td><input type="checkbox" name="display" id="display" <?php if($val->display == 1) echo 'checked="checked"'; ?> />
             一時的に一般側画面へ表示しない</td>
         </tr>
       </table></td>

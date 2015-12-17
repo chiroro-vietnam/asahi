@@ -12,7 +12,7 @@
   <div id="topLeft">
 {!! Form::open( ['method' => 'post', 'url' => 'inquiry/confirm', 'enctype'=>'multipart/form-data'] ) !!} 
   	<h2><span class="h2_title">お問い合わせ</span></h2>
-    <h3 class="h3_title">入力画面</h3>
+    <h3 class="h3_title">確認します</h3>
 
       <p>下記のフォームへお問い合わせ内容をご入力し、「確認画面へ進む」ボタンを押してください。
 

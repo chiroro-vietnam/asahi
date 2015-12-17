@@ -26,9 +26,9 @@ class InquiryController extends FrontendController
     /************************************************************************/
     public function index() 
     {
-        Session::forget('inputdata');
         return view('frontend.inquiry.index');
     }
+    
     public function postInquiry() 
     {
         $validator = Validator::make(Input::all(), Inquiry::$rules, Inquiry::$messages);
@@ -48,25 +48,7 @@ class InquiryController extends FrontendController
                 'fax'           => Input::get('fax'),
                 'email'         => Input::get('email')
             ];
-//            $inputData['content'] = Input::get('content');
-//            $inputData['name'] = Input::get('name');
-//            $inputData['furigana'] = Input::get('furigana');
-//            $inputData['company'] = Input::get('company');
-//            $inputData['department'] = Input::get('department');
-//            $inputData['position'] = Input::get('position');
-//            $inputData['postalCode1'] = Input::get('postalCode1');
-//            $inputData['postalCode2'] = Input::get('postalCode2');
-//            $inputData['state'] = Input::get('dlPrefectures');
-//            $inputData['address'] = Input::get('address');
-//            $inputData['phone'] = Input::get('phone');
-//            $inputData['fax'] = Input::get('fax');
-//            $inputData['email'] = Input::get('email');
-//            foreach($inputData as $data)
-//            {
-//                
-//            }
-//            print "<pre>";
-//            print_r($data);exit;
+
             Session::put('inputdata', $inputData);
             return Redirect::route('frontend.inquiry.confirm');
         }
@@ -79,9 +61,12 @@ class InquiryController extends FrontendController
 
     public function getConfirm()
     {
+        if(!empty(Session::get('inputdata')))
+        {
+          return Redirect::route('frontend.inquiry.index');  
+        }
         $data = Session::get('inputdata');
-        if(!isset($data)){
-        
+        if(!isset($data)){        
           return Redirect::route('frontend.inquiry.index');  
         }             
         return view('frontend.inquiry.confirm', compact('data'));
@@ -93,19 +78,24 @@ class InquiryController extends FrontendController
         {             
             return Redirect::route('frontend.inquiry.index');  
         } 
-        
 
+        
         Mail::send('frontend.inquiry.email', $data, function($message) use ($data)  {
-        $message->to('dao.at@chiroro.com.vn', 'Chiroro Viet Nam');
+        $message->to('support@chiroro.com', 'Chiroro-Net Customer Support');
         $message->subject('お問い合わせ');
         $message->from($data['email'], $data['furigana']);
         });
-        return Redirect::route('frontend.inquiry.complete');
+        return Redirect::route('frontend.inquiry.complete');        
     }
 
+    
     public function getComplete()
-    {
+    {  
+        if(!empty(Session::get('inputdata')))
+        {
+          return Redirect::route('frontend.inquiry.index');  
+        }
+        return view('frontend.inquiry.complete');
         Session::forget('inputdata');
-        return view('frontend.inquiry.complete'); 
     }
 }

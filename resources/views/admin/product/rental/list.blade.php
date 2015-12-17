@@ -70,7 +70,7 @@
                           <td width="5%">
                               <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                           </td>
-                          <td  width="8%" align="center"><span class={{@$class_arr[$val_rp->display_top]}}>{{@$display_arr[$val_rp->display_top]}}</span></td>
+                          <td  width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
                           <td>{{$val_rp->product_name}}</td>
                           <td>{{$val_rp->product_name_auxiliary}}</td>
                           <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>

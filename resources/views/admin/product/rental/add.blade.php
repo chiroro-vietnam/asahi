@@ -65,7 +65,7 @@
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>
-        <td><input type="checkbox" name="display" id="display" <?php if(Input::old('display', true)) echo 'checked'; ?>/>
+        <td><input type="checkbox" name="display" id="display" <?php if(Input::old('display' == 1)) echo 'checked="checked"'; ?>/>
           一時的に一般側画面へ表示しない</td>
       </tr>
       <tr>

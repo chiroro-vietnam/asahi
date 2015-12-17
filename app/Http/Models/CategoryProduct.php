@@ -28,5 +28,10 @@ class CategoryProduct extends Model {
                         ->find($id);
                         
 	}
+        
+        public function products()
+        {
+            return $this->hasMany('App\Http\Models\SellProduct');
+        }
          
 }

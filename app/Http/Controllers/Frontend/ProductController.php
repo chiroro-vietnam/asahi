@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\FrontendController;
-
+use App\Http\Models\SellProduct;
+use App\Http\Models\CategoryProduct;
 use Validator;
 use Auth;
 use Session;
@@ -15,14 +16,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-class ProductController extends FrontendController{
-
+class ProductController extends FrontendController
+{
 	/************************************************************************
 	*
 	/************************************************************************/
 	public function index() 
         {
-            return view('frontend.product.list');
+            $title_sell_product = '販売';
+            $tile_branch = '自社ブランド';
+            $title_cat_product = '販売';
+            $products = SellProduct::getAllSellPro();
+            $catSell = CategoryProduct::getCatSell();
+            $lps = SellProduct::getListPro();
+            return view('frontend.product.list', compact('products', 'title_sell_product', 'tile_branch', 'title_cat_product','catSell' ,'lps'));
 	}
         
                 /************************************************************************
@@ -31,10 +38,12 @@ class ProductController extends FrontendController{
         * 
         *
 	/************************************************************************/
-        public function productDetail(){
+        public function productDetail($id){
             $title_product = 'レンタルサービス';
-            //$product = Product::getProductDetail($id);
-            return view('frontend.product.detail');
+            $product = SellProduct::getSellProById($id);
+            $catSell = CategoryProduct::getCatSell();
+            $lps = SellProduct::getListPro();
+            return view('frontend.product.detail', compact('product','title_product','catSell','lps'));
         }
 
 }
