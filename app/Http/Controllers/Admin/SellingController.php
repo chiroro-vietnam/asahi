@@ -80,8 +80,7 @@ class SellingController extends Controller
             $inputData['overview']                  = Input::get('overview');
             $inputData['set_content']               = Input::get('set_content');
             $inputData['annotation']                = Input::get('annotation');
-            $inputData['display_rate']              = Input::get('display_rate');
-            //$inputData['display_rate']              = 1;                  
+            $inputData['display_rate']              = Input::get('display_rate');                 
             $inputData['sell_price']                = Input::get('sell_price');
             $inputData['annotation_price']          = Input::get('annotation_price');
             $inputData['omotekumi']                 = Input::get('omotekumi');                
@@ -150,6 +149,7 @@ class SellingController extends Controller
     {
         $cat_sell = DB::table('category_product')
                 ->where('is_deleted', NO_DELLETE)
+                ->where('display', 1)
                 ->select('id','name')->find($cs_id);
         return view('admin.product.sell.add', compact('cs_id', 'cat_sell'));
     }
@@ -161,6 +161,7 @@ class SellingController extends Controller
         if($cs_id != null){
             $csp = DB::table('category_product')
                     ->where('is_deleted', NO_DELLETE)
+                    ->where('display', 1)
                     ->lists('name', 'id');
             $sp = $this->_searchSellPro($cs_id);
             return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));            
@@ -234,7 +235,7 @@ class SellingController extends Controller
                 $image_first    = Input::file('image_first');
                 
                 $file1 = DB::table('rental_product')->find($id);
-               // echo "<pre>";                print_r($id);exit;
+                
                 if(!empty($file1))
                 {
                     if($file1->image_first){

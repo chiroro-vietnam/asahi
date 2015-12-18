@@ -58,35 +58,26 @@ class RentalController extends Controller
         return redirect::route('admin.rental.osusume');
     }
     
-    
-    //category rental
-    public function getCatategory()
-    {
-        return view('admin.rental.category');
-    }
-    //category rental
-    public function postCatategory()
-    {
-        
-    }
-    
     //product rental list
     public function listProRental($cr_id=null)
     {
         $cr_id = Input::get('cr_id');
         if($cr_id != null){
             $crs = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)->lists('name', 'id');
+                    ->where('is_deleted', NO_DELLETE)
+                    ->where('display', 1)
+                    ->lists('name', 'id');
             $rp = $this->_searchRentPro($cr_id);
             return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));            
         }  else {
             $crs = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)->lists('name', 'id');
+                    ->where('is_deleted', NO_DELLETE)
+                    ->where('display', 1)
+                    ->lists('name', 'id');
             if(Input::has('btmSearchRT'))
             {            
                $cr_id = Input::get('cat_rental');
                $rp = $this->_searchRentPro($cr_id);
-             //  return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
                return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
                return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
             }else{           
@@ -111,6 +102,7 @@ class RentalController extends Controller
     {
         $cat_rental = DB::table('category_rental')
                 ->where('is_deleted', NO_DELLETE)
+                ->where('display', 1)
                 ->select('id','name')->find($cr_id);
         return view('admin.product.rental.add', compact('cr_id', 'cat_rental'));
     }
