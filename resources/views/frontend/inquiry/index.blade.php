@@ -151,7 +151,7 @@
             </tr>            
               </tbody>
           </table>
-          <div class="btn">
+          <div class="btn" style="width: 114px;">
             <input type="submit" value="確認画面へ進む" alt="確認画面へ進む" name="btSubmit"/>
           </div>
 {!! Form::close() !!}

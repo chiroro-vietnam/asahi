@@ -17,14 +17,14 @@
       <div id="siteSearch">
       	<img src="frontend/image/ht_seach_title.png" alt="サイト内検索">
         
-<!--        <form action="http://www.google.com/search">-->
+        <form action="http://www.google.com/search">
  
-        <form class="form-search" id="search" method="GET" action="{{URL::route('frontend.search')}}">
-<!--            <input type="hidden" name="hl" value="ja">
+<!--        <form class="form-search" id="search" method="GET" action="{{URL::route('frontend.search')}}">-->
+            <input type="hidden" name="hl" value="ja">
             <input type="hidden" name="hq" value="inurl:www.ash-s.com/">
             <input type="hidden" name="ie" value="Shift_JIS">
             <input type="hidden" name="oe" value="Shift_JIS">
-            <input type="hidden" name="filter" value="0">-->
+            <input type="hidden" name="filter" value="0">
             <input type="text" name="keyword" size="25" maxlength="30" value="" placeholder="サイト内検索">
             <input type="submit" name="btnG" value="検索" class="btn_submit">
         </form>
