@@ -53,10 +53,10 @@
     <td>
         <table width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr class="col3">
-            <td width="5%" align="center">削除</td>
+            <td width="7%" align="center">削除</td>
             <td width="5%" align="center">表示</td>
-            <td width="30%"align="center">商品名</td>
-            <td width="30%" align="center">商品名（補助）</td>
+            <td width="32%"align="center">商品名</td>
+            <td width="32%" align="center">商品名（補助）</td>
             <td width="10%" align="center">詳細・編集</td>
             <td width="20%" colspan="4" align="center">表示順序</td>
         </tr>
@@ -64,21 +64,36 @@
               $display_arr = array('0' => '×', '1' => '○'); 
               $class_arr = array('0'=>'red', '1'=>'blue');
             ?>
-            @if(isset($rp) && count($rp) > 0)
+            @if(isset($rp) && count($rp) > 0)            
+                <?php $total = count($rp); $pos = 1;?>
                 @foreach($rp as $val_rp)
-                      <tr>
-                          <td width="5%">
-                              <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
-                          </td>
-                          <td  width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
-                          <td>{{$val_rp->product_name}}</td>
-                          <td>{{$val_rp->product_name_auxiliary}}</td>
-                          <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>
-                          <td align="center"><input type="submit" name="button6" id="button6" value="TOP" /></td>
-                          <td align="center"><input type="submit" name="button7" id="button7" value="↑" /></td>
-                          <td align="center"><input type="submit" name="button8" id="button8" value="↓" /></td>
-                          <td align="center"><input type="submit" name="button4" id="button4" value="LAST" /></td>                      
+                
+                    <tr>
+                        <td width="5%">
+                            <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                        </td>
+                        <td  width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
+                        <td>{{$val_rp->product_name}}</td>
+                        <td>{{$val_rp->product_name_auxiliary}}</td>
+                        <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>
+                        
+                @if($total > 1)
+                    <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+
+                    <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
+                @else
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                @endif
+                                        
+
                     </tr>
+                    <?php $pos++; ?>
               @endforeach
             @else
               <tr>

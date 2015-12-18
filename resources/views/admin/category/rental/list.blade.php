@@ -24,50 +24,51 @@
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr class="col3">
-        <td width="8%" align="center">削除</td>
-        <td width="8%" align="center">表示</td>
-        <td width="30%" align="center">カテゴリ名</td>
-        <td width="10%" align="center">詳細・編集</td>
-        <td width="15%" colspan="4" align="center">表示順序</td>
-        <td width="13%" align="center">カテゴリ内商品管理</td>
+        <td width="6%" align="center">削除</td>
+        <td width="6%" align="center">表示</td>
+        <td width="25%" align="center">カテゴリ名</td>
+        <td width="7%" align="center">詳細・編集</td>
+        <td width="20%" colspan="4" align="center">表示順序</td>
+        <td width="7%" align="center">カテゴリ内商品管理</td>
         </tr>
         <?php 
           $display_arr = array('0' => '×', '1' => '○'); 
           $class_arr = array('0'=>'red', '1'=>'blue');
         ?>
-        @if(count($cat_rental) > 0)
+        @if(isset($cat_rental) && count($cat_rental) > 0)
+        <?php $total = count($cat_rental); $pos = 1; echo $total;?>
           @foreach($cat_rental as $cat)
             <tr>
                 <td>
-                    <a id="delSetting" name="delSetting" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.category.rental.del', $cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                    <a id="delRental" name="delRental" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.category.rental.del', $cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 </td>
                 <td align="center"><span class={{@$class_arr[$cat->display]}}>{{@$display_arr[$cat->display]}}</span></td>
                 <td>{{$cat->name}}</td>
                 <td><input type="button" onclick="location.href='<?php echo url('admin/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
-                <td><input type="submit" name="button6" id="button6" value="TOP" /></td>
-                <td><input type="submit" name="button7" id="button7" value="↑" /></td>
-                <td><input type="submit" name="button8" id="button8" value="↓" /></td>
-                <td><input type="submit" name="button4" id="button4" value="LAST" /></td>
+                @if($total > 1)
+                    <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+
+                    <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
+                @else
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                @endif
                 <td><input type="button" onclick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
+          <?php $pos++; ?>
           @endforeach
         @else
           <tr>
             <td colspan="9"><center>No Data</center></td>  
           </tr>
-        @endif
-
-      <!--<tr>
-        <td><input type="button" onclick="location.href='rental_cat_delete_check.html'" value="削除" /></td>
-        <td align="center"><span class="red">×</span></td>
-        <td>その他</td>
-        <td><input type="button" onclick="location.href='<?php echo route('admin.category.rental.edit'); ?>'" value="詳細・編集" /></td>
-        <td><input type="submit" name="button6" id="button6" value="TOP" /></td>
-        <td><input type="submit" name="button7" id="button7" value="↑" /></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><input type="button" onclick="location.href='<?php echo route('admin.product.rental.list'); ?>'" value="カテゴリ内商品管理" /></td>
-      </tr>-->
+        @endif 
+        
+      </tr>
     </table></td>
   </tr>
   <tr>

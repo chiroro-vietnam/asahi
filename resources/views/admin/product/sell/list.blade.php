@@ -64,20 +64,33 @@
               $class_arr = array('0'=>'red', '1'=>'blue');
             ?>
             @if(isset($sp) && count($sp) > 0)
+                <?php $total = count($sp); $pos=1;?>
                 @foreach($sp as $val_sp)
                       <tr>
-                          <td>
-                              <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
-                          </td>
-                          <td align="center"><span class={{@$class_arr[$val_sp->display]}}>{{@$display_arr[$val_sp->display]}}</span></td>
-                          <td>{{$val_sp->product_name}}</td>
-                          <td>{{$val_sp->product_name_auxiliary}}</td>
-                          <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
-                          <td align="center"><input type="submit" name="button6" id="button6" value="TOP" /></td>
-                          <td align="center"><input type="submit" name="button7" id="button7" value="↑" /></td>
-                          <td align="center"><input type="submit" name="button8" id="button8" value="↓" /></td>
-                          <td align="center"><input type="submit" name="button4" id="button4" value="LAST" /></td>                      
+                            <td>
+                                <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                            </td>
+                            <td align="center"><span class={{@$class_arr[$val_sp->display]}}>{{@$display_arr[$val_sp->display]}}</span></td>
+                            <td>{{$val_sp->product_name}}</td>
+                            <td>{{$val_sp->product_name_auxiliary}}</td>
+                            <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
+                          
+                        @if($total > 1)
+                            <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
+                            <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+
+                            <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
+                            <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
+                        @else
+                            <td align="center">&nbsp;</td>
+                            <td align="center">&nbsp;</td>
+
+                            <td align="center">&nbsp;</td>
+                            <td align="center">&nbsp;</td>
+                        @endif
+                
                     </tr>
+                    <?php $pos++; ?>
               @endforeach
             @else
               <tr>
