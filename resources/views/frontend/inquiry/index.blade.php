@@ -73,7 +73,7 @@
                   <input type="text" size="4" name="postalCode2"/>
                   &nbsp;&nbsp;
 <!--                  <button>郵便番号検索</button>-->
-                        <a id="chkBtn" href="#">郵便番号検索</a>
+<!--                        <a id="chkBtn" href="#">郵便番号検索</a>-->
                 </td>
               </tr>
               <tr>

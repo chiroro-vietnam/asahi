@@ -13,8 +13,7 @@ class Inquiry extends Model {
             'address'                   => 'required',
             'phone'                     => 'required',
             'fax'                       => 'required',
-            'email'                     => 'required|email'
-        
+            'email'                     => 'required|email'        
     );
 
     public static $messages = array(

@@ -22,7 +22,7 @@ class HomepageController extends FrontendController
     public function index() 
     {
         //rental top page
-        $catRenTop = CategoryRental::getCatRental();
+        $catRenTop = CategoryRental::topCatRental();
         $rentalTop = DB::table('rental_product')
                 ->rightJoin('top_page_show', 'rental_product.id', '=', 'top_page_show.rental_product_id')
                 ->leftJoin('category_rental', 'rental_product.cat_rental_id', '=', 'category_rental.id')
@@ -36,7 +36,7 @@ class HomepageController extends FrontendController
                 ->get();
         
         //product top page
-        $catSellTop = CategoryProduct::getCatSell();
+        $catSellTop = CategoryProduct::topCatSell();
         $prTop = DB::table('sell_product')
                 ->rightJoin('top_page_show', 'sell_product.id', '=', 'top_page_show.sell_product_id')
                 ->leftJoin('category_product', 'sell_product.cat_product_id', '=', 'category_product.id')
@@ -51,8 +51,6 @@ class HomepageController extends FrontendController
         
         $lrs = RentalProduct::getListRental();
         $lps = SellProduct::getListPro();
-//        echo '<pre>';
-//        print_r($rentalTop);
         return view('frontend.homepage', compact('catRenTop', 'catSellTop', 'rentalTop', 'prTop', 'lrs','lps'));
     }
 

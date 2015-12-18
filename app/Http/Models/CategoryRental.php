@@ -6,26 +6,27 @@ class CategoryRental extends Model {
 	protected static $table = 'category_rental';
 	
 	//get list category rental
-	public static function getCatRental(){
-		return DB::table(static::$table)
-                        ->where('is_deleted', NO_DELLETE)
-                        ->orderBy('order', 'asc')
-                        ->paginate(LIMIT_PAGE);
-                        
+	public static function getCatRental()
+        {
+            return DB::table(static::$table)
+                    ->where('is_deleted', NO_DELLETE)
+                    ->orderBy('order', 'asc')
+                    ->paginate(LIMIT_PAGE);                        
 	}
 	
 	//delete item category rental
-	public static function delCateRental($id){
-		return DB::table(static::$table)
-                        ->where('id', '=', $id)
-                        ->update(array('is_deleted' => DELETED));
-                        
+	public static function delCateRental($id)
+        {
+            return DB::table(static::$table)
+                    ->where('id', '=', $id)
+                    ->update(array('is_deleted' => DELETED));                        
 	}
-        public static function getCatRentalEdit($id){
-		return DB::table(static::$table)
-                        ->where('is_deleted', NO_DELLETE)
-                        ->find($id);
-                        
+        
+        public static function getCatRentalEdit($id)
+        {
+            return DB::table(static::$table)
+                    ->where('is_deleted', NO_DELLETE)
+                    ->find($id);                        
 	}
         
         public static $rules = array(
@@ -37,13 +38,21 @@ class CategoryRental extends Model {
 	);
       
         //get list category rental join product rental
-	public static function getAllCatRental(){
-		return DB::table(static::$table)                        
-                        //->join('rental_product', 'category_rental.id', '=', 'rental_product.cat_rental_id')
-                        //->select('category_rental.id', 'category_rental.name', 'rental_product.cat_rental_id', 'rental_product.product_name')
-                        ->where('category_rental.is_deleted', '=', NO_DELLETE)
-                        ->get();
-	}        
+	public static function getAllCatRental()
+        {
+            return DB::table(static::$table)
+                    ->where('is_deleted', '=', NO_DELLETE)
+                    ->where('display', 1)
+                    ->get();
+	}   
+        
+        public static function topCatRental(){
+            return DB::table(static::$table)
+                    ->where('is_deleted', NO_DELLETE)
+                    ->where('display', 1)
+                    ->orderBy('order', 'asc')
+                    ->get();                        
+	}
        
         
 }

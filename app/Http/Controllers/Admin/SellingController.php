@@ -168,6 +168,7 @@ class SellingController extends Controller
         }  else {
             $csp = DB::table('category_product')
                     ->where('is_deleted', NO_DELLETE)
+                    ->where('display', 1)
                     ->lists('name', 'id');
             if(Input::has('btmSearchSP'))
             {            

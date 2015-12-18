@@ -8,15 +8,11 @@ use Session;
 use Input;
 use Redirect;
 use Html;
-use League\Flysystem\Filesystem;
 use View;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Mail;
-
-
-
 
 
 class InquiryController extends FrontendController
@@ -71,6 +67,7 @@ class InquiryController extends FrontendController
         }             
         return view('frontend.inquiry.confirm', compact('data'));
     }
+    
     public function postConfirm()
     {
         $data = Session::get('inputdata');
@@ -78,8 +75,7 @@ class InquiryController extends FrontendController
         {             
             return Redirect::route('frontend.inquiry.index');  
         } 
-
-        
+        //send email
         Mail::send('frontend.inquiry.email', $data, function($message) use ($data)  {
         $message->to('support@chiroro.com', 'Chiroro-Net Customer Support');
         $message->subject('お問い合わせ');
@@ -87,7 +83,6 @@ class InquiryController extends FrontendController
         });
         return Redirect::route('frontend.inquiry.complete');        
     }
-
     
     public function getComplete()
     {  
