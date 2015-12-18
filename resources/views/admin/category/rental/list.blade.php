@@ -36,7 +36,7 @@
           $class_arr = array('0'=>'red', '1'=>'blue');
         ?>
         @if(isset($cat_rental) && count($cat_rental) > 0)
-        <?php $total = count($cat_rental); $pos = 1; echo $total;?>
+        <?php $total = count($cat_rental); $pos = 1;?>
           @foreach($cat_rental as $cat)
             <tr>
                 <td>
