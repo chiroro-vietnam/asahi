@@ -4,14 +4,12 @@ use Paginator;
 
 class CategoryRental extends Model {
 	protected static $table = 'category_rental';
-	protected static $primary_key = 'id';
-	protected static $order = 'desc';
 	
 	//get list category rental
 	public static function getCatRental(){
 		return DB::table(static::$table)
                         ->where('is_deleted', NO_DELLETE)
-                        ->orderBy('order', 'ASC')
+                        ->orderBy('order', 'asc')
                         ->paginate(LIMIT_PAGE);
                         
 	}
@@ -40,7 +38,6 @@ class CategoryRental extends Model {
       
         //get list category rental join product rental
 	public static function getAllCatRental(){
-
 		return DB::table(static::$table)                        
                         //->join('rental_product', 'category_rental.id', '=', 'rental_product.cat_rental_id')
                         //->select('category_rental.id', 'category_rental.name', 'rental_product.cat_rental_id', 'rental_product.product_name')

@@ -29,7 +29,9 @@
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td width="20%" class="col3">カテゴリ名 <span class="notnull">[*]</span></td>
-        <td><input name="name" type="text" id="name" value="{{$cat_rental->name}}" size="60" /></td>
+        <td><input name="name" type="text" id="name" value="{{$cat_rental->name}}" size="60" />
+            <input name="order" type="hidden" id="order" value="{{$cat_rental->order}}"/>
+        </td>
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>

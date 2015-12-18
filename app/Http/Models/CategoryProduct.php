@@ -4,7 +4,6 @@ use Paginator;
 
 class CategoryProduct extends Model {
 	protected static $table = 'category_product';
-	protected static $primary_key = 'id';
         
         public static $rules = array(
 		'name'    => 'required'
@@ -17,7 +16,7 @@ class CategoryProduct extends Model {
 	public static function getCatSell(){
 		return DB::table(static::$table)
                         ->where('is_deleted', NO_DELLETE)
-                        ->orderBy('order', 'ASC')
+                        ->orderBy('order', 'asc')
                         ->paginate(LIMIT_PAGE);
                         
 	}

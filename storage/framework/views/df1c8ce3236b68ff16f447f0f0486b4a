@@ -1,7 +1,6 @@
-@extends('backend')
+<?php $__env->startSection('content'); ?>
+<?php echo Form::open( ['method' => 'post', 'route' => 'admin.category.rental.add', 'enctype'=>'multipart/form-data'] ); ?>
 
-@section('content')
-{!! Form::open( ['method' => 'post', 'route' => 'admin.category.rental.add', 'enctype'=>'multipart/form-data'] ) !!}
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
   <tr>
     <td class="col1">■レンタル商品カテゴリ管理　＞　レンタル商品のカテゴリの新規登録</td>
@@ -13,25 +12,25 @@
   <tr>
   <tr>
       <td>
-          @if($errors->any())
+          <?php if($errors->any()): ?>
             <div class="errors">
                 <ul class="msg-validate">
-                    @foreach($errors->all() as $error)
+                    <?php foreach($errors->all() as $error): ?>
                       <div class="alert alert-danger">
-                          <li>{{ $error }}</li>
+                          <li><?php echo e($error); ?></li>
                       </div>               
-                    @endforeach
+                    <?php endforeach; ?>
                 </ul>
             </div>
-          @endif          
+          <?php endif; ?>          
       </td>    
   </tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td width="20%" class="col3">カテゴリ名 <span class="notnull">[*]</span></td>
         <td>
-            <input name="name" type="text" id="name" size="60" value="{{Input::old('name')}}" />
-            <input name="order" type="hidden" id="order" size="60" value="{{$order}}" />
+            <input name="name" type="text" id="name" size="60" value="<?php echo e(Input::old('name')); ?>" />
+            <input name="order" type="hidden" id="order" size="60" value="<?php echo e($order); ?>" />
         </td>
       </tr>
       <tr>
@@ -58,5 +57,7 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-{!! Form::close() !!}
-@endsection
+<?php echo Form::close(); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

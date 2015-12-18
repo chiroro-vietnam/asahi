@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2015 at 01:20 AM
+-- Generation Time: Dec 18, 2015 at 03:53 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.5.30
 
@@ -36,6 +36,20 @@ CREATE TABLE `category_product` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `category_product`
+--
+
+INSERT INTO `category_product` (`id`, `name`, `display`, `order`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, '発電機', 1, 1, 0, '2015-12-18 02:12:23', '2015-12-18 02:52:32'),
+(2, '配水ポリエチレン管融着工具', 1, 2, 0, '2015-12-18 02:12:35', '2015-12-18 02:12:35'),
+(3, '鋳鉄管加工機', 1, 3, 0, '2015-12-18 02:12:49', '2015-12-18 02:12:49'),
+(4, 'パイプ挿入機', 1, 4, 0, '2015-12-18 02:13:00', '2015-12-18 02:13:00'),
+(5, '塩ビパイプ挿入機', 1, 5, 0, '2015-12-18 02:13:14', '2015-12-18 02:33:32'),
+(6, '漏水探知機', 1, 6, 0, '2015-12-18 02:13:24', '2015-12-18 02:13:24'),
+(7, '各種テスト用機器', 1, 7, 0, '2015-12-18 02:13:34', '2015-12-18 02:13:34'),
+(8, 'その他', 0, 8, 0, '2015-12-18 02:13:45', '2015-12-18 02:33:42');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +65,20 @@ CREATE TABLE `category_rental` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `category_rental`
+--
+
+INSERT INTO `category_rental` (`id`, `name`, `display`, `is_deleted`, `order`, `created_at`, `updated_at`) VALUES
+(1, '配水ポリエチレン管融着工具', 1, 0, 1, '2015-12-18 02:10:35', '2015-12-18 02:10:35'),
+(2, '鋳鉄管加工機', 1, 0, 2, '2015-12-18 02:10:47', '2015-12-18 02:10:47'),
+(3, 'パイプ挿入機', 1, 0, 3, '2015-12-18 02:11:02', '2015-12-18 02:11:02'),
+(4, '塩ビパイプ挿入機', 1, 0, 4, '2015-12-18 02:11:15', '2015-12-18 02:11:15'),
+(5, '漏水探知機', 1, 0, 5, '2015-12-18 02:11:26', '2015-12-18 02:15:24'),
+(6, '各種テスト用機器', 1, 0, 6, '2015-12-18 02:11:37', '2015-12-18 02:11:37'),
+(8, 'その他', 0, 0, 7, '2015-12-18 02:29:35', '2015-12-18 02:29:35'),
+(10, 'SASA', 1, 0, 8, '2015-12-18 02:46:19', '2015-12-18 02:46:59');
 
 -- --------------------------------------------------------
 
@@ -172,12 +200,12 @@ ALTER TABLE `top_page_show`
 -- AUTO_INCREMENT for table `category_product`
 --
 ALTER TABLE `category_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `category_rental`
 --
 ALTER TABLE `category_rental`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `rental_product`
 --

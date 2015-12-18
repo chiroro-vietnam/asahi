@@ -24,20 +24,25 @@ class CategoryController extends Controller
     
     //category rental
     public function getCatRentalAdd()
-    {        
-        return view('admin.category.rental.add');
+    {   
+        $max_order = DB::table('category_rental')
+                ->where('is_deleted', NO_DELLETE)
+                ->max('order');
+        $order = $max_order + 1;
+        return view('admin.category.rental.add', compact('order'));
     }
     
      //category rental
     public function postCatRentalAdd()
     {
         $validator = Validator::make(Input::all(), CategoryRental::$rules, CategoryRental::$messages);
-        if($validator->passes()){
+        if($validator->passes()){               
                 $set_display = !empty(Input::get('display')) ? 1 : 0;
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display;               
                 $inputData['created_at']	= date('Y-m-d H:i:s');
                 $inputData['updated_at']	= date('Y-m-d H:i:s');
+                $inputData['order']             = Input::get('order');
 
                 DB::table('category_rental')
                         ->insert($inputData);
@@ -65,7 +70,8 @@ class CategoryController extends Controller
         if($validator->passes()){
                 $set_display = !empty(Input::get('display')) ? 1 : 0;
                 $inputData['name']              = Input::get('name');
-                $inputData['display']		= $set_display;              
+                $inputData['display']		= $set_display; 
+                $inputData['order']             = Input::get('order');
                 $inputData['updated_at']	= date('Y-m-d H:i:s');
 
                 DB::table('category_rental')
@@ -114,9 +120,10 @@ class CategoryController extends Controller
         $validator = Validator::make(Input::all(), CategoryProduct::$rules, CategoryProduct::$messages);
         if($validator->passes()){
                 $set_display = !empty(Input::get('display')) ? 1 : 0;
+                
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display;
-                $inputData['order']         = Input::get('order');
+                $inputData['order']             = Input::get('order');
                 $inputData['created_at']	= date('Y-m-d H:i:s');
                 $inputData['updated_at']	= date('Y-m-d H:i:s');
 
@@ -145,7 +152,8 @@ class CategoryController extends Controller
         if($validator->passes()){
                 $set_display = !empty(Input::get('display')) ? 1 : 0;
                 $inputData['name']              = Input::get('name');
-                $inputData['display']		= $set_display;              
+                $inputData['display']		= $set_display; 
+                $inputData['order']		= Input::get('order');
                 $inputData['updated_at']	= date('Y-m-d H:i:s');
 
                 DB::table('category_product')

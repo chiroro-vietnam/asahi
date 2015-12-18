@@ -1,0 +1,114 @@
+<?php $__env->startSection('content'); ?>
+
+<table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
+  <tr>
+    <td class="col1">■レンタル商品管理　＞　登録済みレンタル商品の一覧</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+      <td>
+        <?php if($message = Session::get('success')): ?>
+            <div class="alert alert-success">
+                    <li><?php echo e($message); ?></li>
+            </div>
+	<?php endif; ?>
+      </td>
+  </tr>
+ <?php echo Form::open( ['method' => 'post', 'url' => 'admin/product/rental/', 'id' => 'frmCatRental', 'enctype'=>'multipart/form-data'] ); ?>
+
+  <tr>
+    <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
+      <tr>
+        <td class="col3">カテゴリ</td>
+        <td><select name="cat_rental" id="cat_rental">
+                <option value="" selected="selected">▼選択</option>          
+            <?php if(count($crs) > 0): ?> 
+                <?php foreach($crs as $key => $cat): ?>
+                <option value="<?php echo e($key); ?>"
+                        <?php if(isset($cr_id) && $cr_id == $key) echo 'selected='."selected" ;?> ><?php echo e($cat); ?></option>                
+                <?php endforeach; ?>
+            <?php endif; ?>          
+        </select>
+          <input type="submit" name="btmSearchRT" id="btmSearchRT" value="表示" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <?php echo Form::close(); ?>
+
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  
+  <?php if(isset($rp)) {?>
+  <tr>
+    <td align="right">
+        <?php if(!empty($cr_id)): ?>
+        <input type="button" onClick="location.href='<?php echo url('admin/product/rental/add/'.$cr_id); ?>'" value="商品の新規登録" />
+        <?php endif; ?>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        <table width="100%" border="1" cellspacing="0" cellpadding="5">
+        <tr class="col3">
+            <td width="7%" align="center">削除</td>
+            <td width="5%" align="center">表示</td>
+            <td width="32%"align="center">商品名</td>
+            <td width="32%" align="center">商品名（補助）</td>
+            <td width="10%" align="center">詳細・編集</td>
+            <td width="20%" colspan="4" align="center">表示順序</td>
+        </tr>
+            <?php 
+              $display_arr = array('0' => '×', '1' => '○'); 
+              $class_arr = array('0'=>'red', '1'=>'blue');
+            ?>
+            <?php if(isset($rp) && count($rp) > 0): ?>            
+                <?php $total = count($rp); $pos = 1;?>
+                <?php foreach($rp as $val_rp): ?>
+                
+                    <tr>
+                        <td width="5%">
+                            <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                        </td>
+                        <td  width="8%" align="center"><span class=<?php echo e(@$class_arr[$val_rp->display]); ?>><?php echo e(@$display_arr[$val_rp->display]); ?></span></td>
+                        <td><?php echo e($val_rp->product_name); ?></td>
+                        <td><?php echo e($val_rp->product_name_auxiliary); ?></td>
+                        <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>
+                        
+                <?php if($total > 1): ?>
+                    <td align="center"><?php if($pos > 1): ?><input type="submit" name="top" id="top" value="TOP" /><?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos > 1): ?><input type="submit" name="up" id="up" value="↑" /><?php else: ?> &nbsp; <?php endif; ?></td>
+
+                    <td align="center"><?php if($pos < $total): ?><input type="submit" name="down" id="down" value="↓" /><?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos < $total): ?><input type="submit" name="last" id="last" value="LAST" /><?php else: ?> &nbsp; <?php endif; ?></td>
+                <?php else: ?>
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                <?php endif; ?>
+                                        
+
+                    </tr>
+                    <?php $pos++; ?>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="9"><center>No Data</center></td>  
+              </tr>
+            <?php endif; ?>
+
+        </table>
+    </td>
+  </tr>  
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <?php } ?>
+  
+</table>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
