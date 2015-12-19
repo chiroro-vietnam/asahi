@@ -17,19 +17,19 @@ class Inquiry extends Model {
     );
 
     public static $messages = array(
-            'content.required'          => 'Please enter content',
-            'name.required'             => 'Please enter name',
-            'furigana.required'         => 'Please kana name',
-            'company.required'          => 'Please company name',
-            'postalCode1.required'      => 'Please enter post code 1',
-            'postalCode1.numeric'      => 'The post code 1 must be numeric',
-            'postalCode2.required'      => 'Please enter post code 2',
-            'postalCode2.numeric'      => 'The post code 2 must be numeric',
-            'state.required'            => 'Please enter state',
-            'address.required'          => 'Please address',
-            'phone.required'            => 'Please enter phone number',
-            'fax.required'              => 'Please fax number',
-            'email.required'            => 'Please enter email',
-            'email.email'               => 'Please enter correct format email'
+            'content.required'          => '内容を入力してください',
+            'name.required'             => 'お名前入力してください',
+            'furigana.required'         => 'ふりがな入力してください',
+            'company.required'          => '会社名入力してください',
+            'postalCode1.required'      => '郵便番号の接頭辞入力してください',
+            'postalCode1.numeric'       => '郵便番号は数値でなければなりません',
+            'postalCode2.required'      => '郵便番号を入力してください',
+            'postalCode2.numeric'       => '郵便番号は数値でなければなりません',
+            'state.required'            => '都道府県を入力してください',
+            'address.required'          => 'アドレスを入力してください',
+            'phone.required'            => '電話番号を入力してください',
+            'fax.required'              => 'FAX番号を入力してください',
+            'email.required'            => 'メールアドレスを入力してください',
+            'email.email'               => 'メールアドレスが無効です'
     ); 
 }    
