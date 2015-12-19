@@ -1,7 +1,6 @@
 @extends('backend')
 
 @section('content')
-
 {!! HTML::script('ckeditor/ckeditor.js') !!}
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
   <tr>

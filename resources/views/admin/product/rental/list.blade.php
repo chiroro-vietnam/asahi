@@ -46,12 +46,14 @@
     <td align="right">
         @if(!empty($cr_id))
         <input type="button" onClick="location.href='<?php echo url('admin/product/rental/add/'.$cr_id); ?>'" value="商品の新規登録" />
+        <input type="hidden" name="cr_id" id="cr_id" value="{{$cr_id}}" />
+        <input type="hidden" name="url" id="url" value="{{url('admin/product/rental?cr_id='.$cr_id)}}" />
         @endif
     </td>
   </tr>
   <tr>
     <td>
-        <table width="100%" border="1" cellspacing="0" cellpadding="5">
+        <table id="tblSort" width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr class="col3">
             <td width="7%" align="center">削除</td>
             <td width="5%" align="center">表示</td>
@@ -68,31 +70,43 @@
                 <?php $total = count($rp); $pos = 1;?>
                 @foreach($rp as $val_rp)
                 
-                    <tr>
-                        <td width="5%">
-                            <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
-                        </td>
-                        <td  width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
-                        <td>{{$val_rp->product_name}}</td>
-                        <td>{{$val_rp->product_name_auxiliary}}</td>
-                        <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>
-                        
-                @if($total > 1)
-                    <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
-                    <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+                <div id="sort-order">
+                    <tr class="sort-record">                        
+                            <input type="hidden" name="sortId" id="sortId" value="{{$val_rp->id}}" />
+                            <input type="hidden" name="sortOder" id="sortOder" value="{{$val_rp->order}}" />
+                            
+                            <td width="5%">
+                                <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                            </td>
+                            <td width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
+                            <td>{{$val_rp->product_name}}</td>
+                            <td>{{$val_rp->product_name_auxiliary}}</td>
+                            <td width="10%"><input type="button" onclick="location.href='<?php echo route('admin.product.rental.edit', $val_rp->id); ?>'" value="詳細・編集" /></td>
 
-                    <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
-                    <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
-                @else
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
+                        @if($total > 1)
+                            <td align="center">@if($pos > 1)
+                                <input class="btn-top" type="submit" name="btn-top" action="top" order="{{$val_rp->order}}" id="{{$val_rp->id}}" value="TOP" />                                
+                                @else &nbsp; @endif</td>
+                            <td align="center">@if($pos > 1)
+                                <input class="btn-up" type="submit" name="btn-up" action="up" order="{{$val_rp->order}}" id="{{$val_rp->id}}" value="↑" />
+                                @else &nbsp; @endif</td>
 
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
-                @endif
-                                        
+                            <td align="center">@if($pos < $total)
+                                <input class="btn-down" type="submit" name="btn-down" action="down" order="{{$val_rp->order}}" id="{{$val_rp->id}}" value="↓" />
+                                @else &nbsp; @endif</td>
+                            <td align="center">@if($pos < $total)
+                                <input class="btn-last" type="submit" name="btn-last" action="last" order="{{$val_rp->order}}" id="{{$val_rp->id}}" value="LAST" />
+                                @else &nbsp; @endif</td>
+                        @else
+                            <td align="center">&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;</td>
+
+                            <td align="center">&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;</td>
+                        @endif                                        
 
                     </tr>
+                </div>
                     <?php $pos++; ?>
               @endforeach
             @else
@@ -101,13 +115,124 @@
               </tr>
             @endif
 
-        </table>
+        </table> 
+<!--       table sort-->
     </td>
   </tr>  
   <tr>
     <td>&nbsp;</td>
   </tr>
   <?php } ?>
-  
+    <tr>
+      <td>
+         <div class="pull-right">
+            <ul class="pagination">
+                @if(isset($cr_id))
+                    @if(count($rp) > 0)
+                    {!! $rp->appends( ['cr_id' => $cr_id])->render() !!} 
+                    @endif
+                @endif
+            </ul>
+        </div>
+      </td>
+  </tr>
 </table>
+<!--{!! HTML::script('backend/js/jquery-1.11.3.js') !!}-->
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$( document ).ready(function() {
+    $( ".btn-up" ).click(function() {
+        
+        var route = window.location.href;
+        alert(route);
+        
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        var cr_id = $('#cr_id').val();
+        var url = $('#url').val();
+
+        orderSort(cr_id, id, order, action, url);
+
+
+//        var $current = $(this).closest('tr.sort-record');
+//        var $previous = $current.prev('tr.sort-record');
+//        if($previous.length !== 0){
+//          $current.insertBefore($previous);
+//        }
+//        //$('#sort-order')load('#sort-order');
+//        return false;
+    });
+
+    $( ".btn-down" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(cr_id, id, order, action, url);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $next = $current.next('tr.sort-record');
+//        if($next.length !== 0){
+//          $current.insertAfter($next);
+//        }
+//        return false;
+    });
+    
+    $( ".btn-top" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(cr_id, id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $first = $current.first('tr.sort-record');
+//        if($first.length !== 0){
+//          $current.insertBefore($first);
+//        }
+//        return false;
+    });
+
+    $( ".btn-last" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(cr_id, id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $last = $current.last('tr.sort-record');
+//        if($last.length !== 0){
+//          $current.insertAfter($last);
+//      }
+//      return false;
+    });
+
+   
+   function orderSort(cr_id, id, order, action, url){ 
+       
+    $.ajax({
+          type: 'get',
+          url: url,
+
+          data: {data: '123'},
+        // dataType: 'json',
+          success: function(data) {
+              //loadpage
+             // alert(response.action);
+           //  var responseData = JSON.parse(data);
+         
+    console.log(data);
+          
+          
+           alert('OK');
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+              alert('ERROR');
+              console.log(textStatus, errorThrown);
+          }
+      }); 
+   }
+    
+});
+
+</script>
 @endsection

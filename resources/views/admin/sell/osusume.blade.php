@@ -64,13 +64,14 @@
       <td>
           <div class="pull-right">
             <ul class="pagination">
-                {!! $lsp->render() !!}          
+                @if(count($lsp) > 0)
+                    {!! $lsp->render() !!} 
+                @endif
             </ul>
         </div>
      </td>
   </tr>
 </table>
-
-  {!! Form::close() !!}
+{!! Form::close() !!}
 @endsection
 

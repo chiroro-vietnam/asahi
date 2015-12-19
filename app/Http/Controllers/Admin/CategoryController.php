@@ -1,19 +1,24 @@
 <?php namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 use App\Http\Models\CategoryRental;
 use App\Http\Models\CategoryProduct;
+use App\Http\Controllers\BackendController;
+
 use DB;
 use Request;
 use Validator;
 use Input;
 use Redirect;
 use Html;
-use Session;
 use Paginator;
 use URL;
 
-class CategoryController extends Controller
+class CategoryController extends BackendController
 {  
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('auth');
+    }
     
      //category rental
     public function listCatRental()

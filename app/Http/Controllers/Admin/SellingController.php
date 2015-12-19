@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 use App\Http\Models\CategoryProduct;
 use App\Http\Models\SellProduct;
+use App\Http\Controllers\BackendController;
+
 use DB;
 use Request;
 use Validator;
@@ -14,8 +15,14 @@ use Paginator;
 use File;
 use Image;
 
-class SellingController extends Controller
-{   
+class SellingController extends BackendController
+{  
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('auth');
+    }
+    
    //get sell osusume     
     public function getOsusume()
     {
@@ -208,7 +215,7 @@ class SellingController extends Controller
         $id = Input::get('id');
         $cs_id = Input::get('cat_product_id');
 
-        $validator = Validator::make(Input::all(), SellProduct::$rules, SellProduct::$messages);
+        $validator = Validator::make(Input::all(), SellProduct::$ruleEdit, SellProduct::$messages);
         if($validator->passes()){                  
                 $display = !empty(Input::get('display')) ? 1 : 0;
                 $display_top = !empty(Input::get('display_top')) ? 1 : 0;

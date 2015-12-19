@@ -73,7 +73,7 @@
       </ul>
         
        <?php // echo "<pre>"; 
-//       print_r($catRenTop);
+       //print_r($catRenTop);
        ?>
       <ul class="tab_content">
       	<li>
@@ -81,11 +81,13 @@
             @if(count($catRenTop) > 0)
             @foreach($catRenTop as $cr)
              <li class="acrd-ctrl"><a href="#">{{$cr->name}}</a>
-                @if(!empty($lrs[$cr->id]))                   
-                    <ul class="acrd-pl">
-                      <li><a href="#">{{@$lrs[$cr->id]}}</a></li>
-                    </ul>                    
-                @endif 
+
+                    @if(!empty($lrs[$cr->id]))                   
+                        <ul class="acrd-pl">
+                          <li><a href="#">{{@$lrs[$cr->id]}}</a></li>
+                        </ul>                    
+                    @endif 
+
                 </li>
             @endforeach                
             @endif        

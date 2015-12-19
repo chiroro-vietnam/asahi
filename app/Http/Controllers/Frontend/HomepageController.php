@@ -11,9 +11,6 @@ use App\Http\Models\CategoryRental;
 use App\Http\Models\RentalProduct;
 use Illuminate\Pagination\Paginator;
 
-
-
-
 class HomepageController extends FrontendController
 {
     /************************************************************************

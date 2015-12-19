@@ -50,6 +50,11 @@ Route::group(array('namespace' => 'Frontend'), function () {
     
 });
 
+//login and logout
+Route::get('admin/login', ['as' => 'admin.auth.login', 'uses' => 'admin\AdminController@getLogin']);
+Route::post('admin/login', ['as' => 'admin.auth.login', 'uses' => 'admin\AdminController@postLogin']);
+Route::get('admin/logout', ['as' => 'admin.auth.logout', 'uses' => 'admin\AdminController@logout']);
+
 //Admin
 Route::group(array('namespace' => 'Admin'), function () {
     
@@ -80,7 +85,7 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/category/rental/del/{id}', array('as' => 'admin.category.rental.del', 'uses' => 'CategoryController@delCatRental'));
     Route::get('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@getCatRentalEdit'));
     Route::post('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@postCatRentalEdit'));
-
+    
     //category sell list
     Route::get('admin/category/sell', array('as' => 'admin.category.sell.list', 'uses' => 'CategoryController@listCatSell'));
     Route::get('admin/category/sell/add', array('as' => 'admin.category.sell.add', 'uses' => 'CategoryController@getCatSellAdd'));
@@ -102,12 +107,28 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
     Route::post('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
    
+    //orderSort
+    Route::get('admin/product/rental/{cr_id?}', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderSort'));
+    Route::post('admin/product/rental/{cr_id?}', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderSort'));
+    
     Route::get('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
     Route::post('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
     Route::get('admin/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@getProRentalEdit'));
     Route::post('admin/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@postProRentalEdit'));
     Route::get('admin/product/rental/del/{id}', array('as' => 'admin.product.rental.del', 'uses' => 'RentalController@delProRental'));
     
+});
+
+Route::get('auth/login', function () {
+	    return redirect()->route('admin.auth.login');
+	});
+
+//filter admin
+Route::filter('admin',function(){
+	if(!Auth::user()) {
+		if(Auth::check()) Auth::logout();
+		return redirect('admin/login');
+	}
 });
 
 

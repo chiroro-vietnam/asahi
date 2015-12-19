@@ -64,7 +64,9 @@
       <td>
           <div class="pull-right">
             <ul class="pagination">
-                {!! $lrp->render() !!}          
+                @if(count($lrp) > 0)
+                {!! $lrp->render() !!} 
+                @endif
             </ul>
         </div>
      </td>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Rental;
 use App\Http\Models\CategoryRental;
 use App\Http\Models\RentalProduct;
+use App\Http\Controllers\BackendController;
 use DB;
 use Request;
 use Validator;
@@ -14,9 +15,16 @@ use Session;
 use Paginator;
 use File;
 use Image;
+use Json;
 
-class RentalController extends Controller
+class RentalController extends BackendController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('auth');
+    }
+    
     //get rental osusume    
     public function getOsusume()
     {
@@ -37,7 +45,7 @@ class RentalController extends Controller
             $id = $order->id;
             $orderUpdate[$id] = Input::get('order_'.$id);
         }
-
+        
         //update order rental product
         foreach ($orderUpdate as $id => $val) {
                 DB::table('rental_product')
@@ -111,8 +119,8 @@ class RentalController extends Controller
     public function postProRentalAdd($cr_id)
     {
         $validator = Validator::make(Input::all(), RentalProduct::$rules, RentalProduct::$messages);
-        if($validator->passes()){
-                       
+        if($validator->passes())
+            {        
                 $display = !empty(Input::get('display')) ? 1 : 0;
                 $display_top = !empty(Input::get('display_top')) ? 1 : 0;
                 
@@ -137,11 +145,9 @@ class RentalController extends Controller
                 $inputData['display_top']		= $display_top; 
                 $inputData['cat_rental_id']		= $cr_id;
                 $inputData['order']                     = $order;
-                
                 $inputData['updated_at']                = date('Y-m-d H:i:s');
                 
-                $image_first = Input::file('image_first');             
-
+                $image_first = Input::file('image_first');
                 if(Input::file('image_first'))
                 {
                     $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
@@ -150,17 +156,14 @@ class RentalController extends Controller
                     $inputData['image_first'] = '/uploads/images/rental_product/'.$fileName1;
                 }
                 
-                $image_second = Input::file('image_second');
-                
+                $image_second = Input::file('image_second');                
                 if(Input::file('image_second'))
                 {
                     $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
                     $fileName2 = rand(date("Ymd"), time()).".".$extension2;
                     Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName2);
                     $inputData['image_second'] = '/uploads/images/rental_product/'.$fileName2;
-                }
-                
-                
+                }               
                 DB::table('rental_product')->insert($inputData);
                 
                 //insert to top_page_show
@@ -291,5 +294,19 @@ class RentalController extends Controller
                 ->update(array('is_deleted' => DELETED));
         return Redirect::to('admin/product/rental/?cr_id='.$cr_id)->with('message', 'Product rental has been deleted successfully');
     }
+    
+    //order sort rental product
+    public function orderSort($cr_id){
+        $cr_id = Input::get('cr_id');
+        $id = Input::get('id');
+        $action = Input::get('action');
+        $order = Input::get('order');        
+       
+        return response()->json(['name' => 'Chiroro', 'state' => 'JP']);
+    }
+
+        
+  
+
 }
 

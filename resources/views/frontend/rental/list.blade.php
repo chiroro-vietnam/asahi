@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
@@ -29,12 +28,10 @@
                 if($count >= 6) break; 
             ?>
              </a>
-            @endforeach
-            
+            @endforeach           
        
     </div>
     @endif
-
     
   </div>
   <div id="topRight">
@@ -54,17 +51,14 @@
                 @endif
             </li>
         @endforeach
-       @endif
-
-        
+       @endif        
         
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">
       <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
-  </div>
-  
+  </div>  
   
 </div></div>
 

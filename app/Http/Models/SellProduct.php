@@ -15,6 +15,16 @@ class SellProduct extends Model {
             'image_second'              => 'max:2000|mimes:jpeg,bmp,png,gif',
             'file'                      => 'required|max:2000|mimes:jpeg,bmp,png,pdf,csv,doc,docx,rtf,xls,ppt,swf,zip,flv,mp4,wmv,avi,txt,upg'
     );
+    
+    public static $ruleEdit = array(
+            'product_name'              => 'required',
+            'display_rate'              => 'required',
+            'display_type'              => 'required',
+            'url'                       => 'required|url',
+            'image_first'               => 'max:2000|mimes:jpeg,bmp,png,gif',
+            'image_second'              => 'max:2000|mimes:jpeg,bmp,png,gif',
+            'file'                      => 'max:2000|mimes:jpeg,bmp,png,pdf,csv,doc,docx,rtf,xls,ppt,swf,zip,flv,mp4,wmv,avi,txt,upg'
+    );
 
     public static $messages = array(
             'product_name.required'	=> 'Please enter sell product',

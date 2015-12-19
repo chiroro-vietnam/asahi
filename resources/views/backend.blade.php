@@ -6,6 +6,8 @@
  @yield('style')
     {!! HTML::style('backend/css/style.css') !!}
     {!! HTML::style('backend/css/custom.css') !!}
+    {!! HTML::script('backend/js/jquery-1.11.3.js') !!}
+    {!! HTML::script('backend/js/jquery-ui.js') !!}
   
 </head>
 
