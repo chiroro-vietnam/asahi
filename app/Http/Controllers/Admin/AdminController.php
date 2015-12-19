@@ -38,7 +38,7 @@ class AdminController extends BackendController
     * get admin login
     /************************************************************************/
     public function getLogin(){
-            if(Auth::check()) return redirect()->route('admin');
+            if(Auth::check()) return redirect()->route('admin.dashboard.index');
             return view('admin.auth.login');
     }
 
@@ -54,13 +54,13 @@ class AdminController extends BackendController
         $validator = Validator::make(Input::all(), User::$rules, User::$message);
         if($validator->passes()){				
             if(Auth::attempt($adminInput, false)){					
-                    return redirect()->route('admin.dashboard.index');
+                return redirect()->route('admin.dashboard.index');
             }else
-                    Session::flash('success', 'ユーザIDまたは間違ったパスワード');
-                    return redirect()->route('admin.auth.login');
-        }else{
                 Session::flash('success', 'ユーザIDまたは間違ったパスワード');
                 return redirect()->route('admin.auth.login');
+        }else{
+            Session::flash('success', 'ユーザIDまたは間違ったパスワード');
+            return redirect()->route('admin.auth.login');
         }
     }
 

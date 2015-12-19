@@ -116,16 +116,5 @@ Route::group(array('namespace' => 'Admin'), function () {
 });
 
 Route::get('auth/login', function () {
-	    return redirect()->route('admin.auth.login');
-	});
-
-//filter admin
-Route::filter('admin',function(){
-    if(!Auth::user()) {
-        if(Auth::check()) Auth::logout();
-        return redirect('admin/login');
-    }
-});
-
-
-
+        return redirect()->route('admin.auth.login');
+    });
