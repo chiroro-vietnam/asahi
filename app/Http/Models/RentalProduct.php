@@ -39,16 +39,13 @@ class RentalProduct extends Model {
                                         ->paginate(LIMIT_PAGE);                        
     }
     
-//    public function CategoryRental()
-//    {
-//            return $this->belongsToMany('App\Http\CategoryRental', 'rental_product');
-//    }
     
-    
-        public static function getListRental()
-        {
-            return DB::table(static::$table)->where('is_deleted', NO_DELLETE)                                        
-                                        ->lists('product_name', 'cat_rental_id'); 
-        }
+    public static function getListRental()
+    {
+        return DB::table(static::$table)
+                ->where('is_deleted', NO_DELLETE)
+                ->select('id', 'product_name', 'cat_rental_id')
+                ->get(); 
+    }
     
 }

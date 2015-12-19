@@ -40,6 +40,7 @@ class RentalController extends FrontendController{
         $catRentals = CategoryRental::getAllCatRental();
         $title_rental = 'レンタルサービス';
         $rental = Rental::getRentalDetail($id);
+
         $lrs = RentalProduct::getListRental();
         return view('frontend.rental.detail', compact('rental', 'title_rental', 'rentals', 'catRentals', 'lrs'));
     }
@@ -54,13 +55,5 @@ class RentalController extends FrontendController{
        return view('frontend.rental.agree'); 
     }
     
-    /************************************************************************
-    *@Rental agree
-    * 
-    * 
-    *
-    /************************************************************************/
-//    public function listCatRental(){
-//        $catRentals = CategoryRental::getAllCatRental();
-//    }
+
 }

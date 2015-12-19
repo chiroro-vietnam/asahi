@@ -39,15 +39,16 @@
     	<div class="sub_title"><img src="frontend/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
       <ul class="sub_rental">
        @if(count($catRentals) > 0)
-        @foreach($catRentals as $cr)        
-
+        @foreach($catRentals as $cr) 
             <li class="acrd-ctrl"><a href="#">{{$cr->name}}</a>
-                @if(!empty($lrs[$cr->id]))
-                    <ul class="acrd-pl">                  
-                    <!--$catRent->product_name-->
-                            <li><a href="#">{{$lrs[$cr->id]}}</a></li>   
-
-                    </ul>
+                 @if(count($lrs) > 0)
+                    @foreach($lrs as $rts)
+                        @if($cr->id == $rts->cat_rental_id)
+                            <ul class="acrd-pl">
+                                <li><a href="#">{{@$rts->product_name}}</a></li>
+                            </ul> 
+                        @endif
+                    @endforeach
                 @endif
             </li>
         @endforeach

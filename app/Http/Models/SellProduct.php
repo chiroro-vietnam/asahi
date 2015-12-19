@@ -1,7 +1,6 @@
 <?php namespace App\Http\Models;
 use DB;
 use Paginator;
-use File;
 
 class SellProduct extends Model {
     protected static $table = 'sell_product';
@@ -51,8 +50,9 @@ class SellProduct extends Model {
 
     //delete item category sell
     public static function delSellPro($id){
-        return DB::table(static::$table)->where('id', '=', $id)
-                                        ->update(array('is_deleted' => DELETED));
+        return DB::table(static::$table)
+                ->where('id', '=', $id)
+                ->update(array('is_deleted' => DELETED));
 
     }
 
@@ -77,7 +77,9 @@ class SellProduct extends Model {
     
     public static function getListPro()
         {
-            return DB::table(static::$table)->where('is_deleted', NO_DELLETE)                                        
-                                        ->lists('product_name', 'cat_product_id'); 
+            return DB::table(static::$table)
+                    ->where('is_deleted', NO_DELLETE)                                        
+                    ->select('id', 'product_name', 'cat_product_id')
+                    ->get();
         }
 }

@@ -83,10 +83,14 @@
           @if(count($catRentals) > 0)
           @foreach($catRentals as $catr)
             <li class="acrd-ctrl"><a href="#">{{$catr->name}}</a>
-                @if(!empty($lrs[$catr->id]))
-                <ul class="acrd-pl">
-                  <li><a href="#">{{$lrs[$catr->id]}}</a></li>                  
-                </ul>
+                @if(count($lrs) > 0)
+                    @foreach($lrs as $rts)
+                        @if($catr->id == $rts->cat_rental_id)
+                            <ul class="acrd-pl">
+                                <li><a href="#">{{@$rts->product_name}}</a></li>
+                            </ul> 
+                        @endif
+                    @endforeach
                 @endif
               </li>
           @endforeach            

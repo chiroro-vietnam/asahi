@@ -44,8 +44,8 @@ class HomepageController extends FrontendController
                 ->where('top_page_show.is_deleted', '=', NO_DELLETE)
                 ->orderBy('sell_product.order', 'ASC')
                 ->limit(TOP_PAGE_NUMBER)
-                ->get();
-        
+                ->get();        
+       
         $lrs = RentalProduct::getListRental();
         $lps = SellProduct::getListPro();
         return view('frontend.homepage', compact('catRenTop', 'catSellTop', 'rentalTop', 'prTop', 'lrs','lps'));

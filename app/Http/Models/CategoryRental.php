@@ -1,4 +1,5 @@
 <?php namespace App\Http\Models;
+//use Illuminate\Database\Eloquent\Model;
 use DB;
 use Paginator;
 
@@ -52,7 +53,6 @@ class CategoryRental extends Model {
                     ->where('display', 1)
                     ->orderBy('order', 'asc')
                     ->get();                        
-	}
-       
+	}      
         
 }

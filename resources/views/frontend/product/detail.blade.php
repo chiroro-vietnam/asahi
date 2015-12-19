@@ -74,12 +74,16 @@
         @if(!empty($catSell))
         @foreach($catSell as $cs)
             <li class="acrd-ctrl"><a href="#">{{$cs->name}}</a>
-              @if(!empty($lps[$cs->id]))
-              <ul class="acrd-pl">
-                <li><a href="#">{{$lps[$cs->id]}}</a></li>
-
-              </ul>
-              @endif
+               @if(count($lps) > 0)
+                    @foreach($lps as $sp)
+                        @if($cs->id == $sp->cat_product_id)
+                            <ul class="acrd-pl">
+                                <li><a href="#">{{@$sp->product_name}}</a></li>
+                            </ul> 
+                        @endif
+                    @endforeach
+                @endif       
+               
             </li>
         @endforeach
         @endif
