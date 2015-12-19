@@ -101,16 +101,12 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::post('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
     Route::get('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@getProSellEdit'));
     Route::post('admin/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
-    Route::get('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));  
-    
+    Route::get('admin/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
+        
     //product rental
     Route::get('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
     Route::post('admin/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
-   
-    //orderSort
-    Route::get('admin/product/rental/{cr_id?}', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderSort'));
-    Route::post('admin/product/rental/{cr_id?}', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderSort'));
-    
+          
     Route::get('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
     Route::post('admin/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
     Route::get('admin/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@getProRentalEdit'));
@@ -125,10 +121,10 @@ Route::get('auth/login', function () {
 
 //filter admin
 Route::filter('admin',function(){
-	if(!Auth::user()) {
-		if(Auth::check()) Auth::logout();
-		return redirect('admin/login');
-	}
+    if(!Auth::user()) {
+        if(Auth::check()) Auth::logout();
+        return redirect('admin/login');
+    }
 });
 
 

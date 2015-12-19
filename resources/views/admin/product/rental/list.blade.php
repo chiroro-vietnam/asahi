@@ -98,11 +98,11 @@
                                 <input class="btn-last" type="submit" name="btn-last" action="last" order="{{$val_rp->order}}" id="{{$val_rp->id}}" value="LAST" />
                                 @else &nbsp; @endif</td>
                         @else
-                            <td align="center">&nbsp;&nbsp;</td>
-                            <td align="center">&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-                            <td align="center">&nbsp;&nbsp;</td>
-                            <td align="center">&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         @endif                                        
 
                     </tr>
@@ -140,17 +140,13 @@
 <!--{!! HTML::script('backend/js/jquery-1.11.3.js') !!}-->
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
-$( document ).ready(function() {
-    $( ".btn-up" ).click(function() {
-        
-        var route = window.location.href;
-        alert(route);
-        
+$(document ).ready(function() {
+    $( ".btn-up" ).click(function() {        
+        var url = window.location.href;        
         var id = $(this).attr('id');
         var order = $(this).attr('order');
         var action = $(this).attr('action');
-        var cr_id = $('#cr_id').val();
-        var url = $('#url').val();
+        var cr_id = $('#cr_id').val();       
 
         orderSort(cr_id, id, order, action, url);
 

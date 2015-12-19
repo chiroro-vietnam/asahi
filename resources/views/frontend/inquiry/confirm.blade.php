@@ -23,7 +23,7 @@
             <tbody>
              <tr>
                 <th>お問い合わせ内容</th>
-                <td>{{$data['content']}}</td>
+                <td>{{nl2br($data['content'])}}</td>
               </tr>
               <tr>
                 <th>お名前</th>                
@@ -73,7 +73,8 @@
               </tbody>
           </table>
           <div class="btn">
-            <input type="submit" value="お問い合わせの送信" alt="お問い合わせの送信" />
+                <input onclick="goBack()" type="button" value="裏面" alt="裏面" />
+                <input type="submit" value="お問い合わせの送信" alt="お問い合わせの送信" />
           </div>
  
       </section>
@@ -86,5 +87,9 @@
   </div>  
   
 </div></div>
-
+<script type="text/javascript">
+  function goBack(){
+    window.history.back();
+  }
+</script>
 @endsection

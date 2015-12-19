@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\FrontendController;
 use App\Http\Models\Inquiry;
 use Validator;
-use Auth;
 use Session;
 use Input;
 use Redirect;
@@ -57,7 +56,7 @@ class InquiryController extends FrontendController
 
     public function getConfirm()
     {
-        if(!empty(Session::get('inputdata')))
+        if(empty(Session::get('inputdata')))
         {
           return Redirect::route('frontend.inquiry.index');  
         }
@@ -71,10 +70,6 @@ class InquiryController extends FrontendController
     public function postConfirm()
     {
         $data = Session::get('inputdata');
-        if(!isset($data))
-        {             
-            return Redirect::route('frontend.inquiry.index');  
-        } 
         //send email
         Mail::send('frontend.inquiry.email', $data, function($message) use ($data)  {
         $message->to('support@chiroro.com', 'Chiroro-Net Customer Support');
@@ -86,7 +81,7 @@ class InquiryController extends FrontendController
     
     public function getComplete()
     {  
-        if(!empty(Session::get('inputdata')))
+        if(empty(Session::get('inputdata')))
         {
           return Redirect::route('frontend.inquiry.index');  
         }

@@ -68,8 +68,7 @@ class SellingController extends BackendController
     {
         $validator = Validator::make(Input::all(), SellProduct::$rules, SellProduct::$messages);
         if($validator->passes())
-        {
-             
+        {             
             $display = !empty(Input::get('display')) ? 1 : 0;
             $display_top = !empty(Input::get('display_top')) ? 1 : 0;
             $open_tab = !empty(Input::get('open_tab')) ? 1 : 0;
@@ -315,7 +314,13 @@ class SellingController extends BackendController
                 ->withErrors($validator)
                 ->withInput();  
         
-    }    
+    } 
+    
+    public function orderProSell($cs_id){
+        exit;
+        print_r(Input::all());
+        echo json_encode(array('name'=>true, 'cs_id'=>2));
+    }
 
 }
 

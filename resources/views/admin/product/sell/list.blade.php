@@ -76,18 +76,26 @@
                             <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
                           
                         @if($total > 1)
-                            <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
-                            <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+                            <td align="center">@if($pos > 1)
+                                <input class="btn-top" type="submit" name="btn-top" action="top" order="{{$val_sp->order}}" id="{{$val_sp->id}}" value="TOP" />                                
+                                @else &nbsp; @endif</td>
+                            <td align="center">@if($pos > 1)
+                                <input class="btn-up" type="submit" name="btn-up" action="up" order="{{$val_sp->order}}" id="{{$val_sp->id}}" value="↑" />
+                                @else &nbsp; @endif</td>
 
-                            <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
-                            <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
+                            <td align="center">@if($pos < $total)
+                                <input class="btn-down" type="submit" name="btn-down" action="down" order="{{$val_sp->order}}" id="{{$val_sp->id}}" value="↓" />
+                                @else &nbsp; @endif</td>
+                            <td align="center">@if($pos < $total)
+                                <input class="btn-last" type="submit" name="btn-last" action="last" order="{{$val_sp->order}}" id="{{$val_sp->id}}" value="LAST" />
+                                @else &nbsp; @endif</td>
                         @else
-                            <td align="center">&nbsp;</td>
-                            <td align="center">&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-                            <td align="center">&nbsp;</td>
-                            <td align="center">&nbsp;</td>
-                        @endif
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        @endif 
                 
                     </tr>
                     <?php $pos++; ?>
@@ -116,4 +124,40 @@
       </td>
   </tr>
 </table>
+
+ {!! Form::open( ['method' => 'post', 'url' => 'admin/product/sell/order', 'id' => 'frmOrder', 'enctype'=>'multipart/form-data'] ) !!}
+ 
+ {!! Form::close() !!}
+ 
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document ).ready(function() {
+//   $( ".btn-up" ).click(function() { 
+//        var url = window.location.href;        
+//        var id = $(this).attr('id');
+//        var order = $(this).attr('order');
+//        var action = $(this).attr('action');
+//        var cs_id = $('#cs_id').val();        
+//        
+//        orderSort(cs_id, id, action, order, route);
+//   }); 
+//
+//    function orderSort(cs_id, id, action, order, route){        
+//        $.ajax( {
+//            type : "GET",
+//            url  : url,
+//            //dataType : "json", 
+//            //data : { cr_id : cr_id, id : id, action : action, order : order, url : url},
+//            success: function(response) {
+//                //alert('OK');
+//              alert(response.cs_id);  
+//            },
+//            error: function(jqXHR, textStatus, errorThrown) {
+//                alert("ERROR"); 
+//            }
+//        });
+//    }
+//});
+</script>
 @endsection
