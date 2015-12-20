@@ -2,7 +2,7 @@
 use App\Http\Models\CategoryRental;
 use App\Http\Models\CategoryProduct;
 use App\Http\Controllers\BackendController;
-
+use Illuminate\Support\Facades\Session;
 use DB;
 use Request;
 use Validator;

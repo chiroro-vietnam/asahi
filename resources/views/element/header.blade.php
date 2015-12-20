@@ -32,9 +32,9 @@
       </div><!--siteSearch//-->
     </div>
     <div class="ht_fsize">
-    	<img class="ht_fsize_title" src="frontend/image/ht_fsize_title.png" alt="文字の大きさ">
-      <a href="#"><img class="fchgBtn" src="frontend/image/ht_fsize_defo.png" alt="標準"></a>
-      <a href="#"><img class="fchgBtn" src="frontend/image/ht_fsize_large.png" alt="拡大"></a>
+    	<img class="ht_fsize_title" src="../../frontend/image/ht_fsize_title.png" alt="文字の大きさ">
+      <a href="#"><img class="fchgBtn" src="../../frontend/image/ht_fsize_defo.png" alt="標準"></a>
+      <a href="#"><img class="fchgBtn" src="../../frontend/image/ht_fsize_large.png" alt="拡大"></a>
     </div>
   </div>
 </div>

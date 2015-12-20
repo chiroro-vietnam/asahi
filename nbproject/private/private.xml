@@ -3,10 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/SellProduct.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Rental.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/CategoryProduct.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Admin/AdminController.php</file>
             <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/list.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/homepage.blade.php</file>
             <file>file:/D:/xampp/htdocs/asahi/app/Http/routes.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/product/list.blade.php</file>
             <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/sell/list.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Admin/SellingController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/list.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/RentalController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/RentalProduct.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/CompanyController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/BackendController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Model.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/HomepageController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/detail.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Inquiry.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/.env</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/CategoryRental.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/product/detail.blade.php</file>
         </group>
     </open-files>
 </project-private>
