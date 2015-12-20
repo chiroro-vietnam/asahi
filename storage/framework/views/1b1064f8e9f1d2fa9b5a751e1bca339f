@@ -22,7 +22,8 @@
     <td align="right"><input type="button" onclick="window.location.href='<?php echo route('admin.category.rental.add'); ?>';" value="カテゴリの新規登録" /></td>
   </tr>
   <tr>
-    <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
+    <td>
+        <table id="tbl-ajax" width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr class="col3">
         <td width="6%" align="center">削除</td>
         <td width="6%" align="center">表示</td>
@@ -38,28 +39,41 @@
         <?php if(isset($cat_rental) && count($cat_rental) > 0): ?>
         <?php $total = count($cat_rental); $pos = 1;?>
           <?php foreach($cat_rental as $cat): ?>
-            <tr>
-                <td>
+         
+            <tr class="sort-record"> 
+                <td class="sort-col">
                     <a id="delRental" name="delRental" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.category.rental.del', $cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 </td>
-                <td align="center"><span class=<?php echo e(@$class_arr[$cat->display]); ?>><?php echo e(@$display_arr[$cat->display]); ?></span></td>
-                <td><?php echo e($cat->name); ?></td>
-                <td><input type="button" onclick="location.href='<?php echo url('admin/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
+                <td class="sort-col" align="center"><span class=<?php echo e(@$class_arr[$cat->display]); ?>><?php echo e(@$display_arr[$cat->display]); ?></span></td>
+                <td class="sort-col"><?php echo e($cat->name); ?></td>
+                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('admin/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
+                <div id="btn-sort">
                 <?php if($total > 1): ?>
-                    <td align="center"><?php if($pos > 1): ?><input type="submit" name="top" id="top" value="TOP" /><?php else: ?> &nbsp; <?php endif; ?></td>
-                    <td align="center"><?php if($pos > 1): ?><input type="submit" name="up" id="up" value="↑" /><?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos > 1): ?>
+                        <input class="btn-top" type="button" name="btn-top" action="top" order="<?php echo e($cat->order); ?>" id="<?php echo e($cat->id); ?>" value="TOP" />                                
+                        <?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos > 1): ?>
+                        <input class="btn-up" type="button" name="btn-up" action="up" order="<?php echo e($cat->order); ?>" id="<?php echo e($cat->id); ?>" value="↑" />
+                        <?php else: ?> &nbsp; <?php endif; ?></td>
 
-                    <td align="center"><?php if($pos < $total): ?><input type="submit" name="down" id="down" value="↓" /><?php else: ?> &nbsp; <?php endif; ?></td>
-                    <td align="center"><?php if($pos < $total): ?><input type="submit" name="last" id="last" value="LAST" /><?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos < $total): ?>
+                        <input class="btn-down" type="button" name="btn-down" action="down" order="<?php echo e($cat->order); ?>" id="<?php echo e($cat->id); ?>" value="↓" />
+                        <?php else: ?> &nbsp; <?php endif; ?></td>
+                    <td align="center"><?php if($pos < $total): ?>
+                        <input class="btn-last" type="button" name="btn-last" action="last" order="<?php echo e($cat->order); ?>" id="<?php echo e($cat->id); ?>" value="LAST" />
+                        <?php else: ?> &nbsp; <?php endif; ?></td>
                 <?php else: ?>
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
-                <?php endif; ?>
-                <td><input type="button" onclick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <?php endif; ?>                                        
+                </div>
+                        
+                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
+          </div>
           <?php $pos++; ?>
           <?php endforeach; ?>
         <?php else: ?>
@@ -86,7 +100,87 @@
 </table> 
 <?php echo Form::close(); ?>
 
-  
+
+<script type="text/javascript">
+$(document ).ready(function() {
+   $( ".btn-up" ).click(function(e) { 
+       e.preventDefault();
+        var url = window.location.href;        
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');       
+        orderSort(id, order, action);
+//        var $current = $(this).closest('tr.sort-record');
+//        var $previous = $current.prev('tr.sort-record');
+//        if($previous.length !== 0){
+//          $current.insertBefore($previous);
+//        }
+        return false;
+    });
+
+    $( ".btn-down" ).click(function(e) {
+        e.preventDefault();   
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');      
+        orderSort(id, order, action);        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $next = $current.next('tr.sort-record');
+//        if($next.length !== 0){
+//          $current.insertAfter($next);
+//        }        
+        return false;
+    });
+    
+    $( ".btn-top" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $first = $current.first('tr.sort-record');
+//        if($first.length !== 0){
+//          $current.insertBefore($first);
+//        }
+//        return false;
+    });
+
+    $( ".btn-last" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $last = $current.last('tr.sort-record');
+//        if($last.length !== 0){
+//          $current.insertAfter($last);
+//      }
+      return false;
+    });
+});
+function orderSort(id, order, action){
+    var ref = "<?php echo e(route('admin.category.rental.order')); ?>"; 
+    $.ajax(
+    {
+        type : 'get',
+        url : ref,
+        data : 
+        {
+            'id' : id,'order' : order,'action' : action
+        },
+        success : function(response)
+        {
+            window.location.reload(true);      
+        },
+        error: function(jqXHR, textStatus, errorThrown) {              
+            console.log(textStatus, errorThrown);
+        }
+    });  
+}
+
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('backend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

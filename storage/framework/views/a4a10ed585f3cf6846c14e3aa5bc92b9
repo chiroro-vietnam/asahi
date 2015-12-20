@@ -35,11 +35,16 @@
        <?php if(count($catSell) > 0): ?>
        <?php foreach($catSell as $cp): ?>
             <li class="acrd-ctrl"><a href="#"><?php echo e($cp->name); ?></a>
-                <?php if(!empty($lps[$cp->id])): ?>
-                    <ul class="acrd-pl">
-                      <li><a href="#"><?php echo e(@$lps[$cp->id]); ?></a></li>
-                    </ul>
+                <?php if(count($lps) > 0): ?>
+                    <?php foreach($lps as $sp): ?>
+                        <?php if($cp->id == $sp->cat_product_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a href="#"><?php echo e(@$sp->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
+                             
             </li>
         <?php endforeach; ?>
         <?php endif; ?>

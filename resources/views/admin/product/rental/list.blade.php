@@ -55,10 +55,10 @@
     <td>
         <table id="tblSort" width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr class="col3">
-            <td width="7%" align="center">削除</td>
+            <td width="8%" align="center">削除</td>
             <td width="5%" align="center">表示</td>
-            <td width="32%"align="center">商品名</td>
-            <td width="32%" align="center">商品名（補助）</td>
+            <td width="28%"align="center">商品名</td>
+            <td width="28%" align="center">商品名（補助）</td>
             <td width="10%" align="center">詳細・編集</td>
             <td width="20%" colspan="4" align="center">表示順序</td>
         </tr>
@@ -137,47 +137,45 @@
       </td>
   </tr>
 </table>
-<!--{!! HTML::script('backend/js/jquery-1.11.3.js') !!}-->
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
 <script type="text/javascript">
 $(document ).ready(function() {
-    $( ".btn-up" ).click(function() {        
-        var url = window.location.href;        
+   $( ".btn-up" ).click(function(e) { 
+       e.preventDefault();
+        //var url = window.location.href;        
         var id = $(this).attr('id');
         var order = $(this).attr('order');
-        var action = $(this).attr('action');
-        var cr_id = $('#cr_id').val();       
-
-        orderSort(cr_id, id, order, action, url);
-
-
+        var action = $(this).attr('action');  
+        var cr_id = $(this).attr('cr_id');
+        orderSort(cr_id, id, order, action);
 //        var $current = $(this).closest('tr.sort-record');
 //        var $previous = $current.prev('tr.sort-record');
 //        if($previous.length !== 0){
 //          $current.insertBefore($previous);
 //        }
-//        //$('#sort-order')load('#sort-order');
-//        return false;
+        return false;
     });
 
-    $( ".btn-down" ).click(function() {
+    $( ".btn-down" ).click(function(e) {
+        e.preventDefault();   
         var id = $(this).attr('id');
         var order = $(this).attr('order');
-        var action = $(this).attr('action');
-        orderSort(cr_id, id, order, action, url);
-        
+        var action = $(this).attr('action'); 
+        var cr_id = $(this).attr('cr_id');
+        orderSort(cr_id, id, order, action);        
 //        var $current = $(this).closest('tr.sort-record');
 //        var $next = $current.next('tr.sort-record');
 //        if($next.length !== 0){
 //          $current.insertAfter($next);
-//        }
-//        return false;
+//        }        
+        return false;
     });
     
     $( ".btn-top" ).click(function() {
         var id = $(this).attr('id');
         var order = $(this).attr('order');
         var action = $(this).attr('action');
+        var cr_id = $(this).attr('cr_id');
         orderSort(cr_id, id, order, action);
         
 //        var $current = $(this).closest('tr.sort-record');
@@ -192,6 +190,7 @@ $(document ).ready(function() {
         var id = $(this).attr('id');
         var order = $(this).attr('order');
         var action = $(this).attr('action');
+        var cr_id = $(this).attr('cr_id');
         orderSort(cr_id, id, order, action);
         
 //        var $current = $(this).closest('tr.sort-record');
@@ -199,36 +198,28 @@ $(document ).ready(function() {
 //        if($last.length !== 0){
 //          $current.insertAfter($last);
 //      }
-//      return false;
+      return false;
     });
-
-   
-   function orderSort(cr_id, id, order, action, url){ 
-       
-    $.ajax({
-          type: 'get',
-          url: url,
-
-          data: {data: '123'},
-        // dataType: 'json',
-          success: function(data) {
-              //loadpage
-             // alert(response.action);
-           //  var responseData = JSON.parse(data);
-         
-    console.log(data);
-          
-          
-           alert('OK');
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-              alert('ERROR');
-              console.log(textStatus, errorThrown);
-          }
-      }); 
-   }
-    
 });
+function orderSort(cr_id, id, order, action){
+    var ref = "{{route('admin.product.rental.order')}}"; 
+    $.ajax(
+    {
+        type : 'get',
+        url : ref,
+        data : 
+        {
+            'csr_id' : cr_id, 'id' : id,'order' : order,'action' : action
+        },
+        success : function(response)
+        {
+            window.location.reload(true);      
+        },
+        error: function(jqXHR, textStatus, errorThrown) {              
+            console.log(textStatus, errorThrown);
+        }
+    });  
+}
 
 </script>
 @endsection

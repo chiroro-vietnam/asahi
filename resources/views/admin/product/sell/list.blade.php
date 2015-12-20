@@ -125,39 +125,88 @@
   </tr>
 </table>
 
- {!! Form::open( ['method' => 'post', 'url' => 'admin/product/sell/order', 'id' => 'frmOrder', 'enctype'=>'multipart/form-data'] ) !!}
- 
- {!! Form::close() !!}
- 
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document ).ready(function() {
-//   $( ".btn-up" ).click(function() { 
-//        var url = window.location.href;        
-//        var id = $(this).attr('id');
-//        var order = $(this).attr('order');
-//        var action = $(this).attr('action');
-//        var cs_id = $('#cs_id').val();        
-//        
-//        orderSort(cs_id, id, action, order, route);
-//   }); 
-//
-//    function orderSort(cs_id, id, action, order, route){        
-//        $.ajax( {
-//            type : "GET",
-//            url  : url,
-//            //dataType : "json", 
-//            //data : { cr_id : cr_id, id : id, action : action, order : order, url : url},
-//            success: function(response) {
-//                //alert('OK');
-//              alert(response.cs_id);  
-//            },
-//            error: function(jqXHR, textStatus, errorThrown) {
-//                alert("ERROR"); 
-//            }
-//        });
-//    }
-//});
+   $( ".btn-up" ).click(function(e) { 
+       e.preventDefault();
+        var url = window.location.href;        
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');  
+        var cs_id = $(this).attr('cs_id');
+        orderSort(cs_id, id, order, action);
+//        var $current = $(this).closest('tr.sort-record');
+//        var $previous = $current.prev('tr.sort-record');
+//        if($previous.length !== 0){
+//          $current.insertBefore($previous);
+//        }
+        return false;
+    });
+
+    $( ".btn-down" ).click(function(e) {
+        e.preventDefault();   
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action'); 
+        var cs_id = $(this).attr('cs_id');
+        orderSort(cs_id, id, order, action);        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $next = $current.next('tr.sort-record');
+//        if($next.length !== 0){
+//          $current.insertAfter($next);
+//        }        
+        return false;
+    });
+    
+    $( ".btn-top" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        var cs_id = $(this).attr('cs_id');
+        orderSort(cs_id, id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $first = $current.first('tr.sort-record');
+//        if($first.length !== 0){
+//          $current.insertBefore($first);
+//        }
+//        return false;
+    });
+
+    $( ".btn-last" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        var cs_id = $(this).attr('cs_id');
+        orderSort(cs_id, id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $last = $current.last('tr.sort-record');
+//        if($last.length !== 0){
+//          $current.insertAfter($last);
+//      }
+      return false;
+    });
+});
+function orderSort(cs_id, id, order, action){
+    var ref = "{{route('admin.product.sell.order')}}"; 
+    $.ajax(
+    {
+        type : 'get',
+        url : ref,
+        data : 
+        {
+            'cs_id' : cs_id, 'id' : id,'order' : order,'action' : action
+        },
+        success : function(response)
+        {
+            window.location.reload(true);      
+        },
+        error: function(jqXHR, textStatus, errorThrown) {              
+            console.log(textStatus, errorThrown);
+        }
+    });  
+}
+
 </script>
 @endsection

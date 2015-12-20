@@ -63,7 +63,9 @@
       <td>
           <div class="pull-right">
             <ul class="pagination">
-                <?php echo $lrp->render(); ?>          
+                <?php if(count($lrp) > 0): ?>
+                <?php echo $lrp->render(); ?> 
+                <?php endif; ?>
             </ul>
         </div>
      </td>

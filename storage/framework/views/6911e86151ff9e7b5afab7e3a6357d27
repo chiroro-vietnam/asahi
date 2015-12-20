@@ -81,10 +81,14 @@
           <?php if(count($catRentals) > 0): ?>
           <?php foreach($catRentals as $catr): ?>
             <li class="acrd-ctrl"><a href="#"><?php echo e($catr->name); ?></a>
-                <?php if(!empty($lrs[$catr->id])): ?>
-                <ul class="acrd-pl">
-                  <li><a href="#"><?php echo e($lrs[$catr->id]); ?></a></li>                  
-                </ul>
+                <?php if(count($lrs) > 0): ?>
+                    <?php foreach($lrs as $rts): ?>
+                        <?php if($catr->id == $rts->cat_rental_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a href="#"><?php echo e(@$rts->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
               </li>
           <?php endforeach; ?>            

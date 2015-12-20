@@ -63,14 +63,15 @@
       <td>
           <div class="pull-right">
             <ul class="pagination">
-                <?php echo $lsp->render(); ?>          
+                <?php if(count($lsp) > 0): ?>
+                    <?php echo $lsp->render(); ?> 
+                <?php endif; ?>
             </ul>
         </div>
      </td>
   </tr>
 </table>
-
-  <?php echo Form::close(); ?>
+<?php echo Form::close(); ?>
 
 <?php $__env->stopSection(); ?>
 

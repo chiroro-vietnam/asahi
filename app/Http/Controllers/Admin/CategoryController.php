@@ -134,7 +134,7 @@ class CategoryController extends BackendController
            DB::table('category_rental')
                 ->where('id', '=', $jID)
                 ->update(array('order' => $order)); 
-           echo json_encode(array('order'=>'ok'));
+           echo json_encode(array('order'=>$jOrder));
         }
         //order top
         if($action == 'top')
@@ -147,21 +147,21 @@ class CategoryController extends BackendController
             DB::table('category_rental')
                  ->where('id', '=', $id)
                  ->update(array('order' => $orderTop)); 
-           echo json_encode(array('order'=>'ok'));
+           echo json_encode(array('order'=>$orderTop));
         }
         
         //order last
         if($action == 'last')
         {
-            $record_min = DB::table('category_rental')
+            $record_max = DB::table('category_rental')
                     ->where('is_deleted', NO_DELLETE)
                     ->select('order')
                     ->max('order');
-            $orderTop = $record_min + 1;      
+            $orderLast = $record_max + 1;      
             DB::table('category_rental')
                  ->where('id', '=', $id)
-                 ->update(array('order' => $orderTop)); 
-           echo json_encode(array('order'=>'ok'));
+                 ->update(array('order' => $orderLast)); 
+           echo json_encode(array('order'=>$orderLast));
         }
 
     }

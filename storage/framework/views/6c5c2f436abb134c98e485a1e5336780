@@ -8,6 +8,10 @@
 
     <?php echo HTML::style('backend/css/custom.css'); ?>
 
+    <?php echo HTML::script('backend/js/jquery-1.11.3.js'); ?>
+
+    <?php echo HTML::script('backend/js/jquery-ui.js'); ?>
+
   
 </head>
 

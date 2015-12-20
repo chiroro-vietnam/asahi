@@ -101,7 +101,7 @@ class RentalController extends BackendController
         return DB::table('rental_product')
                 ->where('is_deleted', NO_DELLETE)
                 ->where('cat_rental_id', $cat_rental_id)
-                ->orderBy('order', 'ASC')
+                ->orderBy('order', 'asc')
                 ->paginate(LIMIT_PAGE);        
     }
 
@@ -305,7 +305,66 @@ class RentalController extends BackendController
         return response()->json(['name' => 'Chiroro', 'state' => 'JP']);
     }
 
+    //order sort rental
+    public function orderRental()
+    {     
+        $id = Input::get('id');
+        $order = Input::get('order');
+        $action = Input::get('action');
+  
+        //order up
+        if($action == 'up')
+        {
+           $jOrder = $order - 1;
+           $jID = $id - 1;         
+           DB::table('rental_product')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder));           
+           DB::table('rental_product')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order));           
+           echo json_encode(array('order'=>$jOrder));
+        }
+        //order down
+        if($action == 'down')
+        {
+           $jOrder = $order + 1;
+           $jID = $id + 1;         
+           DB::table('rental_product')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder));            
+           DB::table('rental_product')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order)); 
+           echo json_encode(array('order'=>$jOrder));
+        }
+        //order top
+        if($action == 'top'){
+            $record_min = DB::table('sell_product')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->min('order');
+            $orderTop = $record_min - 1;      
+            DB::table('rental_product')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderTop)); 
+           echo json_encode(array('order'=>$orderTop));
+        }
         
+        //order last
+        if($action == 'last')
+        {
+            $record_max = DB::table('sell_product')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->max('order');
+            $orderLast = $record_max + 1;      
+            DB::table('rental_product')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderLast)); 
+           echo json_encode(array('order'=>$orderLast));
+        }
+    }    
   
 
 }

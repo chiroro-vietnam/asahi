@@ -70,21 +70,24 @@
       	<li class="select"><img src="frontend/image/top_tab_rental.png" alt="レンタル商品カテゴリ"></li>
       	<li><img src="frontend/image/top_tab_products.png" alt="販売商品カテゴリ"></li>
       </ul>
-        
-       <?php // echo "<pre>"; 
-//       print_r($catRenTop);
-       ?>
+
       <ul class="tab_content">
       	<li>
           <ul class="sub_rental">
             <?php if(count($catRenTop) > 0): ?>
             <?php foreach($catRenTop as $cr): ?>
              <li class="acrd-ctrl"><a href="#"><?php echo e($cr->name); ?></a>
-                <?php if(!empty($lrs[$cr->id])): ?>                   
-                    <ul class="acrd-pl">
-                      <li><a href="#"><?php echo e(@$lrs[$cr->id]); ?></a></li>
-                    </ul>                    
-                <?php endif; ?> 
+
+                <?php if(count($lrs) > 0): ?>
+                    <?php foreach($lrs as $rts): ?>
+                        <?php if($cr->id == $rts->cat_rental_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a href="#"><?php echo e(@$rts->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
                 </li>
             <?php endforeach; ?>                
             <?php endif; ?>        
@@ -96,11 +99,16 @@
            <?php if(count($catSellTop) > 0): ?>
             <?php foreach($catSellTop as $cs): ?>
              <li class="acrd-ctrl"><a href="#"><?php echo e($cs->name); ?></a>
-                 <?php if(!empty($lps[$cs->id])): ?>
-                    <ul class="acrd-pl">
-                      <li><a href="#"><?php echo e(@$lps[$cs->id]); ?></a></li>
-                    </ul>                  
+                <?php if(count($lps) > 0): ?>
+                    <?php foreach($lps as $sp): ?>
+                        <?php if($cs->id == $sp->cat_product_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a href="#"><?php echo e(@$sp->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
+                
                 </li>
              <?php endforeach; ?>            
             <?php endif; ?>

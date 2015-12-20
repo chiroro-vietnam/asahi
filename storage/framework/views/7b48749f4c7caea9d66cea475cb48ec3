@@ -1,6 +1,5 @@
 <?php $__env->startSection('content'); ?>
 
-
 <div id="breadcrumbs">
   <ul class="pan clear">
     <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
@@ -27,12 +26,10 @@
                 if($count >= 6) break; 
             ?>
              </a>
-            <?php endforeach; ?>
-            
+            <?php endforeach; ?>           
        
     </div>
     <?php endif; ?>
-
     
   </div>
   <div id="topRight">
@@ -40,29 +37,27 @@
     	<div class="sub_title"><img src="frontend/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
       <ul class="sub_rental">
        <?php if(count($catRentals) > 0): ?>
-        <?php foreach($catRentals as $cr): ?>        
-
+        <?php foreach($catRentals as $cr): ?> 
             <li class="acrd-ctrl"><a href="#"><?php echo e($cr->name); ?></a>
-                <?php if(!empty($lrs[$cr->id])): ?>
-                    <ul class="acrd-pl">                  
-                    <!--$catRent->product_name-->
-                            <li><a href="#"><?php echo e($lrs[$cr->id]); ?></a></li>   
-
-                    </ul>
+                 <?php if(count($lrs) > 0): ?>
+                    <?php foreach($lrs as $rts): ?>
+                        <?php if($cr->id == $rts->cat_rental_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a href="#"><?php echo e(@$rts->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
-       <?php endif; ?>
-
-        
+       <?php endif; ?>        
         
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">
       <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
-  </div>
-  
+  </div>  
   
 </div></div>
 
