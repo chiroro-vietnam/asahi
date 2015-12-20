@@ -101,7 +101,72 @@ class CategoryController extends BackendController
                 ->with('message', 'Category rental has been deleted successfully');
     }
     
-         //category sell
+    //order sort cal rental
+    public function orderRental()
+    {     
+        $id = Input::get('id');
+        $order = Input::get('order');
+        $action = Input::get('action');
+   
+        //order up
+        if($action == 'up')
+        {
+           $jOrder = $order - 1;
+           $jID = $id - 1;         
+           DB::table('category_rental')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder)); 
+           
+           DB::table('category_rental')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order)); 
+           echo json_encode(array('order'=>$jOrder));
+        }
+        //order down
+        if($action == 'down')
+        {
+           $jOrder = $order + 1;
+           $jID = $id + 1;         
+           DB::table('category_rental')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder)); 
+           
+           DB::table('category_rental')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+        //order top
+        if($action == 'top')
+        {
+            $record_min = DB::table('category_rental')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->min('order');
+            $orderTop = $record_min - 1;      
+            DB::table('category_rental')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderTop)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+        
+        //order last
+        if($action == 'last')
+        {
+            $record_min = DB::table('category_rental')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->max('order');
+            $orderTop = $record_min + 1;      
+            DB::table('category_rental')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderTop)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+
+    }
+    
+    //category sell
     public function listCatSell()
     {
         $cat_sell = CategoryProduct::getCatSell();
@@ -173,14 +238,78 @@ class CategoryController extends BackendController
                 ->withInput();   
     }
   
-        //deletel category rental
-    public function delCatSell($id){
+    //deletel category rental
+    public function delCatSell($id)
+    {
         DB::table('category_product')
                 ->where('id', '=', $id)
                 ->update(array('is_deleted' => DELETED));
         Session::flash('success', 'The category sell deleted successfully.');
         return Redirect::route('admin.category.sell.list')
                 ->with('message', 'Category sell has been deleted successfully');
+    }
+    
+    //order sort cat sell
+    public function orderSell()
+    {     
+        $id = Input::get('id');
+        $order = Input::get('order');
+        $action = Input::get('action');
+   
+        //order up
+        if($action == 'up')
+        {
+           $jOrder = $order - 1;
+           $jID = $id - 1;         
+           DB::table('category_product')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder)); 
+           
+           DB::table('category_product')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order)); 
+           echo json_encode(array('order'=>$jOrder));
+        }
+        //order down
+        if($action == 'down')
+        {
+           $jOrder = $order + 1;
+           $jID = $id + 1;         
+           DB::table('category_product')
+                ->where('id', '=', $id)
+                ->update(array('order' => $jOrder));            
+           DB::table('category_product')
+                ->where('id', '=', $jID)
+                ->update(array('order' => $order)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+        //order top
+        if($action == 'top'){
+            $record_min = DB::table('category_product')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->min('order');
+            $orderTop = $record_min - 1;      
+            DB::table('category_product')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderTop)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+        
+        //order last
+        if($action == 'last')
+        {
+            $record_min = DB::table('category_product')
+                    ->where('is_deleted', NO_DELLETE)
+                    ->select('order')
+                    ->max('order');
+            $orderTop = $record_min + 1;      
+            DB::table('category_product')
+                 ->where('id', '=', $id)
+                 ->update(array('order' => $orderTop)); 
+           echo json_encode(array('order'=>'ok'));
+        }
+
     }
 }
 

@@ -85,6 +85,8 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/category/rental/del/{id}', array('as' => 'admin.category.rental.del', 'uses' => 'CategoryController@delCatRental'));
     Route::get('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@getCatRentalEdit'));
     Route::post('admin/category/rental/edit/{id?}', array('as' => 'admin.category.rental.edit', 'uses' => 'CategoryController@postCatRentalEdit'));
+    //sort order cat rental
+    Route::get('admin/category/rental/order', array('as' => 'admin.category.rental.order', 'uses' => 'CategoryController@orderRental'));
     
     //category sell list
     Route::get('admin/category/sell', array('as' => 'admin.category.sell.list', 'uses' => 'CategoryController@listCatSell'));
@@ -93,7 +95,9 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('admin/category/sell/edit/{id?}', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@getCatSellEdit'));
     Route::post('admin/category/sell/edit/{id?}', array('as' => 'admin.category.sell.edit', 'uses' => 'CategoryController@postCatSellEdit'));
     Route::get('admin/category/sell/del/{id?}', array('as' => 'admin.category.sell.del', 'uses' => 'CategoryController@delCatSell'));
-
+    //sort order cat sell
+    Route::get('admin/category/sell/order', array('as' => 'admin.category.sell.order', 'uses' => 'CategoryController@orderSell'));
+    
     //product sell
     Route::get('admin/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));
     Route::post('admin/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));

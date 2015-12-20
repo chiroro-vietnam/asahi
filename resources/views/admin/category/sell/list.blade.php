@@ -46,18 +46,26 @@
                 <td>{{$cat->name}}</td>
                 <td><input type="button" onclick="location.href='<?php echo url('admin/category/sell/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
                 @if($total > 1)
-                    <td align="center">@if($pos > 1)<input type="submit" name="top" id="top" value="TOP" />@else &nbsp; @endif</td>
-                    <td align="center">@if($pos > 1)<input type="submit" name="up" id="up" value="↑" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos > 1)
+                        <input class="btn-top" type="button" name="btn-top" action="top" order="{{$cat->order}}" id="{{$cat->id}}" value="TOP" />                                
+                        @else &nbsp; @endif</td>
+                    <td align="center">@if($pos > 1)
+                        <input class="btn-up" type="button" name="btn-up" action="up" order="{{$cat->order}}" id="{{$cat->id}}" value="↑" />
+                        @else &nbsp; @endif</td>
 
-                    <td align="center">@if($pos < $total)<input type="submit" name="down" id="down" value="↓" />@else &nbsp; @endif</td>
-                    <td align="center">@if($pos < $total)<input type="submit" name="last" id="last" value="LAST" />@else &nbsp; @endif</td>
+                    <td align="center">@if($pos < $total)
+                        <input class="btn-down" type="button" name="btn-down" action="down" order="{{$cat->order}}" id="{{$cat->id}}" value="↓" />
+                        @else &nbsp; @endif</td>
+                    <td align="center">@if($pos < $total)
+                        <input class="btn-last" type="button" name="btn-last" action="last" order="{{$cat->order}}" id="{{$cat->id}}" value="LAST" />
+                        @else &nbsp; @endif</td>
                 @else
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-                    <td align="center">&nbsp;</td>
-                    <td align="center">&nbsp;</td>
-                @endif
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                @endif     
                 <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
           <?php $pos++;?>
@@ -97,5 +105,84 @@
     
 
 {!! Form::close() !!}
-  
+<script type="text/javascript">
+$(document ).ready(function() {
+   $( ".btn-up" ).click(function(e) { 
+       e.preventDefault();
+        var url = window.location.href;        
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');       
+        orderSort(id, order, action);
+//        var $current = $(this).closest('tr.sort-record');
+//        var $previous = $current.prev('tr.sort-record');
+//        if($previous.length !== 0){
+//          $current.insertBefore($previous);
+//        }
+        return false;
+    });
+
+    $( ".btn-down" ).click(function(e) {
+        e.preventDefault();   
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');      
+        orderSort(id, order, action);        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $next = $current.next('tr.sort-record');
+//        if($next.length !== 0){
+//          $current.insertAfter($next);
+//        }        
+        return false;
+    });
+    
+    $( ".btn-top" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $first = $current.first('tr.sort-record');
+//        if($first.length !== 0){
+//          $current.insertBefore($first);
+//        }
+//        return false;
+    });
+
+    $( ".btn-last" ).click(function() {
+        var id = $(this).attr('id');
+        var order = $(this).attr('order');
+        var action = $(this).attr('action');
+        orderSort(id, order, action);
+        
+//        var $current = $(this).closest('tr.sort-record');
+//        var $last = $current.last('tr.sort-record');
+//        if($last.length !== 0){
+//          $current.insertAfter($last);
+//      }
+      return false;
+    });
+});
+function orderSort(id, order, action){
+    var ref = "{{route('admin.category.sell.order')}}"; 
+    $.ajax(
+    {
+        type : 'get',
+        url : ref,
+        data : 
+        {
+            'id' : id,'order' : order,'action' : action
+        },
+        success : function(response)
+        {
+            window.location.reload(true);      
+        },
+        error: function(jqXHR, textStatus, errorThrown) {              
+            console.log(textStatus, errorThrown);
+        }
+    });  
+}
+
+</script>  
 @endsection
