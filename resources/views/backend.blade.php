@@ -14,8 +14,20 @@
 <body>
     <table width="100%" border="0" cellspacing="0" cellpadding="5">
         <tr>
-          <td width="50%"><input type="button" onClick="location.href='<?php echo route('admin.dashboard.index'); ?>'" value="管理者メニューへ" /></td>
+          <td width="50%">
+            @if(Auth::check())
+              <input type="button" onClick="location.href='<?php echo route('admin.dashboard.index'); ?>'" value="管理者メニューへ" />
+             @else
+              &nbsp;
+            @endif 
+          </td>
           <td width="50%">&nbsp;</td>
+          <td>
+              @if (Auth::check())
+                <input type="button" onClick="location.href='<?php echo route('admin.auth.logout'); ?>'" value="ログアウト" />
+              @endif
+              
+          </td>
         </tr>
       </table>
       <hr noshade="noshade" />
