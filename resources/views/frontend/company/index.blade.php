@@ -5,7 +5,7 @@
 
 <div id="breadcrumbs">
   <ul class="pan clear">
-    <li><a href="index.html" title="TOP" class="now">TOP</a></li>
+    <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
     <li>会社概要</li>
   </ul>
 </div>
