@@ -10,7 +10,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-{!! Form::open( ['method' => 'post', 'url' => 'admin/product/rental/add/'.$cr_id, 'enctype'=>'multipart/form-data'] ) !!}  
+{!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/add/'.$cr_id, 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
       
     <td>
@@ -125,7 +125,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input type="button" onClick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cr_id); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
+    <td align="center"><input type="button" onClick="location.href='<?php echo url('manage/product/rental/?cr_id='.$cr_id); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

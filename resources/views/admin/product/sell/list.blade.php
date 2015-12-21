@@ -18,7 +18,7 @@
 	@endif
       </td>
   </tr>
-  {!! Form::open( ['method' => 'post', 'url' => 'admin/product/sell/', 'id' => 'frmCatSell', 'enctype'=>'multipart/form-data'] ) !!}
+  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/', 'id' => 'frmCatSell', 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
@@ -44,7 +44,7 @@
   <tr>
     <td align="right">
         @if(!empty($cs_id))
-        <input type="button" onClick="location.href='<?php echo url('admin/product/sell/add/'.$cs_id); ?>'" value="商品の新規登録" />
+        <input type="button" onClick="location.href='<?php echo url('manage/product/sell/add/'.$cs_id); ?>'" value="商品の新規登録" />
         @endif
     </td>
   </tr>
@@ -73,7 +73,7 @@
                             <td align="center"><span class={{@$class_arr[$val_sp->display]}}>{{@$display_arr[$val_sp->display]}}</span></td>
                             <td>{{$val_sp->product_name}}</td>
                             <td>{{$val_sp->product_name_auxiliary}}</td>
-                            <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
+                            <td><input type="button" onclick="location.href='<?php echo url('manage/product/sell/edit/'.$val_sp->id); ?>'" value="詳細・編集" /></td>
                           
                         @if($total > 1)
                             <td align="center">@if($pos > 1)

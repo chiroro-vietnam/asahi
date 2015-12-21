@@ -30,7 +30,7 @@
     @foreach($sp as $val)        
     @endforeach
   @endif
-{!! Form::open( [ 'id' => 'frmEditSP','method' => 'post', 'url' => 'admin/product/sell/edit/'.$id, 'files'=>true, 'enctype'=>'multipart/form-data']) !!}  
+{!! Form::open( [ 'id' => 'frmEditSP','method' => 'post', 'url' => 'manage/product/sell/edit/'.$id, 'files'=>true, 'enctype'=>'multipart/form-data']) !!}  
  
 <tr>
       
@@ -157,7 +157,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input type="button" onClick="location.href='<?php echo url('admin/product/sell/?cs_id='.$val->cat_product_id); ?>'" value="登録済み販売商品一覧に戻る" /></td>
+    <td align="center"><input type="button" onClick="location.href='<?php echo url('manage/product/sell/?cs_id='.$val->cat_product_id); ?>'" value="登録済み販売商品一覧に戻る" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

@@ -141,10 +141,10 @@ class SellingController extends BackendController
 
             DB::table('sell_product')->insert($inputData);
             Session::flash('success', 'The sell product insert successfully.');
-            return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
+            return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
         }
 
-        return Redirect::to('admin/product/sell/add/'.$cs_id)
+        return Redirect::to('manage/product/sell/add/'.$cs_id)
                 ->with('message'. 'Edit sell product fail, try again!')
                 ->withErrors($validator)
                 ->withInput();  
@@ -307,10 +307,10 @@ class SellingController extends BackendController
                         ->where('id', $id)
                         ->update($inputData);
                 Session::flash('success', 'The sell product updated successfully.');
-                return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
+                return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
         }
 
-        return Redirect::to('admin/product/sell/edit/'.$id)
+        return Redirect::to('manage/product/sell/edit/'.$id)
                 ->with('message'. 'Edit sell product fail, try again!')
                 ->withErrors($validator)
                 ->withInput();  

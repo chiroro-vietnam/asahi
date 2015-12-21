@@ -85,7 +85,7 @@ class CategoryController extends BackendController
                 Session::flash('success', 'The category rental edit successfully.');
                 return Redirect::route('admin.category.rental.list');
         }
-        return Redirect::to('admin/category/rental/edit/'.$id)
+        return Redirect::to('manage/category/rental/edit/'.$id)
                 ->with('message'. 'Edit category rental fail, try again!')
                 ->withErrors($validator)
                 ->withInput();   
@@ -232,7 +232,7 @@ class CategoryController extends BackendController
                 Session::flash('success', 'The category sell edit successfully.');
                 return Redirect::route('admin.category.sell.list');
         }
-        return Redirect::to('admin/category/sell/edit/'.$id)
+        return Redirect::to('manage/category/sell/edit/'.$id)
                 ->with('message'. 'Edit category sell fail, try again!')
                 ->withErrors($validator)
                 ->withInput();   

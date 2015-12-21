@@ -18,7 +18,7 @@
 	@endif
       </td>
   </tr>
-  {!! Form::open( ['method' => 'post', 'url' => 'admin/product/osusume-sell', 'enctype'=>'multipart/form-data'] ) !!}
+  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/osusume-sell', 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td align="left">※商品管理でおすすめ商品として表示するにチェックが入っている商品のみを表示しております。<br />
 ※TOPページにおすすめ＜レンタル＞商品を●点まで表示することができます。<br /></td>
@@ -36,7 +36,7 @@
         @foreach($lsp as $sp)
             <tr>
                 <td align="center">                   
-                    <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('admin/product/osusume-sell/del/'.$sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                    <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('manage/product/osusume-sell/del/'.$sp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 <td>{{$sp->product_name}}</td>
                 <td>{{$sp->product_name_auxiliary}}</td>
                 <td align="center">

@@ -24,7 +24,7 @@
           @endif          
       </td>    
   </tr>
-   {!! Form::open( ['method' => 'post', 'url' => 'admin/category/rental/edit/'.$cat_rental->id, 'enctype'=>'multipart/form-data'] ) !!}
+   {!! Form::open( ['method' => 'post', 'url' => 'manage/category/rental/edit/'.$cat_rental->id, 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>

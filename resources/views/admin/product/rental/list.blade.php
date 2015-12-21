@@ -18,7 +18,7 @@
 	@endif
       </td>
   </tr>
- {!! Form::open( ['method' => 'post', 'url' => 'admin/product/rental/', 'id' => 'frmCatRental', 'enctype'=>'multipart/form-data'] ) !!}
+ {!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/', 'id' => 'frmCatRental', 'enctype'=>'multipart/form-data'] ) !!}
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
@@ -45,9 +45,9 @@
   <tr>
     <td align="right">
         @if(!empty($cr_id))
-        <input type="button" onClick="location.href='<?php echo url('admin/product/rental/add/'.$cr_id); ?>'" value="商品の新規登録" />
+        <input type="button" onClick="location.href='<?php echo url('manage/product/rental/add/'.$cr_id); ?>'" value="商品の新規登録" />
         <input type="hidden" name="cr_id" id="cr_id" value="{{$cr_id}}" />
-        <input type="hidden" name="url" id="url" value="{{url('admin/product/rental?cr_id='.$cr_id)}}" />
+        <input type="hidden" name="url" id="url" value="{{url('manage/product/rental?cr_id='.$cr_id)}}" />
         @endif
     </td>
   </tr>

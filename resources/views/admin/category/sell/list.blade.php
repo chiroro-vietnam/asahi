@@ -40,11 +40,11 @@
           @foreach($cat_sell as $cat)
             <tr>
                 <td>
-                    <a id="delCatSell" name="delCatSell" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('admin/category/sell/del/'.$cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                    <a id="delCatSell" name="delCatSell" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('manage/category/sell/del/'.$cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 </td>
                 <td align="center"><span class={{@$class_arr[$cat->display]}}>{{@$display_arr[$cat->display]}}</span></td>
                 <td>{{$cat->name}}</td>
-                <td><input type="button" onclick="location.href='<?php echo url('admin/category/sell/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
+                <td><input type="button" onclick="location.href='<?php echo url('manage/category/sell/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
                 @if($total > 1)
                     <td align="center">@if($pos > 1)
                         <input class="btn-top" type="button" name="btn-top" action="top" order="{{$cat->order}}" id="{{$cat->id}}" value="TOP" />                                
@@ -66,7 +66,7 @@
                     <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 @endif     
-                <td><input type="button" onclick="location.href='<?php echo url('admin/product/sell/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
+                <td><input type="button" onclick="location.href='<?php echo url('manage/product/sell/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
           <?php $pos++;?>
           @endforeach

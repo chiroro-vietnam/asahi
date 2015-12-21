@@ -46,7 +46,7 @@
                 </td>
                 <td class="sort-col" align="center"><span class={{@$class_arr[$cat->display]}}>{{@$display_arr[$cat->display]}}</span></td>
                 <td class="sort-col">{{$cat->name}}</td>
-                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('admin/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
+                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('manage/category/rental/edit/'.$cat->id); ?>'" value="詳細・編集" /></td>
                 <div id="btn-sort">
                 @if($total > 1)
                     <td align="center">@if($pos > 1)
@@ -71,7 +71,7 @@
                 @endif                                        
                 </div>
                         
-                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('admin/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
+                <td class="sort-col"><input type="button" onclick="location.href='<?php echo url('manage/product/rental/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
           </div>
           <?php $pos++; ?>

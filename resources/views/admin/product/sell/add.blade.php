@@ -9,7 +9,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-  {!! Form::open( ['method' => 'post', 'url' => 'admin/product/sell/add/'.$cs_id, 'enctype'=>'multipart/form-data'] ) !!}  
+  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/add/'.$cs_id, 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
              

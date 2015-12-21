@@ -86,7 +86,7 @@ class RentalController extends BackendController
             {            
                $cr_id = Input::get('cat_rental');
                $rp = $this->_searchRentPro($cr_id);
-               return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
+               return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
                return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
             }else{           
 
@@ -181,10 +181,10 @@ class RentalController extends BackendController
                 }
                 
                 Session::flash('success', 'The rental product updated successfully.');
-                return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
+                return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
         }
 
-        return Redirect::to('admin/product/rental/add/'.$cr_id)
+        return Redirect::to('manage/product/rental/add/'.$cr_id)
                 ->with('message'. 'Edit rental product fail, try again!')
                 ->withErrors($validator)
                 ->withInput();  
@@ -275,10 +275,10 @@ class RentalController extends BackendController
                     ->where('id', $id)
                     ->update($inputData);
             Session::flash('success', 'The rental product updated successfully.');
-            return Redirect::to('admin/product/rental/?cr_id='.$cr_id);
+            return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
         }
 
-        return Redirect::to('admin/product/rental/edit/'.$id)
+        return Redirect::to('manage/product/rental/edit/'.$id)
                 ->with('message'. 'Edit rental product fail, try again!')
                 ->withErrors($validator)
                 ->withInput();  
@@ -292,7 +292,7 @@ class RentalController extends BackendController
         DB::table('rental_product')
                 ->where('id', '=', $id)
                 ->update(array('is_deleted' => DELETED));
-        return Redirect::to('admin/product/rental/?cr_id='.$cr_id)->with('message', 'Product rental has been deleted successfully');
+        return Redirect::to('manage/product/rental/?cr_id='.$cr_id)->with('message', 'Product rental has been deleted successfully');
     }
     
     //order sort rental product

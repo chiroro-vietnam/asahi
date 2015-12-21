@@ -10,7 +10,7 @@
     <td>&nbsp;</td>
   </tr>
   @foreach($data as $rp) @endforeach
-{!! Form::open( [ 'id' => 'frmEditRP','method' => 'post', 'url' => 'admin/product/rental/edit/'.$rp->id,'files' => true, 'enctype'=>'multipart/form-data']) !!}  
+{!! Form::open( [ 'id' => 'frmEditRP','method' => 'post', 'url' => 'manage/product/rental/edit/'.$rp->id,'files' => true, 'enctype'=>'multipart/form-data']) !!}  
   <tr>      
     <td>
         <table width="100%" border="1" cellspacing="0" cellpadding="5">   
@@ -133,7 +133,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input type="button" onClick="location.href='<?php echo url('admin/product/rental/?cr_id='.$rp->cat_rental_id); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
+    <td align="center"><input type="button" onClick="location.href='<?php echo url('manage/product/rental/?cr_id='.$rp->cat_rental_id); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
