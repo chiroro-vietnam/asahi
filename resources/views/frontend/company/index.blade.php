@@ -54,7 +54,7 @@
 </table><br /><br />
 
 <div id="company_inquiry">
-<a href="inquiry.html" target="_brank">お問い合わせは送信フォームからお願い致します。</a>
+<a href="<?php echo route('frontend.inquiry.index'); ?>" target="_brank">お問い合わせは送信フォームからお願い致します。</a>
 </div>
 
 <br /><br /><br />
@@ -73,7 +73,7 @@
   </div>
   <div id="topRight">
     <div class="sub_info">
-      <a href="inquiry.html"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
+      <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="../../frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
   </div>
   
