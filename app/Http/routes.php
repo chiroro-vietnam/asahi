@@ -51,10 +51,9 @@ Route::group(array('namespace' => 'Frontend'), function () {
 });
 
 //login and logout
-Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'admin\AdminController@getLogin']);
-Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'admin\AdminController@postLogin']);
-Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'admin\AdminController@logout']);
-
+Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@getLogin']);
+Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@postLogin']);
+Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AdminController@logout']);
 //Admin
 Route::group(array('namespace' => 'Admin'), function () {
     
