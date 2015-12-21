@@ -8,7 +8,6 @@ use Input;
 use Redirect;
 use Html;
 use View;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Mail;
@@ -55,11 +54,7 @@ class InquiryController extends FrontendController
     }
 
     public function getConfirm()
-    {
-        if(empty(Session::get('inputdata')))
-        {
-          return Redirect::route('frontend.inquiry.index');  
-        }
+    {       
         $data = Session::get('inputdata');
         if(!isset($data)){        
           return Redirect::route('frontend.inquiry.index');  
@@ -81,8 +76,8 @@ class InquiryController extends FrontendController
     
     public function getComplete()
     {  
-        if(empty(Session::get('inputdata')))
-        {
+        $data = Session::get('inputdata');
+        if(!isset($data)){        
           return Redirect::route('frontend.inquiry.index');  
         }
         return view('frontend.inquiry.complete');
