@@ -36,7 +36,7 @@
             @if($product->display_type == 1) <!--  detail -->
                 <a href="<?php echo route('frontend.product.detail', $product->id); ?>">
                     <div class="listFrame">
-                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}></div>
+                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
@@ -44,7 +44,7 @@
             @elseif($product->display_type == 2) <!--  link url-->
                 <a href="<?php echo url($product->url);?>" <?php if($product->open_tab == 1) echo 'target="_blank"';?>>
                     <div class="listFrame">
-                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}></div>
+                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
@@ -53,7 +53,7 @@
             @else <!--  file -->
                 <a href="<?php echo url($product->file); ?>">
                     <div class="listFrame">
-                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}></div>
+                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
