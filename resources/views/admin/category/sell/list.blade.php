@@ -66,7 +66,7 @@
                     <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 @endif     
-                <td><input type="button" onclick="location.href='<?php echo url('manage/product/sell/?cr_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
+                <td><input type="button" onclick="location.href='<?php echo url('manage/product/sell/?cs_id='.$cat->id); ?>'" value="カテゴリ内商品管理" /></td>
           </tr>
           <?php $pos++;?>
           @endforeach

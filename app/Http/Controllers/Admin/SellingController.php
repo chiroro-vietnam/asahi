@@ -180,7 +180,7 @@ class SellingController extends BackendController
             {            
                $cs_id = Input::get('cat_sell');
                $sp = $this->_searchSellPro($cs_id);
-               return Redirect::to('admin/product/sell/?cs_id='.$cs_id);
+               return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
                return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));
             }else{
             return view('admin.product.sell.list', compact('csp'));
