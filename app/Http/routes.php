@@ -50,10 +50,10 @@ Route::group(array('namespace' => 'Frontend'), function () {
     
 });
 
-//login and logout
-Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@getLogin']);
-Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@postLogin']);
-Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AdminController@logout']);
+    //login and logout
+    Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@getLogin']);
+    Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@postLogin']);
+    Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AdminController@logout']);
 //Admin
 Route::group(array('namespace' => 'Admin'), function () {
     
@@ -119,6 +119,13 @@ Route::group(array('namespace' => 'Admin'), function () {
     Route::get('manage/product/rental/order', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderRental'));
 });
 
-Route::get('auth/login', function () {
+    Route::get('auth/login', function () {
+        return redirect()->route('admin.auth.login');
+    });
+
+    Route::get('admin/login', function () {
+        return redirect()->route('admin.auth.login');
+    });
+    Route::get('admin', function () {
         return redirect()->route('admin.auth.login');
     });
