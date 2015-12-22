@@ -125,10 +125,14 @@ class SellingController extends BackendController
                     $inputData['file'] = '/uploads/files/sell_product/'.$fileName;
             }   
 
-            //insert to top_page_show
+            DB::table('sell_product')->insert($inputData);
+            Session::flash('success', 'The sell product insert successfully.');
+
+             //insert to top_page_show
             if($display_top == 1)
             {
-                $max_id = DB::table('sell_product')                    
+                $max_id = DB::table('sell_product')
+                ->where('is_deleted', NO_DELLETE)                    
                 ->max('sell_product.id');
                 $sell_product_id = $max_id;
                 $dataTopPage  = array(
@@ -139,8 +143,6 @@ class SellingController extends BackendController
                 DB::table('top_page_show')->insert($dataTopPage);
             }
 
-            DB::table('sell_product')->insert($inputData);
-            Session::flash('success', 'The sell product insert successfully.');
             return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
         }
 

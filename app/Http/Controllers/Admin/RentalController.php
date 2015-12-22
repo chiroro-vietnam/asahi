@@ -165,8 +165,8 @@ class RentalController extends BackendController
                     $inputData['image_second'] = '/uploads/images/rental_product/'.$fileName2;
                 }               
                 DB::table('rental_product')->insert($inputData);
-                
-                //insert to top_page_show
+
+                 //insert to top_page_show
                 if($display_top == 1)
                 {
                     $max_id = DB::table('rental_product')                    
@@ -178,7 +178,7 @@ class RentalController extends BackendController
                         'created_at'          => date('Y-m-d H:i:s'),
                         'updated_at'          => date('Y-m-d H:i:s')); 
                     DB::table('top_page_show')->insert($dataTopPage);
-                }
+                }               
                 
                 Session::flash('success', 'The rental product updated successfully.');
                 return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
