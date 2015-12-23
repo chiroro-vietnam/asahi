@@ -69,11 +69,12 @@ class RentalController extends BackendController
     //product rental list
     public function listProRental()
     {
-        $crs = DB::table('category_product')
+        $crs = DB::table('category_rental')
                         ->where('is_deleted', NO_DELLETE)
                         ->where('display', 1)
                         ->select('id','name')
                         ->get();
+
         if(Input::has('btmSearchRT'))
         {
            $cr_id = Input::get('cr_id'); 
