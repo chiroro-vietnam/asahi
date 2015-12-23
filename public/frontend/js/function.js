@@ -34,10 +34,17 @@ jQuery(function() {
 
 //accordion-------------------------------------------------
 (function($){
-
+var flag = false;
   $('.subMenu').on('click' , '.acrd-ctrl', function(e){
     e.preventDefault();
+ 
 
+$('.item-detail').click(function() {
+  flag = true;
+  window.location.href = $(this).attr('href');
+ });
+ if(flag == false)
+ {
     // 現在のアイコン状態で＋にするか−にするか判定
     if($(this).children('a').is('.now')){
       // ＋アイコンに変更
@@ -54,8 +61,8 @@ jQuery(function() {
     $(this)
       .children('.acrd-pl')
       .slideToggle();
-
-  });
+ }
+});
 
 })(jQuery);
 	

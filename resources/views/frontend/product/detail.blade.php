@@ -78,7 +78,7 @@
                     @foreach($lps as $sp)
                         @if($cs->id == $sp->cat_product_id)
                             <ul class="acrd-pl">
-                                <li><a href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
+                                <li><a class="item-detail" href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
                             </ul> 
                         @endif
                     @endforeach

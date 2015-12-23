@@ -17,7 +17,7 @@
                 <div class="listFrame">
                   <div class="listTitle">{{$rt->name}}</div>
                   <div class="listImg">
-                      {!! HTML::image($rt->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}
+                      {!! HTML::image(@$rt->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}
                   </div>
                   <div class="listName"><span class="ln_cat">{{$rt->product_name_auxiliary}}</span><br /><span class="ln_name">{{$rt->product_name}}</span></div>
                   <div class="listDetail">{{$rt->overview}}</div>
@@ -44,7 +44,7 @@
             @elseif($product->display_type == 2) <!--  link url-->
                 <a href="<?php echo url($product->url);?>" <?php if($product->open_tab == 1) echo 'target="_blank"';?>>
                     <div class="listFrame">
-                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
+                      <div class="listImg">{!! HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
@@ -53,7 +53,7 @@
             @else <!--  file -->
                 <a href="<?php echo url($product->file); ?>">
                     <div class="listFrame">
-                      <div class="listImg">{!! HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
+                      <div class="listImg">{!! HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
@@ -78,12 +78,11 @@
             @if(count($catRenTop) > 0)
             @foreach($catRenTop as $cr)
              <li class="acrd-ctrl"><a href="#">{{$cr->name}}</a>
-
                 @if(count($lrs) > 0)
                     @foreach($lrs as $rts)
                         @if($cr->id == $rts->cat_rental_id)
                             <ul class="acrd-pl">
-                                <li><a href="<?php echo url('rental/detail/'.$rts->id); ?>">{{@$rts->product_name}}</a></li>
+                                <li><a class="item-detail" href="<?php echo url('rental/detail/'.$rts->id); ?>">{{@$rts->product_name}}</a></li>
                             </ul> 
                         @endif
                     @endforeach
@@ -103,7 +102,7 @@
                     @foreach($lps as $sp)
                         @if($cs->id == $sp->cat_product_id)
                             <ul class="acrd-pl">
-                                <li><a href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
+                                <li><a class="item-detail" href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
                             </ul> 
                         @endif
                     @endforeach

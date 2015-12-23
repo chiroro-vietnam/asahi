@@ -87,7 +87,7 @@
                     @foreach($lrs as $rts)
                         @if($catr->id == $rts->cat_rental_id)
                             <ul class="acrd-pl">
-                                <li><a href="<?php echo url('rental/detail/'.$rts->id); ?>">{{@$rts->product_name}}</a></li>
+                                <li><a class="item-detail" href="<?php echo url('rental/detail/'.$rts->id); ?>">{{@$rts->product_name}}</a></li>
                             </ul> 
                         @endif
                     @endforeach

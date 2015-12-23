@@ -44,7 +44,7 @@
                     @foreach($lps as $sp)
                         @if($cp->id == $sp->cat_product_id)
                             <ul class="acrd-pl">
-                                <li><a href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
+                                <li><a class="item-detail" href="<?php echo url('product/detail/'.$sp->id); ?>">{{@$sp->product_name}}</a></li>
                             </ul> 
                         @endif
                     @endforeach
@@ -56,7 +56,7 @@
       </ul>
     </div><!-- /subMenu -->
     <div class="sub_info">
-      <a href="inquiry.html"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
+      <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
   </div>
   
