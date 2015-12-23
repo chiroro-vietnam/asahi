@@ -14,6 +14,7 @@
 <div class="clear" id="index">
   <div id="topLeft">
   	<h2><span class="h2_title">{{$title_sell_product}}</span></h2>
+    <?php $count = count($products); ?>
      @if(count($products) > 0)
     <h3 class="h3_title">{{$tile_branch}}</h3>       
         <div class="productsList clear"> 
@@ -22,8 +23,11 @@
                     <div class="listFrame">
                       <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name}}</span><br /><span class="ln_name">{{$product->product_name_auxiliary}}</span></div>
-                    </div>            
-                </a>  
+                    </div>
+                </a>
+                <?php 
+                    if($count >= LIMIT_ITEM_PAGE) break; 
+                ?>
             
             @endforeach
             </div>
