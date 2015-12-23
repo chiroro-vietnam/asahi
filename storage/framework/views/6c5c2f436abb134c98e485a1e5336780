@@ -27,9 +27,9 @@
           </td>
           <td width="50%">&nbsp;</td>
           <td>
-          <?php if(Auth::check()): ?>
-            <input type="button" onClick="location.href='<?php echo route('admin.auth.logout'); ?>'" value="ログアウト" />
-          <?php endif; ?>
+              <?php if(Auth::check()): ?>
+                <input type="button" onClick="location.href='<?php echo route('admin.auth.logout'); ?>'" value="ログアウト" />
+              <?php endif; ?>
               
           </td>
         </tr>

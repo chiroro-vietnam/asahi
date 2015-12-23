@@ -15,7 +15,7 @@
             <div class="alert alert-success">
                     <li>{{ $message }}</li>
             </div>
-    @endif
+	@endif
       </td>
   </tr>
   <tr>
@@ -90,10 +90,13 @@
     </table></td>
   </tr>
   <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
       <td>
           <div class="pull-right">
             <ul class="pagination">
-                {!! $cat_sell->render() !!}
+                {!! $cat_sell->render() !!}          
             </ul>
         </div>
       </td>

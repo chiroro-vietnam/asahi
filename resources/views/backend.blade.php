@@ -23,9 +23,9 @@
           </td>
           <td width="50%">&nbsp;</td>
           <td>
-          @if (Auth::check())
-            <input type="button" onClick="location.href='<?php echo route('admin.auth.logout'); ?>'" value="ログアウト" />
-          @endif
+              @if (Auth::check())
+                <input type="button" onClick="location.href='<?php echo route('admin.auth.logout'); ?>'" value="ログアウト" />
+              @endif
               
           </td>
         </tr>
