@@ -21,7 +21,7 @@
             @foreach($products as $product)            
                 <a href="<?php echo url('product/detail/'.$product->id); ?>">
                     <div class="listFrame">
-                      <div class="listImg"><img src="frontend/image/top_products_img1.jpg" alt=""></div>
+                      <div class="listImg">{!!HTML::image(@$product->image_first) !!}</div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name}}</span><br /><span class="ln_name">{{$product->product_name_auxiliary}}</span></div>
                     </div>
                 </a>

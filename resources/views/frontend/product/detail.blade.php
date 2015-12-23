@@ -18,8 +18,8 @@
 
     <div class="productsDetail clear">
       <div class="dtl_left">
-        <div class="dtlImg1">{!!HTML::image($product->image_first) !!}</div>
-        <div class="dtlImg2">{!!HTML::image($product->image_second) !!}</div>
+        <div class="dtlImg1">{!!HTML::image(@$product->image_first) !!}</div>
+        <div class="dtlImg2">{!!HTML::image(@$product->image_second) !!}</div>
       </div>
       <div class="dtl_right">
         <div class="dtlName">
