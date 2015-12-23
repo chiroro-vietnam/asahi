@@ -23,8 +23,8 @@
       </div>
       <div class="dtl_right">
         <div class="dtlName">
-          <span class="dn_cat">{{$rental->product_name}}</span>
-          <span class="dn_name">{{$rental->product_name_auxiliary}}</span>
+          <span class="dn_cat">{{$rental->product_name_auxiliary}}</span>
+          <span class="dn_name">{{$rental->product_name}}</span>
           <span class="dn_notice">{{$rental->copy}}</span>
         </div>
         <div class="dtlHr"></div>
