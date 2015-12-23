@@ -7,35 +7,36 @@
   <tr>
     <td class="col1">■レンタル商品管理　＞　レンタル商品の新規登録</td>
   </tr>
+<tr><td>&nbsp;</td></tr>
   <tr>
-    <td>&nbsp;</td>
+    <td>
+       @if($errors->any())
+            <div class="errors">
+                <ul class="msg-validate">
+                 <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)                     
+                          <li>{{ $error }}</li>                                  
+                    @endforeach
+                     </div>
+                </ul>
+            </div>
+          @endif     
+    </td>
   </tr>
 {!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/add/', 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
       
     <td>
-        <table width="100%" border="1" cellspacing="0" cellpadding="5">   
-
-          @if($errors->any())
-            <div class="errors">
-                <ul class="msg-validate">
-                    @foreach($errors->all() as $error)
-                      <div class="alert alert-danger">
-                          <li>{{ $error }}</li>
-                      </div>               
-                    @endforeach
-                </ul>
-            </div>
-          @endif      
+        <table width="100%" border="1" cellspacing="0" cellpadding="5">           
     <tr>
         <td width="20%" class="col3">カテゴリ <span class="notnull">[*]</span></td>
         <td>
         <select name="cat_rental" id="cat_rental">
           <option value="" selected="selected">▼選択</option>          
             @if(count($cat_rental) > 0) 
-                @foreach($cat_rental as $key => $cat)
-                  <option value="{{$key}}"
-                          <?php if(Input::old('cat_rental') == $key) echo 'selected='."selected" ;?> >
+                @foreach($cat_rental as $cat)
+                  <option value="{{$cat->id}}"
+                          <?php if(Input::old('cat_rental') == $cat->id) echo 'selected='."selected" ;?> >
                             {{$cat->name}}
                   </option>                
                 @endforeach

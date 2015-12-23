@@ -15,7 +15,7 @@
             <div class="alert alert-success">
                     <li>{{ $message }}</li>
             </div>
-	@endif
+	     @endif
       </td>
   </tr>
  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/', 'id' => 'frmCatRental', 'enctype'=>'multipart/form-data'] ) !!}

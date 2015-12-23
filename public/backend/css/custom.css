@@ -66,7 +66,7 @@
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
-  width: 870px;
+  width: 920px;
   margin-left: -40px;
 }
 .alert-danger hr {
@@ -809,4 +809,8 @@ table tbody tr.col3 span#transmark{
 
 table tbody tr span#transmark{
     display: none;
+}
+
+ ul.msg-validate .alert li{
+  margin-left: 10px;
 }

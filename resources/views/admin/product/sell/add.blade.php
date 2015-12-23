@@ -7,24 +7,25 @@
   <tr>
     <td class="col1">■販売商品管理　＞　販売商品の新規登録</td>
   </tr>
+  <tr><td>&nbsp;</td></tr>
   <tr>
-    <td>&nbsp;</td>
+    <td>
+       @if($errors->any())
+            <div class="errors">
+                <ul class="msg-validate">
+                 <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)                     
+                          <li>{{ $error }}</li>                                  
+                    @endforeach
+                     </div>
+                </ul>
+            </div>
+          @endif     
+    </td>
   </tr>
   {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/add/', 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
-             
-        @if($errors->any())
-            <div class="errors">
-                <ul class="msg-validate">
-                      <div class="alert alert-danger">
-                          @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                          @endforeach
-                      </div>               
-                </ul>
-            </div>
-          @endif   
       
         <tr>
           <td class="col3">表示種別<span class="notnull">[*]</span></td>

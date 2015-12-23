@@ -74,23 +74,8 @@
           <tr>
             <td colspan="9"><center>No Data</center></td>  
           </tr>
-        @endif
-
-      <!--<tr>
-        <td><input type="button" onclick="location.href='rental_cat_delete_check.html'" value="削除" /></td>
-        <td align="center"><span class="red">×</span></td>
-        <td>その他</td>
-        <td><input type="button" onclick="location.href='<?php echo route('admin.category.sell.edit'); ?>'" value="詳細・編集" /></td>
-        <td><input type="submit" name="button6" id="button6" value="TOP" /></td>
-        <td><input type="submit" name="button7" id="button7" value="↑" /></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><input type="button" onclick="location.href='<?php echo route('admin.product.sell.list'); ?>'" value="カテゴリ内商品管理" /></td>
-      </tr>-->
+        @endif     
     </table></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
   </tr>
   <tr>
       <td>

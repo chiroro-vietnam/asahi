@@ -8,8 +8,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-  </tr>
-  
+  </tr>  
   <tr>
       <td>
             @if($errors->any())
@@ -32,8 +31,7 @@
   @endif
 {!! Form::open( [ 'id' => 'frmEditSP','method' => 'post', 'url' => 'manage/product/sell/edit/'.$id, 'files'=>true, 'enctype'=>'multipart/form-data']) !!}  
  
-<tr>
-      
+<tr>      
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr>
           <td class="col3">表示種別<span class="notnull">[*]</span></td>

@@ -12,7 +12,7 @@ return array(
      |
      */
 
-    'enabled' => false, //set in FrontendController
+    'enabled' => true, //set in FrontendController
 
     /*
      |--------------------------------------------------------------------------

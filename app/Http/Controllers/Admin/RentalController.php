@@ -148,8 +148,8 @@ class RentalController extends BackendController
                 $inputData['display_top']		        = $display_top; 
                 $inputData['cat_rental_id']		        = Input::get('cat_rental');
                 $inputData['order']                     = $order;
-                $inputData['updated_at']                = date('Y-m-d H:i:s');
-                
+                $inputData['updated_at']                = date('Y-m-d H:i:s');                
+
                 $image_first = Input::file('image_first');
                 if(Input::file('image_first'))
                 {
@@ -200,13 +200,17 @@ class RentalController extends BackendController
                 ->leftJoin('category_rental', 'rental_product.cat_rental_id', '=', 'category_rental.id')
                 ->where('rental_product.id', $id)
                 ->where('rental_product.is_deleted', NO_DELLETE)
-                ->select('rental_product.*', 'category_rental.name')->get();
+                ->select('rental_product.*', 'category_rental.name')
+                ->get();
+
+                // echo "<pre>";
+                // print_r($data);exit;
         return view('admin.product.rental.edit', compact('data'));
     }
     //product rental edit
     public function postProRentalEdit($id)
     {
-        $validator = Validator::make(Input::all(), RentalProduct::$rules, RentalProduct::$messages);
+        $validator = Validator::make(Input::all(), RentalProduct::$ruleEdit, RentalProduct::$messages);
         if($validator->passes())
         {       
             $display = !empty(Input::get('display')) ? 1 : 0;
