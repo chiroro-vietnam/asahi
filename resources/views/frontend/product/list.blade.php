@@ -14,9 +14,8 @@
 <div class="clear" id="index">
   <div id="topLeft">
   	<h2><span class="h2_title">{{$title_sell_product}}</span></h2>
-    <h3 class="h3_title">{{$tile_branch}}</h3>   
-    
-        @if(count($products) > 0)
+     @if(count($products) > 0)
+    <h3 class="h3_title">{{$tile_branch}}</h3>       
         <div class="productsList clear"> 
             @foreach($products as $product)            
                 <a href="<?php echo url('product/detail/'.$product->id); ?>">

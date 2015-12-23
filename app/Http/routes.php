@@ -50,10 +50,10 @@ Route::group(array('namespace' => 'Frontend'), function () {
     
 });
 
-    //login and logout
-    Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@getLogin']);
-    Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@postLogin']);
-    Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AdminController@logout']);
+//login and logout
+Route::get('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@getLogin']);
+Route::post('manage/login', ['as' => 'admin.auth.login', 'uses' => 'Admin\AdminController@postLogin']);
+Route::get('manage/logout', ['as' => 'admin.auth.logout', 'uses' => 'Admin\AdminController@logout']);
 //Admin
 Route::group(array('namespace' => 'Admin'), function () {
     
@@ -100,32 +100,31 @@ Route::group(array('namespace' => 'Admin'), function () {
     //product sell
     Route::get('manage/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));
     Route::post('manage/product/sell', array('as' => 'admin.product.sell.list', 'uses' => 'SellingController@listProSell'));
-    Route::get('manage/product/sell/add/{cs_id?}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
-    Route::post('manage/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
+    Route::get('manage/product/sell/add', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
+    Route::post('manage/product/sell/add', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@postProSellAdd'));
     Route::get('manage/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@getProSellEdit'));
     Route::post('manage/product/sell/edit/{id?}', array('as' => 'admin.product.sell.edit', 'uses' => 'SellingController@postProSellEdit'));
-    Route::get('manage/product/sell/add/{cs_id}', array('as' => 'admin.product.sell.add', 'uses' => 'SellingController@getProSellAdd'));
     Route::get('manage/product/sell/order', array('as' => 'admin.product.sell.order', 'uses' => 'SellingController@orderSell'));    
     
     //product rental
     Route::get('manage/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
     Route::post('manage/product/rental/', array('as' => 'admin.product.rental.list', 'uses' => 'RentalController@listProRental'));
           
-    Route::get('manage/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
-    Route::post('manage/product/rental/add/{cr_id}', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
+    Route::get('manage/product/rental/add', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@getProRentalAdd'));    
+    Route::post('manage/product/rental/add', array('as' => 'admin.product.rental.add', 'uses' => 'RentalController@postProRentalAdd'));
     Route::get('manage/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@getProRentalEdit'));
     Route::post('manage/product/rental/edit/{id}', array('as' => 'admin.product.rental.edit', 'uses' => 'RentalController@postProRentalEdit'));
     Route::get('manage/product/rental/del/{id}', array('as' => 'admin.product.rental.del', 'uses' => 'RentalController@delProRental'));
     Route::get('manage/product/rental/order', array('as' => 'admin.product.rental.order', 'uses' => 'RentalController@orderRental'));
 });
 
-    Route::get('auth/login', function () {
+Route::get('auth/login', function () {
         return redirect()->route('admin.auth.login');
     });
 
-    Route::get('admin/login', function () {
+Route::get('admin/login', function () {
         return redirect()->route('admin.auth.login');
     });
-    Route::get('admin', function () {
+Route::get('admin', function () {
         return redirect()->route('admin.auth.login');
     });

@@ -23,12 +23,12 @@
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td class="col3">カテゴリ</td>
-        <td><select name="cat_sell" id="cat_sell">
+        <td><select name="cs_id" id="cs_id">
                 <option selected="selected" value="">▼選択</option>
           @if(count($csp) > 0) 
-                @foreach($csp as $key => $cat)
-                <option value="{{$key}}"
-                        <?php if(isset($cs_id) && $cs_id == $key) echo 'selected='."selected" ;?> >{{$cat}}</option>                
+                @foreach($csp as $cat)
+                <option value="{{$cat->id}}"
+                        <?php if(isset($cs_id) && $cs_id == $cat->id) echo 'selected='."selected" ;?> >{{$cat->name}}</option>                
                 @endforeach
             @endif   
         </select>
@@ -42,10 +42,8 @@
   </tr>
 
   <tr>
-    <td align="right">
-        @if(!empty($cs_id))
-        <input type="button" onClick="location.href='<?php echo url('manage/product/sell/add/'.$cs_id); ?>'" value="商品の新規登録" />
-        @endif
+    <td align="right">       
+        <input type="button" onClick="location.href='<?php echo route('admin.product.sell.add'); ?>'" value="商品の新規登録" />
     </td>
   </tr>
   <tr>
@@ -107,24 +105,26 @@
             @endif
     </table></td>
   </tr>
+
   <tr>
-    <td>&nbsp;</td>
-  </tr>
-     <tr>
-      <td>
-         <div class="pull-right">
+  <td>
+        <div class="pull-right">
             <ul class="pagination">
-                @if(isset($cs_id))
+            @if(isset($cs_id))
                     @if(count($sp) > 0)
-                    {!! $sp->appends( ['cs_id' => $cs_id])->render() !!}   
+                    {!! $sp->appends( ['cs_id' => $cs_id])->render() !!} 
+                    @endif
+                @else
+                    @if(count($sp) > 0)
+                    {!! $sp->render() !!} 
                     @endif
                 @endif
+
             </ul>
         </div>
-      </td>
+  </td>
   </tr>
 </table>
-
 <script type="text/javascript">
 $(document ).ready(function() {
    $( ".btn-up" ).click(function(e) { 

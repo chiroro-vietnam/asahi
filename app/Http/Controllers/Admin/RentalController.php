@@ -67,56 +67,59 @@ class RentalController extends BackendController
     }
     
     //product rental list
-    public function listProRental($cr_id=null)
+    public function listProRental()
     {
-        $cr_id = Input::get('cr_id');
-        if($cr_id != null){
-            $crs = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)
-                    ->where('display', 1)
-                    ->lists('name', 'id');
-            $rp = $this->_searchRentPro($cr_id);
-            return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));            
-        }  else {
-            $crs = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)
-                    ->where('display', 1)
-                    ->lists('name', 'id');
-            if(Input::has('btmSearchRT'))
-            {            
-               $cr_id = Input::get('cat_rental');
-               $rp = $this->_searchRentPro($cr_id);
-               return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
-               return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
-            }else{           
+        $crs = DB::table('category_product')
+                        ->where('is_deleted', NO_DELLETE)
+                        ->where('display', 1)
+                        ->select('id','name')
+                        ->get();
+        if(Input::has('btmSearchRT'))
+        {
+           $cr_id = Input::get('cr_id'); 
+           $rp = $this->_searchRentPro($cr_id);
+           return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
+            return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
 
-            return view('admin.product.rental.list', compact('crs'));
-            }
-        }       
+        }else{
+            $cr_id = Input::get('cr_id');
+            $rp = $this->_searchRentPro($cr_id);
+            return view('admin.product.rental.list', compact('rp', 'cr_id', 'crs'));
+        }
+
     }
     
     //Search rental product
-    private function _searchRentPro($cat_rental_id)
+    private function _searchRentPro($cr_id)
     {
-        return DB::table('rental_product')
+        if($cr_id == null)
+        {
+            return DB::table('rental_product')
                 ->where('is_deleted', NO_DELLETE)
-                ->where('cat_rental_id', $cat_rental_id)
                 ->orderBy('order', 'asc')
-                ->paginate(LIMIT_PAGE);        
+                ->paginate(LIMIT_PAGE); 
+        }else{
+            return DB::table('rental_product')
+                ->where('is_deleted', NO_DELLETE)
+                ->where('cat_rental_id', $cr_id)
+                ->orderBy('order', 'asc')
+                ->paginate(LIMIT_PAGE);
+        }                
     }
 
     //product rental add
-    public function getProRentalAdd($cr_id)            
+    public function getProRentalAdd()            
     {
         $cat_rental = DB::table('category_rental')
                 ->where('is_deleted', NO_DELLETE)
                 ->where('display', 1)
-                ->select('id','name')->find($cr_id);
-        return view('admin.product.rental.add', compact('cr_id', 'cat_rental'));
+                ->select('id','name')
+                ->get();
+        return view('admin.product.rental.add', compact('cat_rental'));
     }
     
     //product rental add
-    public function postProRentalAdd($cr_id)
+    public function postProRentalAdd()
     {
         $validator = Validator::make(Input::all(), RentalProduct::$rules, RentalProduct::$messages);
         if($validator->passes())
@@ -142,8 +145,8 @@ class RentalController extends BackendController
                 $inputData['omotekumi']                 = Input::get('omotekumi');
                 $inputData['rental_one_month_price']    = Input::get('rental_one_month_price');                
                 $inputData['display']                   = $display;
-                $inputData['display_top']		= $display_top; 
-                $inputData['cat_rental_id']		= $cr_id;
+                $inputData['display_top']		        = $display_top; 
+                $inputData['cat_rental_id']		        = Input::get('cat_rental');
                 $inputData['order']                     = $order;
                 $inputData['updated_at']                = date('Y-m-d H:i:s');
                 
@@ -180,15 +183,16 @@ class RentalController extends BackendController
                     DB::table('top_page_show')->insert($dataTopPage);
                 }               
                 
-                Session::flash('success', 'The rental product updated successfully.');
-                return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
+                Session::flash('success', 'The rental product added successfully.');
+                return Redirect::route('admin.product.rental.list');
         }
 
-        return Redirect::to('manage/product/rental/add/'.$cr_id)
-                ->with('message'. 'Edit rental product fail, try again!')
+        return Redirect::route('admin.product.rental.add')
+                ->with('message'. 'Add rental product fail, try again!')
                 ->withErrors($validator)
                 ->withInput();  
     }
+
     //product rental edit
     public function getProRentalEdit($id)
     {
@@ -287,7 +291,9 @@ class RentalController extends BackendController
     //product rental delete
     public function delProRental($id)
     {
-        $cat_id = DB::table('rental_product')->select('cat_rental_id')->find($id);
+        $cat_id = DB::table('rental_product')
+            ->select('cat_rental_id')
+            ->find($id);
         $cr_id = $cat_id->cat_rental_id;
         DB::table('rental_product')
                 ->where('id', '=', $id)

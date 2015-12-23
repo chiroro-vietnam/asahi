@@ -6,13 +6,15 @@ class RentalProduct extends Model {
     protected static $table = 'rental_product';
 
     public static $rules = array(
+        'cat_rental'      => 'required',
         'product_name'    => 'required',
         'show_rate'       => 'required',
     );
 
     public static $messages = array(
-            'product_name.required'	=> 'Please enter rental product',
-            'show_rate.required'	=> 'Please choose show rate'
+            'product_name.required'     => 'Please choose category',
+            'product_name.required'	    => 'Please enter rental product',
+            'show_rate.required'        => 'Please choose show rate'
     );
 
     //get list rental product

@@ -10,7 +10,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-{!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/add/'.$cr_id, 'enctype'=>'multipart/form-data'] ) !!}  
+{!! Form::open( ['method' => 'post', 'url' => 'manage/product/rental/add/', 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
       
     <td>
@@ -28,9 +28,23 @@
             </div>
           @endif      
     <tr>
-        <td width="20%" class="col3">カテゴリ</td>
-        <td>{{$cat_rental->name}}</td>
+        <td width="20%" class="col3">カテゴリ <span class="notnull">[*]</span></td>
+        <td>
+        <select name="cat_rental" id="cat_rental">
+          <option value="" selected="selected">▼選択</option>          
+            @if(count($cat_rental) > 0) 
+                @foreach($cat_rental as $key => $cat)
+                  <option value="{{$key}}"
+                          <?php if(Input::old('cat_rental') == $key) echo 'selected='."selected" ;?> >
+                            {{$cat->name}}
+                  </option>                
+                @endforeach
+            @endif          
+        </select>
+
+        </td>
       </tr>
+
       <tr>
         <td width="20%" class="col3">商品名 <span class="notnull">[*]</span></td>
         <td><input name="product_name" type="text" id="product_name" size="60" value="{{Input::old('product_name')}}" /></td>
@@ -125,7 +139,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input type="button" onClick="location.href='<?php echo url('manage/product/rental/?cr_id='.$cr_id); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
+    <td align="center"><input type="button" onClick="location.href='<?php echo url('manage/product/rental'); ?>'" value="登録済みレンタル商品一覧に戻る" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

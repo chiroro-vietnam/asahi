@@ -15,7 +15,7 @@
     <div class="ht_text">機械工具・販売・レンタル・メンテナンスの総合商社</div>
     <div class="ht_search">
       <div id="siteSearch">
-      	<img src="frontend/image/ht_seach_title.png" alt="サイト内検索">
+      	<img src="../../frontend/image/ht_seach_title.png" alt="サイト内検索">
         
         <form action="http://www.google.com/search">
  

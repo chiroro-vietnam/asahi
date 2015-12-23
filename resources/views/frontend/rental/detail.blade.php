@@ -70,7 +70,7 @@
           </div>
 
         <div class="inqInput">
-          <?php echo nl2br($rental->omotekumi);?>
+          <?php echo $rental->omotekumi;?>
         </div>
     @endif
 

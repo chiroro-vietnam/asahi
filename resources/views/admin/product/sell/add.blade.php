@@ -1,6 +1,7 @@
 @extends('backend')
 
 @section('content')
+
 {!! HTML::script('ckeditor/ckeditor.js') !!}
 <table width="920" border="0" align="center" cellpadding="5" cellspacing="0">
   <tr>
@@ -9,7 +10,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/add/'.$cs_id, 'enctype'=>'multipart/form-data'] ) !!}  
+  {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/add/', 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
              
@@ -35,8 +36,23 @@
             ファイルタイプ</td>
         </tr>
         <tr>
-          <td width="20%" class="col3">カテゴリ</td>
-          <td>{{$cat_sell->name}}</td>
+          <td width="20%" class="col3">カテゴリ<span class="notnull">[*]</span></td>
+          <td>
+          <select name="cat_sell" id="cat_sell">
+          <option value="" selected="selected">▼選択</option>          
+            @if(count($cat_sell) > 0) 
+                @foreach($cat_sell as $cat)
+                  <option value="{{$cat->id}}"
+                          <?php if(Input::old('cat_sell') == $cat->id) echo 'selected='."selected" ;?> >
+                            {{$cat->name}}
+                  </option>                
+                @endforeach
+            @endif          
+        </select>
+
+        </td>
+
+          </td>
         </tr>
         <tr>
           <td width="20%" class="col3">商品名 <span class="notnull">[*]</span></td>
@@ -143,7 +159,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input type="button" onClick="location.href='sell_product_list.html'" value="登録済み販売商品一覧に戻る" /></td>
+    <td align="center"><input type="button" onClick="location.href='<?php echo route('admin.product.sell.list'); ?>'" value="登録済み販売商品一覧に戻る" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

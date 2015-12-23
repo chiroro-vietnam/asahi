@@ -14,9 +14,9 @@
 <div class="clear" id="index">
   <div id="topLeft">
   	<h2><span class="h2_title">{{$title_rental}}</span></h2>
-    <h3 class="h3_title">{{$title_cat_rental}}</h3>
-    <?php $count = count($rentals); ?>
-    @if($count > 0)
+     <?php $count = count($rentals); ?>
+     @if($count > 0)
+    <h3 class="h3_title">{{$title_cat_rental}}</h3>      
     <div class="rentalList clear">        
             @foreach($rentals as $rt)
             <a href="<?php echo url('rental/detail/'.$rt->id); ?>">

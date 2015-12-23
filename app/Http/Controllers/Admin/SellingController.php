@@ -64,9 +64,19 @@ class SellingController extends BackendController
     }
     
      //product sell add
-   public function postProSellAdd($cs_id)
+   public function postProSellAdd()
     {
-        $validator = Validator::make(Input::all(), SellProduct::$rules, SellProduct::$messages);
+        $cs_id          = Input::get('cat_sell');
+        $display_type   = Input::get('display_type');
+
+        if($display_type == 1){
+            $validator = Validator::make(Input::all(), SellProduct::$rules1, SellProduct::$messages);
+        }elseif ($display_type == 2) {
+             $validator = Validator::make(Input::all(), SellProduct::$rules2, SellProduct::$messages);
+        }else{
+            $validator = Validator::make(Input::all(), SellProduct::$rules3, SellProduct::$messages);
+        }
+
         if($validator->passes())
         {             
             $display = !empty(Input::get('display')) ? 1 : 0;
@@ -76,7 +86,7 @@ class SellingController extends BackendController
             $max_order = DB::table('sell_product')
                     ->where('is_deleted', NO_DELLETE)
                     ->max('order');
-            $order = $max_order + 1;
+            $order = $max_order + 1;          
 
             $inputData['display_type']              = Input::get('display_type');
 
@@ -95,7 +105,7 @@ class SellingController extends BackendController
             $inputData['display']                   = $display;
             $inputData['display_top']               = $display_top;               
             $inputData['updated_at']                = date('Y-m-d H:i:s');
-            $inputData['cat_product_id']            = $cs_id;
+            $inputData['cat_product_id']            =  Input::get('cat_sell');
             $inputData['order']                     = $order;
 
            $image_first = Input::file('image_first');             
@@ -153,51 +163,57 @@ class SellingController extends BackendController
     }
 
       //product sell add
-    public function getProSellAdd($cs_id)            
+    public function getProSellAdd()            
     {
         $cat_sell = DB::table('category_product')
-                ->where('is_deleted', NO_DELLETE)
-                ->where('display', 1)
-                ->select('id','name')->find($cs_id);
-        return view('admin.product.sell.add', compact('cs_id', 'cat_sell'));
+            ->where('is_deleted', NO_DELLETE)
+            ->where('display', 1)
+            ->select('id','name')
+            ->get();
+           
+        return view('admin.product.sell.add', compact('cat_sell'));
     }
     
     //product sell list
-    public function listProSell($cs_id=null)
+    public function listProSell()
     {
-        $cs_id = Input::get('cs_id');
-        if($cs_id != null){
-            $csp = DB::table('category_product')
-                    ->where('is_deleted', NO_DELLETE)
-                    ->where('display', 1)
-                    ->lists('name', 'id');
+        $csp = DB::table('category_product')
+                        ->where('is_deleted', NO_DELLETE)
+                        ->where('display', 1)
+                        ->select('id','name')
+                        ->get();
+        if(Input::has('btmSearchSP'))
+        {
+           $cs_id = Input::get('cs_id'); 
+           $sp = $this->_searchSellPro($cs_id);
+           return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
+            return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));
+
+        }else{
+            $cs_id = Input::get('cs_id');
             $sp = $this->_searchSellPro($cs_id);
-            return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));            
-        }  else {
-            $csp = DB::table('category_product')
-                    ->where('is_deleted', NO_DELLETE)
-                    ->where('display', 1)
-                    ->lists('name', 'id');
-            if(Input::has('btmSearchSP'))
-            {            
-               $cs_id = Input::get('cat_sell');
-               $sp = $this->_searchSellPro($cs_id);
-               return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
-               return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));
-            }else{
-            return view('admin.product.sell.list', compact('csp'));
-            }
+            return view('admin.product.sell.list', compact('sp', 'cs_id', 'csp'));
         }
     }
     
      //Search rental product
-    private function _searchSellPro($cat_product_id)
+    private function _searchSellPro($cs_id)
     {
-        return DB::table('sell_product')
+        if($cs_id == null)
+        {
+            return DB::table('sell_product')
                 ->where('is_deleted', NO_DELLETE)
-                ->where('cat_product_id', $cat_product_id)
                 ->orderBy('order', 'asc')
-                ->paginate(LIMIT_PAGE);        
+                ->paginate(LIMIT_PAGE); 
+
+        }else{
+            return DB::table('sell_product')
+                ->where('is_deleted', NO_DELLETE)
+                ->where('cat_product_id', $cs_id)
+                ->orderBy('order', 'asc')
+                ->paginate(LIMIT_PAGE); 
+        }
+               
     }   
     
     //product sell edit
@@ -214,14 +230,22 @@ class SellingController extends BackendController
     //product sell edit
     public function postProSellEdit()
     {
-        $id = Input::get('id');
-        $cs_id = Input::get('cat_product_id');
+        $id             = Input::get('id');
+        $cs_id          = Input::get('cat_product_id');
+        $display_type   = Input::get('display_type');
 
-        $validator = Validator::make(Input::all(), SellProduct::$ruleEdit, SellProduct::$messages);
+        if($display_type == 1){
+            $validator = Validator::make(Input::all(), SellProduct::$rulesEdit1, SellProduct::$messages);
+        }elseif ($display_type == 2) {
+             $validator = Validator::make(Input::all(), SellProduct::$rulesEdit2, SellProduct::$messages);
+        }else{
+            $validator = Validator::make(Input::all(), SellProduct::$rulesEdit3, SellProduct::$messages);
+        }
+      
         if($validator->passes()){                  
-                $display = !empty(Input::get('display')) ? 1 : 0;
-                $display_top = !empty(Input::get('display_top')) ? 1 : 0;
-                $open_tab = !empty(Input::get('open_tab')) ? 1 : 0;
+                $display        = !empty(Input::get('display')) ? 1 : 0;
+                $display_top    = !empty(Input::get('display_top')) ? 1 : 0;
+                $open_tab       = !empty(Input::get('open_tab')) ? 1 : 0;
                 
                 $inputData['display_type']              = Input::get('display_type');                
                 $inputData['product_name']              = Input::get('product_name');

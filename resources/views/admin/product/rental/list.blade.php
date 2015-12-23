@@ -23,12 +23,12 @@
     <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
       <tr>
         <td class="col3">カテゴリ</td>
-        <td><select name="cat_rental" id="cat_rental">
+        <td><select name="cr_id" id="cr_id">
                 <option value="" selected="selected">▼選択</option>          
             @if(count($crs) > 0) 
-                @foreach($crs as $key => $cat)
-                <option value="{{$key}}"
-                        <?php if(isset($cr_id) && $cr_id == $key) echo 'selected='."selected" ;?> >{{$cat}}</option>                
+                @foreach($crs as $cat)
+               <option value="{{$cat->id}}"
+                        <?php if(isset($cr_id) && $cr_id == $cat->id) echo 'selected='."selected" ;?> >{{$cat->name}}</option>
                 @endforeach
             @endif          
         </select>
@@ -44,11 +44,11 @@
   <?php if(isset($rp)) {?>
   <tr>
     <td align="right">
-        @if(!empty($cr_id))
-        <input type="button" onClick="location.href='<?php echo url('manage/product/rental/add/'.$cr_id); ?>'" value="商品の新規登録" />
+       
+        <input type="button" onClick="location.href='<?php echo url('manage/product/rental/add/'); ?>'" value="商品の新規登録" />
         <input type="hidden" name="cr_id" id="cr_id" value="{{$cr_id}}" />
         <input type="hidden" name="url" id="url" value="{{url('manage/product/rental?cr_id='.$cr_id)}}" />
-        @endif
+
     </td>
   </tr>
   <tr>
@@ -119,23 +119,23 @@
 <!--       table sort-->
     </td>
   </tr>  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
   <?php } ?>
-    <tr>
-      <td>
-         <div class="pull-right">
-            <ul class="pagination">
-                @if(isset($cr_id))
-                    @if(count($rp) > 0)
-                    {!! $rp->appends( ['cr_id' => $cr_id])->render() !!} 
-                    @endif
-                @endif
-            </ul>
-        </div>
-      </td>
-  </tr>
+<tr><td>
+  <div class="pull-right">
+  <ul class="pagination">
+      @if(isset($cr_id))
+          @if(count($rp) > 0)
+          {!! $rp->appends( ['cr_id' => $cr_id])->render() !!} 
+          @endif
+      @else
+          @if(count($rp) > 0)
+          {!! $rp->render() !!} 
+          @endif
+      @endif
+  </ul>
+</div>
+</td>
+</tr>
 </table>
 
 <script type="text/javascript">
@@ -209,7 +209,7 @@ function orderSort(cr_id, id, order, action){
         url : ref,
         data : 
         {
-            'csr_id' : cr_id, 'id' : id,'order' : order,'action' : action
+            'cr_id' : cr_id, 'id' : id,'order' : order,'action' : action
         },
         success : function(response)
         {
