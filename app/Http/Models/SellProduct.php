@@ -20,7 +20,7 @@ class SellProduct extends Model {
             'cat_sell'                  => 'required',
             'product_name'              => 'required',
             'display_type'              => 'required',
-            'url'                       => 'required|url'         
+            'url'                       => 'required|url'
     );
 
     //file
@@ -76,7 +76,7 @@ class SellProduct extends Model {
     public static function searchSellPro($cat_rental_id=null)
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->where('cat_rental_id', $cat_rental_id)
                 ->paginate(LIMIT_PAGE);                        
     }
@@ -86,7 +86,7 @@ class SellProduct extends Model {
     {
         return DB::table(static::$table)
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
+                ->update(array('is_deleted' => INACTIVE));
 
     }
 
@@ -96,7 +96,7 @@ class SellProduct extends Model {
     {
         return DB::table(static::$table)
                 ->select('sell_product.*')
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->where('display', 0)
                 ->where('display_top', 1)
                 ->paginate(LIMIT_ITEM_PAGE);                        
@@ -107,7 +107,7 @@ class SellProduct extends Model {
     {
         return DB::table(static::$table)
                 ->select('sell_product.*')
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->find( $id);                      
     }
     //productDetail
@@ -115,8 +115,20 @@ class SellProduct extends Model {
     public static function getListPro()
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)                                        
+                ->where('is_deleted', ACTIVE)                                        
                 ->select('id', 'product_name', 'cat_product_id')
                 ->get();
+    }
+    
+    //check category active status
+    public static function chkCatActive($catid)
+    {
+        $result = DB::table(static::$table)
+                ->where('is_deleted', ACTIVE)
+                ->where('cat_product_id', $catid)
+                ->find($catid);
+        if(!empty($result))
+            return false;
+        return true;
     }
 }

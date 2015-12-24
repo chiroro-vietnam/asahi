@@ -15,8 +15,12 @@
                 <div class="listFrame">
                   <div class="listTitle"><?php echo e($rt->name); ?></div>
                   <div class="listImg">
+                    <?php if(empty($rt->image_first)): ?>
+                    <img src="../../frontend/image/noimage.png" alt="">
+                    <?php else: ?>
                       <?php echo HTML::image(@$rt->image_first, '', array( 'width' => 200, 'height' => 122 )); ?>
 
+                    <?php endif; ?>
                   </div>
                   <div class="listName"><span class="ln_cat"><?php echo e($rt->product_name_auxiliary); ?></span><br /><span class="ln_name"><?php echo e($rt->product_name); ?></span></div>
                   <div class="listDetail"><?php echo e($rt->overview); ?></div>
@@ -35,15 +39,29 @@
             <?php if($product->display_type == 1): ?> <!--  detail -->
                 <a href="<?php echo route('frontend.product.detail', $product->id); ?>">
                     <div class="listFrame">
-                      <div class="listImg"><?php echo HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?></div>
-                      <div class="listName"><span class="ln_cat"><?php echo e($product->product_name_auxiliary); ?></span><br /><span class="ln_name"><?php echo e($product->product_name); ?></span></div>
+                      <div class="listImg">
+                            <?php if(empty($product->image_first)): ?>
+                            <img src="../../frontend/image/noimage.png" alt="">
+                            <?php else: ?>
+                            <?php echo HTML::image($product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?>
+
+                            <?php endif; ?>
+                      </div>
+                        <div class="listName"><span class="ln_cat"><?php echo e($product->product_name_auxiliary); ?></span><br /><span class="ln_name"><?php echo e($product->product_name); ?></span></div>
                       <div class="listDetail"><?php echo e($product->overview); ?></div>
                     </div>
                 </a> 
             <?php elseif($product->display_type == 2): ?> <!--  link url-->
                 <a href="<?php echo url($product->url);?>" <?php if($product->open_tab == 1) echo 'target="_blank"';?>>
                     <div class="listFrame">
-                      <div class="listImg"><?php echo HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?></div>
+                      <div class="listImg">
+                            <?php if(empty($product->image_first)): ?>
+                            <img src="../../frontend/image/noimage.png" alt="">
+                            <?php else: ?>
+                            <?php echo HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?>
+
+                            <?php endif; ?>
+                      </div>
                       <div class="listName"><span class="ln_cat"><?php echo e($product->product_name_auxiliary); ?></span><br /><span class="ln_name"><?php echo e($product->product_name); ?></span></div>
                       <div class="listDetail"><?php echo e($product->overview); ?></div>
                     </div>
@@ -52,7 +70,14 @@
             <?php else: ?> <!--  file -->
                 <a href="<?php echo url($product->file); ?>">
                     <div class="listFrame">
-                      <div class="listImg"><?php echo HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?></div>
+                      <div class="listImg">
+                          <?php if(empty($product->image_first)): ?>
+                            <img src="frontend/image/noimage.png" alt="">
+                            <?php else: ?>
+                          <?php echo HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )); ?>
+
+                          <?php endif; ?>
+                      </div>
                       <div class="listName"><span class="ln_cat"><?php echo e($product->product_name_auxiliary); ?></span><br /><span class="ln_name"><?php echo e($product->product_name); ?></span></div>
                       <div class="listDetail"><?php echo e($product->overview); ?></div>
                     </div>

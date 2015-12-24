@@ -25,7 +25,7 @@ class RentalController extends FrontendController{
         $title_rental = 'レンタルサービス';
         $title_cat_rental = '配水ポリエチレン管融着工具';
         $rentals = Rental::getRental();
-        $catRentals = CategoryRental::getAllCatRental();
+        $catRentals = CategoryRental::getCatRentalFront();
         $lrs = RentalProduct::getListRental();
         return view('frontend.rental.list', compact('rentals', 'title_rental', 'title_cat_rental', 'catRentals', 'lrs'));
     }
@@ -37,7 +37,7 @@ class RentalController extends FrontendController{
     *
     /************************************************************************/
     public function rentalDetail($id){
-        $catRentals = CategoryRental::getAllCatRental();
+        $catRentals = CategoryRental::getCatRentalFront();
         $title_rental = 'レンタルサービス';
         $rental = Rental::getRentalDetail($id);
 

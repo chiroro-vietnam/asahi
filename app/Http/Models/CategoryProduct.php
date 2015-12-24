@@ -10,34 +10,53 @@ class CategoryProduct extends Model {
     );
 
     public static $messages = array(
-            'name.required'	=> 'Please enter category sell'		
+            'name.required'	=> 'Please enter category sell'
     );
-
+    //admin cat list
     public static function getCatSell()
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
+                //->where('display', 0)
                 ->orderBy('order', 'asc')
                 ->paginate(LIMIT_PAGE);
-
+    }
+    
+    public static function getCatSellFront()
+    {
+        return DB::table(static::$table)
+                ->where('is_deleted', ACTIVE)
+                ->where('display', 0)
+                ->orderBy('order', 'asc')
+                ->paginate(LIMIT_PAGE);
     }
 
     public static function getCatSellEdit($id)
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->find($id);
-
     }
 
     public static function topCatSell()
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)
-                ->where('display', 1)
+                ->where('is_deleted', ACTIVE)
+                ->where('display', 0)
                 ->orderBy('order', 'asc')
                 ->limit(LIMIT_PAGE)
                 ->get();
+    }
+    //check category active status
+    public static function chkCatActive($catid)
+    {
+        $result = DB::table(static::$table)
+                ->where('is_deleted', ACTIVE)
+                ->where('cat_product_id', $catid)
+                ->find($catid);
+        if(!empty($result))
+            return false;
+        return true;
     }
     
 }

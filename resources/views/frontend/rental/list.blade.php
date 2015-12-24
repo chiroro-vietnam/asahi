@@ -21,7 +21,13 @@
             @foreach($rentals as $rt)
             <a href="<?php echo url('rental/detail/'.$rt->id); ?>">
                 <div class="listFrame">
-                    <div class="listImg">{!!HTML::image(@$rt->image_first) !!}</div>
+                    <div class="listImg">
+                        @if(empty($rt->image_first))
+                        <img src="../../frontend/image/noimage.png" alt="">
+                        @else
+                        {!!HTML::image(@$rt->image_first) !!}
+                        @endif
+                    </div>
                     <div class="listName"><span class="ln_cat">{{$rt->product_name}}</span><br /><span class="ln_name">{{$rt->product_name_auxiliary}}</span></div>
                 </div>            
              </a>

@@ -18,8 +18,20 @@
 
     <div class="rentalDetail clear">
       <div class="dtl_left">
-        <div class="dtlImg1">{!!HTML::image(@$rental->image_first) !!}</div>
-        <div class="dtlImg2">{!!HTML::image(@$rental->image_second) !!}</div>
+        <div class="dtlImg1">
+            @if(empty($rental->image_first))
+            <img src="../../frontend/image/noimage.png" alt="">
+            @else
+            {!!HTML::image(@$rental->image_first) !!}
+            @endif
+        </div>
+        <div class="dtlImg2">
+            @if(empty($rental->image_second))
+            <img src="../../frontend/image/noimage.png" alt="">
+            @else
+            {!!HTML::image(@$rental->image_second) !!}
+            @endif
+        </div>
       </div>
       <div class="dtl_right">
         <div class="dtlName">

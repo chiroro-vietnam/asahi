@@ -10,19 +10,19 @@ use DB;
 use View;
 
 class SearchController extends FrontendController{
-	public function __construct()
-	{
+    public function __construct()
+    {
             parent::__construct();
-	}
-	
-	/************************************************************************
-	* search news category
-	/************************************************************************/
-	public function search(){
-		$this->data['keyword']  = Input::get('keyword');
-		$this->data['page'] 	= Input::get('page');
-		$dataSearch             = 'Result search';
-		return view('frontend.search', compact('dataSearch'))->with($this->data);
-	}
+    }
+    
+    /************************************************************************
+    * search news category
+    /************************************************************************/
+    public function search(){
+        $this->data['keyword']  = Input::get('keyword');
+        $this->data['page'] 	= Input::get('page');
+        $dataSearch             = 'Result search';
+        return view('frontend.search', compact('dataSearch'))->with($this->data);
+    }
 }
 

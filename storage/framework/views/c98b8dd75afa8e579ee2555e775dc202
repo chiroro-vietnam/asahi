@@ -15,7 +15,11 @@
             <div class="alert alert-success">
                     <li><?php echo e($message); ?></li>
             </div>
-	<?php endif; ?>
+	<?php elseif($message = Session::get('error')): ?>
+            <div class="alert alert-danger">
+                    <li><?php echo e($message); ?></li>
+            </div>
+        <?php endif; ?>
       </td>
   </tr>
   <tr>
@@ -32,15 +36,15 @@
             <td  width="7%" align="center">カテゴリ内商品管理</td>
         </tr>
         <?php 
-          $display_arr = array('0' => '×', '1' => '○'); 
-          $class_arr = array('0'=>'red', '1'=>'blue');
+          $display_arr = array('0' => '○', '1' => '×'); 
+          $class_arr = array('0'=>'blue', '1'=>'red');
         ?>
         <?php if(isset($cat_sell) && count($cat_sell) > 0): ?>
         <?php $total = count($cat_sell); $pos = 1;?>
           <?php foreach($cat_sell as $cat): ?>
             <tr>
                 <td>
-                    <a id="delCatSell" name="delCatSell" onclick="return confirm('Are you sure delete this item?');" href="<?php echo url('manage/category/sell/del/'.$cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                    <a id="delCatSell" name="delCatSell" onclick="return confirm('あなたはこれを削除してもよろしいですか。');" href="<?php echo url('manage/category/sell/del/'.$cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 </td>
                 <td align="center"><span class=<?php echo e(@$class_arr[$cat->display]); ?>><?php echo e(@$display_arr[$cat->display]); ?></span></td>
                 <td><?php echo e($cat->name); ?></td>

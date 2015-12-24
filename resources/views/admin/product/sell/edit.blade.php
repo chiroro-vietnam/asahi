@@ -109,7 +109,7 @@
             <td>
                 <table width="100%" cellspacing="0" cellpadding="5">
              <tr>
-               <td bgcolor="#999999"><input name="omotekumi_title" type="text" id="omotekumi_title" value="{{$val->omotekumi_title}} size="60" /></td>
+               <td bgcolor="#999999"><input name="omotekumi_title" type="text" id="omotekumi_title" value="{{$val->omotekumi_title}}" size="60" /></td>
                </tr>
             </table>
                 <textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$val->omotekumi}}">{{$val->omotekumi}}</textarea></td>              

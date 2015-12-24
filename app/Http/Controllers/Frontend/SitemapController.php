@@ -15,15 +15,15 @@ class SitemapController extends FrontendController{
     
 
         /************************************************************************
-	*
+    *
         * 
         * 
         *
-	/************************************************************************/
-	public function siteMap()
+    /************************************************************************/
+    public function siteMap()
         {        
             return view('frontend.sitemap.index');
-	}
+    }
         
 
 }

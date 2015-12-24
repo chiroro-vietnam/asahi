@@ -1,5 +1,4 @@
-<?php
-namespace App\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 use App\Http\Models\CategoryProduct;
 use App\Http\Models\SellProduct;
 use App\Http\Controllers\BackendController;
@@ -35,7 +34,7 @@ class SellingController extends BackendController
     {
          $orders = DB::table('sell_product')
                         ->select('id', 'order')
-                        ->where('is_deleted', NO_DELLETE)
+                        ->where('is_deleted', ACTIVE)
                         ->get();
 
         $orderUpdate = array();
@@ -50,7 +49,7 @@ class SellingController extends BackendController
                         ->where('id', '=', $id)
                         ->update(array('order' => $val));
         }
-        Session::flash('success', 'Order sell product updated successfully.');
+        Session::flash('success', ' 変更が完了しました。');
         return redirect::route('admin.sell.osusume');
     }
     //delete sell osusume
@@ -58,8 +57,8 @@ class SellingController extends BackendController
     {
         DB::table('sell_product')
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
-        Session::flash('success', 'The sell product deleted successfully.');
+                ->update(array('is_deleted' => INACTIVE));
+        Session::flash('success', '削除が完了しました。');
         return redirect::route('admin.sell.osusume');
     }
     
@@ -84,7 +83,7 @@ class SellingController extends BackendController
             $open_tab = (Input::get('open_tab') == 'on') ? 1 : 0;
             
             $max_order = DB::table('sell_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->max('order');
             $order = $max_order + 1;          
 
@@ -143,12 +142,12 @@ class SellingController extends BackendController
             if($display_top == 1)
             {
                 $max_id = DB::table('sell_product')
-                ->where('is_deleted', NO_DELLETE)                    
+                ->where('is_deleted', ACTIVE)                    
                 ->max('sell_product.id');
                 $sell_product_id = $max_id;
                 $dataTopPage  = array(
                     'sell_product_id'   => $sell_product_id,
-                    'is_deleted'          => NO_DELLETE,
+                    'is_deleted'          => ACTIVE,
                     'created_at'          => date('Y-m-d H:i:s'),
                     'updated_at'          => date('Y-m-d H:i:s')); 
                 DB::table('top_page_show')->insert($dataTopPage);
@@ -167,8 +166,8 @@ class SellingController extends BackendController
     public function getProSellAdd()            
     {
         $cat_sell = DB::table('category_product')
-            ->where('is_deleted', NO_DELLETE)
-            ->where('display', 1)
+            ->where('is_deleted', ACTIVE)
+            ->where('display', 0)
             ->select('id','name')
             ->get();
            
@@ -179,8 +178,8 @@ class SellingController extends BackendController
     public function listProSell()
     {
         $csp = DB::table('category_product')
-                        ->where('is_deleted', NO_DELLETE)
-                        ->where('display', 1)
+                        ->where('is_deleted', ACTIVE)
+                        ->where('display', 0)
                         ->select('id','name')
                         ->get();
         if(Input::has('btmSearchSP'))
@@ -203,15 +202,21 @@ class SellingController extends BackendController
         if($cs_id == null)
         {
             return DB::table('sell_product')
-                ->where('is_deleted', NO_DELLETE)
-                ->orderBy('order', 'asc')
+                ->leftJoin('category_product', 'sell_product.cat_product_id', '=', 'category_product.id')
+                ->where('sell_product.is_deleted', ACTIVE)
+                ->where('category_product.display', 0)
+                ->select('sell_product.*')
+                ->orderBy('sell_product.order', 'asc')
                 ->paginate(LIMIT_PAGE); 
 
         }else{
             return DB::table('sell_product')
-                ->where('is_deleted', NO_DELLETE)
-                ->where('cat_product_id', $cs_id)
-                ->orderBy('order', 'asc')
+                ->leftJoin('category_product', 'sell_product.cat_product_id', '=', 'category_product.id')
+                ->where('sell_product.is_deleted', ACTIVE)
+                ->where('category_product.display', 0)
+                ->where('sell_product.cat_product_id', $cs_id)
+                ->select('sell_product.*')
+                ->orderBy('sell_product.order', 'asc')
                 ->paginate(LIMIT_PAGE); 
         }
                
@@ -324,11 +329,11 @@ class SellingController extends BackendController
                 if($display_top == 1)
                 {
                     $dataTopPage  = array(                       
-                            'top_page_show.is_deleted'          => NO_DELLETE,
+                            'top_page_show.is_deleted'          => ACTIVE,
                             'top_page_show.updated_at'          => date('Y-m-d H:i:s')); 
                 }else{
                     $dataTopPage  = array(                     
-                            'top_page_show.is_deleted'        => DELETED,
+                            'top_page_show.is_deleted'        => INACTIVE,
                             'top_page_show.updated_at'        => date('Y-m-d H:i:s'));
                 }
                 DB::table('top_page_show')
@@ -387,7 +392,7 @@ class SellingController extends BackendController
         //order top
         if($action == 'top'){
             $record_min = DB::table('sell_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->min('order');
             $orderTop = $record_min - 1;      
@@ -401,7 +406,7 @@ class SellingController extends BackendController
         if($action == 'last')
         {
             $record_max = DB::table('sell_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->max('order');
             $orderLast = $record_max + 1;      

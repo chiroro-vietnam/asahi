@@ -25,7 +25,7 @@ class RentalProduct extends Model {
     //get list rental product
     public static function searchRentalPro($cat_rental_id=null)
     {
-        return DB::table(static::$table)->where('is_deleted', NO_DELLETE)
+        return DB::table(static::$table)->where('is_deleted', ACTIVE)
                                         ->where('cat_rental_id', $cat_rental_id)
                                         ->paginate(LIMIT_PAGE);                        
     }
@@ -34,7 +34,7 @@ class RentalProduct extends Model {
     public static function delRentalPro($id)
     {
         return DB::table(static::$table)->where('id', '=', $id)
-                                        ->update(array('is_deleted' => DELETED));
+                                        ->update(array('is_deleted' => INACTIVE));
 
     }
 
@@ -43,7 +43,7 @@ class RentalProduct extends Model {
     public static function getAllRentalPro()
     {
         return DB::table(static::$table)->select('id', 'product_name', 'product_name_auxiliary', 'order')
-                                        ->where('is_deleted', NO_DELLETE)
+                                        ->where('is_deleted', ACTIVE)
                                         ->where('display',0)
                                         ->where('display_top',1)
                                         ->paginate(LIMIT_PAGE);                        
@@ -53,10 +53,21 @@ class RentalProduct extends Model {
     public static function getListRental()
     {
         return DB::table(static::$table)
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->where('display',0)
                 ->select('id', 'product_name', 'cat_rental_id', 'display')
                 ->get(); 
     }
     
+    //check category active status
+    public static function chkCatActive($catid)
+    {
+        $result = DB::table(static::$table)
+                ->where('is_deleted', ACTIVE)
+                ->where('cat_rental_id', $catid)
+                ->find($catid);
+        if(!empty($result))
+            return false;
+        return true;
+    }
 }

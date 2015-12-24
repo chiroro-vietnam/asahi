@@ -19,7 +19,14 @@
             <?php foreach($rentals as $rt): ?>
             <a href="<?php echo url('rental/detail/'.$rt->id); ?>">
                 <div class="listFrame">
-                    <div class="listImg"><?php echo HTML::image(@$rt->image_first); ?></div>
+                    <div class="listImg">
+                        <?php if(empty($rt->image_first)): ?>
+                        <img src="../../frontend/image/noimage.png" alt="">
+                        <?php else: ?>
+                        <?php echo HTML::image(@$rt->image_first); ?>
+
+                        <?php endif; ?>
+                    </div>
                     <div class="listName"><span class="ln_cat"><?php echo e($rt->product_name); ?></span><br /><span class="ln_name"><?php echo e($rt->product_name_auxiliary); ?></span></div>
                 </div>            
              </a>

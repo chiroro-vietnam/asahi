@@ -1,5 +1,4 @@
-<?php
-namespace App\Http\Controllers\Admin;
+<?php namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Rental;
 use App\Http\Models\CategoryRental;
@@ -37,7 +36,7 @@ class RentalController extends BackendController
     {
         $orders = DB::table('rental_product')
                         ->select('id', 'order')
-                        ->where('is_deleted', NO_DELLETE)
+                        ->where('is_deleted', ACTIVE)
                         ->get();
 
         $orderUpdate = array();
@@ -52,7 +51,7 @@ class RentalController extends BackendController
                         ->where('id', '=', $id)
                         ->update(array('order' => $val));
         }
-        Session::flash('success', 'Order rental product updated successfully.');
+        Session::flash('success', '変更が完了しました。');
         return redirect::route('admin.rental.osusume');
     }
     
@@ -61,8 +60,8 @@ class RentalController extends BackendController
     {
         DB::table('rental_product')
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
-        Session::flash('success', 'The rental product deleted successfully.');
+                ->update(array('is_deleted' => INACTIVE));
+        Session::flash('success', ' 削除が完了しました。');
         return redirect::route('admin.rental.osusume');
     }
     
@@ -70,8 +69,8 @@ class RentalController extends BackendController
     public function listProRental()
     {
         $crs = DB::table('category_rental')
-                        ->where('is_deleted', NO_DELLETE)
-                        ->where('display', 1)
+                        ->where('is_deleted', ACTIVE)
+                        ->where('display', 0)
                         ->select('id','name')
                         ->get();
 
@@ -92,18 +91,22 @@ class RentalController extends BackendController
     
     //Search rental product
     private function _searchRentPro($cr_id)
-    {
+    {               
         if($cr_id == null)
         {
             return DB::table('rental_product')
-                ->where('is_deleted', NO_DELLETE)
-                ->orderBy('order', 'asc')
+                ->leftJoin('category_rental', 'rental_product.cat_rental_id', '=', 'category_rental.id')
+                ->where('category_rental.display', 0)
+                ->where('rental_product.is_deleted', ACTIVE)
+                ->orderBy('rental_product.order', 'asc')
                 ->paginate(LIMIT_PAGE); 
         }else{
             return DB::table('rental_product')
-                ->where('is_deleted', NO_DELLETE)
-                ->where('cat_rental_id', $cr_id)
-                ->orderBy('order', 'asc')
+                ->leftJoin('category_rental', 'rental_product.cat_rental_id', '=', 'category_rental.id')
+                ->where('category_rental.display', 0)
+                ->where('rental_product.cat_rental_id', $cr_id)                    
+                ->where('rental_product.is_deleted', ACTIVE)
+                ->orderBy('rental_product.order', 'asc')
                 ->paginate(LIMIT_PAGE);
         }                
     }
@@ -112,8 +115,8 @@ class RentalController extends BackendController
     public function getProRentalAdd()            
     {
         $cat_rental = DB::table('category_rental')
-                ->where('is_deleted', NO_DELLETE)
-                ->where('display', 1)
+                ->where('is_deleted', ACTIVE)
+                ->where('display', 0)
                 ->select('id','name')
                 ->get();
         return view('admin.product.rental.add', compact('cat_rental'));
@@ -129,7 +132,7 @@ class RentalController extends BackendController
                 $display_top = (Input::get('display_top') == 'on') ? 1 : 0;
                 
                 $max_order = DB::table('rental_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->max('order');
                  $order = $max_order + 1;
                 
@@ -179,7 +182,7 @@ class RentalController extends BackendController
                     $rental_product_id = $max_id;
                     $dataTopPage  = array(
                         'rental_product_id'   => $rental_product_id,
-                        'is_deleted'          => NO_DELLETE,
+                        'is_deleted'          => ACTIVE,
                         'created_at'          => date('Y-m-d H:i:s'),
                         'updated_at'          => date('Y-m-d H:i:s')); 
                     DB::table('top_page_show')->insert($dataTopPage);
@@ -201,7 +204,7 @@ class RentalController extends BackendController
         $data = DB::table('rental_product')               
                 ->leftJoin('category_rental', 'rental_product.cat_rental_id', '=', 'category_rental.id')
                 ->where('rental_product.id', $id)
-                ->where('rental_product.is_deleted', NO_DELLETE)
+                ->where('rental_product.is_deleted', ACTIVE)
                 ->select('rental_product.*', 'category_rental.name')
                 ->get();
         return view('admin.product.rental.edit', compact('data'));
@@ -275,11 +278,11 @@ class RentalController extends BackendController
             //update top_show_page
             if($display_top == 1){
                 $dataTopPage  = array(                       
-                        'top_page_show.is_deleted'          => NO_DELLETE,
+                        'top_page_show.is_deleted'          => ACTIVE,
                         'top_page_show.updated_at'          => date('Y-m-d H:i:s')); 
             }else{
                 $dataTopPage  = array(                     
-                          'top_page_show.is_deleted'        => DELETED,
+                          'top_page_show.is_deleted'        => INACTIVE,
                           'top_page_show.updated_at'        => date('Y-m-d H:i:s'));
                 }
             DB::table('top_page_show')
@@ -308,8 +311,8 @@ class RentalController extends BackendController
         $cr_id = $cat_id->cat_rental_id;
         DB::table('rental_product')
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
-        return Redirect::to('manage/product/rental/?cr_id='.$cr_id)->with('message', 'Product rental has been deleted successfully');
+                ->update(array('is_deleted' => INACTIVE));
+        return Redirect::to('manage/product/rental/?cr_id='.$cr_id)->with('message', '削除が完了しました。');
     }
     
     //order sort rental product
@@ -358,7 +361,7 @@ class RentalController extends BackendController
         //order top
         if($action == 'top'){
             $record_min = DB::table('sell_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->min('order');
             $orderTop = $record_min - 1;      
@@ -372,7 +375,7 @@ class RentalController extends BackendController
         if($action == 'last')
         {
             $record_max = DB::table('sell_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->max('order');
             $orderLast = $record_max + 1;      

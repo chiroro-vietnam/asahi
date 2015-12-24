@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 use App\Http\Models\CategoryRental;
 use App\Http\Models\CategoryProduct;
+use App\Http\Models\SellProduct;
+use App\Http\Models\RentalProduct;
 use App\Http\Controllers\BackendController;
 use Illuminate\Support\Facades\Session;
 use DB;
@@ -31,7 +33,7 @@ class CategoryController extends BackendController
     public function getCatRentalAdd()
     {   
         $max_order = DB::table('category_rental')
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->max('order');
         $order = $max_order + 1;
         return view('admin.category.rental.add', compact('order'));
@@ -42,7 +44,7 @@ class CategoryController extends BackendController
     {
         $validator = Validator::make(Input::all(), CategoryRental::$rules, CategoryRental::$messages);
         if($validator->passes()){               
-                $set_display = !empty(Input::get('display')) ? 1 : 0;
+                $set_display = (Input::get('display') == 'on') ? 1 : 0;
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display;               
                 $inputData['created_at']	= date('Y-m-d H:i:s');
@@ -73,7 +75,7 @@ class CategoryController extends BackendController
     {
         $validator = Validator::make(Input::all(), CategoryRental::$rules, CategoryRental::$messages);
         if($validator->passes()){
-                $set_display = !empty(Input::get('display')) ? 1 : 0;
+                $set_display = (Input::get('display') == 'on') ? 1 : 0;
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display; 
                 $inputData['order']             = Input::get('order');
@@ -92,13 +94,19 @@ class CategoryController extends BackendController
     }
     
     //deletel category rental
-    public function delCatRental($id){
-        DB::table('category_rental')
+    public function delCatRental($id){        
+        $chk = RentalProduct::chkCatActive($id);
+        if($chk == true)
+        {
+           DB::table('category_rental')
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
-        Session::flash('success', 'The category rental deleted successfully.');
-        return Redirect::route('admin.category.rental.list')
-                ->with('message', 'Category rental has been deleted successfully');
+                ->update(array('is_deleted' => INACTIVE));
+            Session::flash('success', '削除が完了しました。');
+            return Redirect::route('admin.category.rental.list'); 
+        }else{
+           Session::flash('error', 'このカテゴリは削除できません。');
+           return Redirect::route('admin.category.rental.list'); 
+        }
     }
     
     //order sort cal rental
@@ -140,7 +148,7 @@ class CategoryController extends BackendController
         if($action == 'top')
         {
             $record_min = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->min('order');
             $orderTop = $record_min - 1;      
@@ -154,7 +162,7 @@ class CategoryController extends BackendController
         if($action == 'last')
         {
             $record_max = DB::table('category_rental')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->max('order');
             $orderLast = $record_max + 1;      
@@ -178,7 +186,7 @@ class CategoryController extends BackendController
     public function getCatSellAdd()
     {
         $max_order = DB::table('category_product')
-                ->where('is_deleted', NO_DELLETE)
+                ->where('is_deleted', ACTIVE)
                 ->max('order');
         $order = $max_order + 1;
         return view('admin.category.sell.add', compact('order'));
@@ -189,7 +197,7 @@ class CategoryController extends BackendController
     {
         $validator = Validator::make(Input::all(), CategoryProduct::$rules, CategoryProduct::$messages);
         if($validator->passes()){
-                $set_display = !empty(Input::get('display')) ? 1 : 0;
+                $set_display = (Input::get('display') == 'on') ? 1 : 0;
                 
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display;
@@ -220,7 +228,7 @@ class CategoryController extends BackendController
     {
        $validator = Validator::make(Input::all(), CategoryProduct::$rules, CategoryProduct::$messages);
         if($validator->passes()){
-                $set_display = !empty(Input::get('display')) ? 1 : 0;
+                $set_display = (Input::get('display') == 'on') ? 1 : 0;
                 $inputData['name']              = Input::get('name');
                 $inputData['display']		= $set_display; 
                 $inputData['order']		= Input::get('order');
@@ -241,12 +249,19 @@ class CategoryController extends BackendController
     //deletel category rental
     public function delCatSell($id)
     {
-        DB::table('category_product')
+        $chk = SellProduct::chkCatActive($id);
+        if($chk == true)
+        {
+            DB::table('category_product')
                 ->where('id', '=', $id)
-                ->update(array('is_deleted' => DELETED));
-        Session::flash('success', 'The category sell deleted successfully.');
-        return Redirect::route('admin.category.sell.list')
-                ->with('message', 'Category sell has been deleted successfully');
+                ->update(array('is_deleted' => INACTIVE));
+            Session::flash('success', '削除が完了しました。');
+            return Redirect::route('admin.category.sell.list'); 
+        }else{
+           Session::flash('error', 'このカテゴリは削除できません。');
+           return Redirect::route('admin.category.sell.list');  
+        }
+       
     }
     
     //order sort cat sell
@@ -286,7 +301,7 @@ class CategoryController extends BackendController
         //order top
         if($action == 'top'){
             $record_min = DB::table('category_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->min('order');
             $orderTop = $record_min - 1;      
@@ -300,7 +315,7 @@ class CategoryController extends BackendController
         if($action == 'last')
         {
             $record_min = DB::table('category_product')
-                    ->where('is_deleted', NO_DELLETE)
+                    ->where('is_deleted', ACTIVE)
                     ->select('order')
                     ->max('order');
             $orderTop = $record_min + 1;      

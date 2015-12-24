@@ -76,7 +76,7 @@
                             <input type="hidden" name="sortOder" id="sortOder" value="{{$val_rp->order}}" />
                             
                             <td width="5%">
-                                <a id="delRP" name="delRP" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                                <a id="delRP" name="delRP" onclick="return confirm('あなたはこれを削除してもよろしいですか。');" href="<?php echo route('admin.product.rental.del', $val_rp->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                             </td>
                             <td width="8%" align="center"><span class={{@$class_arr[$val_rp->display]}}>{{@$display_arr[$val_rp->display]}}</span></td>
                             <td>{{$val_rp->product_name}}</td>

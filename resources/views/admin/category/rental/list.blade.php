@@ -15,7 +15,11 @@
             <div class="alert alert-success">
                     <li>{{ $message }}</li>
             </div>
-	   @endif
+	@elseif($message = Session::get('error'))
+            <div class="alert alert-danger">
+                    <li>{{ $message }}</li>
+            </div>
+        @endif
       </td>
   </tr>
   <tr>
@@ -33,8 +37,8 @@
         <td width="7%" align="center">カテゴリ内商品管理</td>
         </tr>
         <?php 
-          $display_arr = array('0' => '×', '1' => '○'); 
-          $class_arr = array('0'=>'red', '1'=>'blue');
+          $display_arr = array('0' => '○', '1' => '×'); 
+          $class_arr = array('0'=>'blue', '1'=>'red');
         ?>
         @if(isset($cat_rental) && count($cat_rental) > 0)
         <?php $total = count($cat_rental); $pos = 1;?>
@@ -42,7 +46,7 @@
          
             <tr class="sort-record"> 
                 <td class="sort-col">
-                    <a id="delRental" name="delRental" onclick="return confirm('Are you sure delete this item?');" href="<?php echo route('admin.category.rental.del', $cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
+                    <a id="delRental" name="delRental" onclick="return confirm('あなたはこれを削除してもよろしいですか。');" href="<?php echo route('admin.category.rental.del', $cat->id); ?>" class="btn btn-default btn-sm" role="button">削除</a>
                 </td>
                 <td class="sort-col" align="center"><span class={{@$class_arr[$cat->display]}}>{{@$display_arr[$cat->display]}}</span></td>
                 <td class="sort-col">{{$cat->name}}</td>
