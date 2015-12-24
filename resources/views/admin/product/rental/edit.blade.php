@@ -54,7 +54,7 @@
       </tr>
       <tr>
         <td width="20%" class="col3">セット内容</td>
-        <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="{{nl2br($rp->set_content)}}">{{nl2br($rp->set_content)}}</textarea></td>
+        <td><textarea name="set_content" cols="60" rows="5" id="set_content" value="<?php echo nl2br($rp->set_content);?>">{{nl2br($rp->set_content)}}</textarea></td>
       </tr>
       <tr>
         <td width="20%" class="col3">注釈</td>
@@ -71,7 +71,7 @@
       <tr>
         <td width="20%" class="col3">表示設定</td>
         <td><input type="checkbox" name="display" id="display" 
-             <?php  if($rp->display) echo 'checked="checked"'; ?>/>
+             <?php  if($rp->display == 1) echo 'checked="checked"'; ?>/>
           一時的に一般側画面へ表示しない</td>
       </tr>
       <tr>
@@ -103,13 +103,10 @@
       </tr>
       
       <tr>
-        <td width="20%" class="col3">表組み</td>
-        
-         <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$rp->omotekumi}}">{{$rp->omotekumi}}</textarea></td> 
-            
-      </tr>
-      
-      
+        <td width="20%" class="col3">表組み</td>       
+        <td>             
+             <textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$rp->omotekumi}}">{{$rp->omotekumi}}</textarea></td> 
+         </tr>     
         <tr>
             <td colspan="2" class="col2">▼トップページ／おすすめ＜レンタル＞商品</td>
         </tr>

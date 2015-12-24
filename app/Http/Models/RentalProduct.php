@@ -23,14 +23,16 @@ class RentalProduct extends Model {
     );
 
     //get list rental product
-    public static function searchRentalPro($cat_rental_id=null){
+    public static function searchRentalPro($cat_rental_id=null)
+    {
         return DB::table(static::$table)->where('is_deleted', NO_DELLETE)
                                         ->where('cat_rental_id', $cat_rental_id)
                                         ->paginate(LIMIT_PAGE);                        
     }
 
     //delete item category rental
-    public static function delRentalPro($id){
+    public static function delRentalPro($id)
+    {
         return DB::table(static::$table)->where('id', '=', $id)
                                         ->update(array('is_deleted' => DELETED));
 
@@ -42,6 +44,7 @@ class RentalProduct extends Model {
     {
         return DB::table(static::$table)->select('id', 'product_name', 'product_name_auxiliary', 'order')
                                         ->where('is_deleted', NO_DELLETE)
+                                        ->where('display',0)
                                         ->where('display_top',1)
                                         ->paginate(LIMIT_PAGE);                        
     }
@@ -51,7 +54,8 @@ class RentalProduct extends Model {
     {
         return DB::table(static::$table)
                 ->where('is_deleted', NO_DELLETE)
-                ->select('id', 'product_name', 'cat_rental_id')
+                ->where('display',0)
+                ->select('id', 'product_name', 'cat_rental_id', 'display')
                 ->get(); 
     }
     

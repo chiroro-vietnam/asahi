@@ -63,8 +63,8 @@
             <td width="20%" colspan="4" align="center">表示順序</td>
         </tr>
             <?php 
-              $display_arr = array('0' => '×', '1' => '○'); 
-              $class_arr = array('0'=>'red', '1'=>'blue');
+              $display_arr = array('0' => '○', '1' => '×'); 
+              $class_arr = array('0'=>'blue', '1'=>'red');
             ?>
             @if(isset($rp) && count($rp) > 0)            
                 <?php $total = count($rp); $pos = 1;?>

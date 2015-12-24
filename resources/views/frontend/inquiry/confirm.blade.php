@@ -23,7 +23,7 @@
             <tbody>
              <tr>
                 <th>お問い合わせ内容</th>
-                <td>{{nl2br($data['content'])}}</td>
+                <td><?php echo nl2br($data['content']) ;?></td>
               </tr>
               <tr>
                 <th>お名前</th>                

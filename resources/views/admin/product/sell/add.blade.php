@@ -111,7 +111,13 @@
         </tr>
         <tr>
             <td width="20%" class="col3">表組み</td>       
-            <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{Input::old('omotekumi')}}">{{Input::old('omotekumi')}}</textarea></td>              
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="5">
+                <tr>
+                  <td bgcolor="#999999"><input name="omotekumi_title" type="text" id="omotekumi_title" value="{{Input::old('omotekumi_title')}}" size="60" /></td>
+                  </tr>
+               </table>
+                <textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{Input::old('omotekumi')}}">{{Input::old('omotekumi')}}</textarea></td>              
         </tr>
   <tr>
           <td colspan="2" class="col2">●リンクタイプ</td>
@@ -138,7 +144,7 @@
         </tr>
         <tr>
           <td class="col3">表示設定</td>
-          <td><input type="checkbox" name="display_top" id="display_top"  />
+          <td><input type="checkbox" name="display_top" id="display_top" <?php if(Input::old('display_top' == 1)) echo 'checked="checked"'; ?> />
             おすすめの＜販売＞商品として表示する</td>
         </tr>
         <tr>

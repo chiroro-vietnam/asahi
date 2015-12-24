@@ -106,7 +106,13 @@
         </tr>
         <tr>
             <td width="20%" class="col3">表組み</td>       
-            <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$val->omotekumi}}">{{$val->omotekumi}}</textarea></td>              
+            <td>
+                <table width="100%" cellspacing="0" cellpadding="5">
+             <tr>
+               <td bgcolor="#999999"><input name="omotekumi_title" type="text" id="omotekumi_title" value="{{$val->omotekumi_title}} size="60" /></td>
+               </tr>
+            </table>
+                <textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{$val->omotekumi}}">{{$val->omotekumi}}</textarea></td>              
         </tr>
         <tr>
           <td colspan="2" class="col2">●リンクタイプ</td>

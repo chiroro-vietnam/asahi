@@ -26,7 +26,7 @@ class RentalController extends FrontendController{
         $title_cat_rental = '配水ポリエチレン管融着工具';
         $rentals = Rental::getRental();
         $catRentals = CategoryRental::getAllCatRental();
-        $lrs = RentalProduct::getListRental();        
+        $lrs = RentalProduct::getListRental();
         return view('frontend.rental.list', compact('rentals', 'title_rental', 'title_cat_rental', 'catRentals', 'lrs'));
     }
 

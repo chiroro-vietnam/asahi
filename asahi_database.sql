@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2015 at 04:52 AM
+-- Generation Time: Dec 24, 2015 at 01:10 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.5.30
 
@@ -114,6 +114,7 @@ CREATE TABLE `sell_product` (
   `display_rate` tinyint(1) NOT NULL,
   `sell_price` double(15,8) DEFAULT NULL,
   `annotation_price` double(15,8) DEFAULT NULL,
+  `omotekumi_title` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `omotekumi` text COLLATE utf8_unicode_ci,
   `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -163,9 +164,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', 'admin@chiroro.co.jp', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', '4U8rKiqrMNAQMOfj13UGUmFvmvPsfNfP40EkmsfKuDVT0N9RY69EmiMKEGBT', '2015-12-19 20:39:37', '2015-12-19 20:39:37'),
-(2, 'kyuma', 'Kyuma ANDO ', 'kyuma@chiroro.com.vn', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', '4U8rKiqrMNAQMOfj13UGUmFvmvPsfNfP40EkmsfKuDVT0N9RY69EmiMKEGBT', '2015-12-19 20:39:37', '2015-12-19 20:39:37'),
-(3, 'urakami', 'Urakami Yuzo', 'urakami@chiroro.co.jp', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', '4U8rKiqrMNAQMOfj13UGUmFvmvPsfNfP40EkmsfKuDVT0N9RY69EmiMKEGBT', '2015-12-19 20:39:37', '2015-12-19 20:39:37');
+(1, 'Admin', 'admin', 'admin@chiroro.co.jp', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', 'ZU9vZb4HWK0DftLDcyidEHQNn6u5tS8brI2ZXQWqW1LBCuB0kLeTSgBQgIlC', '2015-12-20 06:13:12', '2015-12-21 01:56:17'),
+(2, 'kyuma', 'Kyuma ANDO ', 'kyuma@chiroro.com.vn', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', '4U8rKiqrMNAQMOfj13UGUmFvmvPsfNfP40EkmsfKuDVT0N9RY69EmiMKEGBT', '2015-12-20 06:13:12', '2015-12-20 06:13:12'),
+(3, 'urakami', 'Urakami Yuzo', 'urakami@chiroro.co.jp', '$2y$10$vcFnKXBKGIfxtRKt5pVkneOymfr25T20p0wt9Sg0VXiusLwGzsQDu', '4U8rKiqrMNAQMOfj13UGUmFvmvPsfNfP40EkmsfKuDVT0N9RY69EmiMKEGBT', '2015-12-20 06:13:12', '2015-12-20 06:13:12');
 
 --
 -- Indexes for dumped tables

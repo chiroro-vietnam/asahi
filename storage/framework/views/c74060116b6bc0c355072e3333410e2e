@@ -1,0 +1,35 @@
+<?php echo e($name); ?> さま<br>
+
+お問い合わせ内容: <?php echo e($content); ?><br>
+
+お名前: <?php echo e($name); ?><br>
+
+ふりがな: <?php echo e($furigana); ?><br>
+
+会社名: <?php echo e($company); ?><br>
+
+部署: <?php echo e($department); ?><br>
+
+役職: <?php echo e($position); ?><br>
+
+郵便番号: <?php echo e($postalCode1); ?> - <?php echo e($postalCode2); ?><br>
+
+都道府県: <?php echo e($state); ?><br>
+
+ご住所: <?php echo e($address); ?><br>
+
+電話番号: <?php echo e($phone); ?><br>
+
+FAX番号: <?php echo e($fax); ?><br>
+
+メールアドレス: <?php echo e($email); ?><br><br><br>
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+株式会社チロロネット カスタマーサポート<br>
+───────────────────────────<br>
+   〒710-0844  岡山県倉敷市福井125-7<br>
+   TEL: 086-430-3956  /  FAX: 086-430-3957<br>
+   E-Mail: support@chiroro.com<br>
+   URL: http://www.chiroro.co.jp/<br>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>

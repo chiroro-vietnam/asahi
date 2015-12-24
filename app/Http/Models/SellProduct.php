@@ -58,8 +58,8 @@ class SellProduct extends Model {
    
     public static $messages = array(
             'cat_sell.required'         => 'Please choose category',
-            'product_name.required'	    => 'Please enter sell product',
-            'display_rate.required'	    => 'Please choose show rate',
+            'product_name.required'	=> 'Please enter sell product',
+            'display_rate.required'	=> 'Please choose show rate',
             'display_type'              => 'Please choose display type',
             'url.required'              => 'Please enter url',
             'url.url'                   => 'Please enter correct format url',
@@ -73,7 +73,8 @@ class SellProduct extends Model {
     );
 
     //get list rental product
-    public static function searchSellPro($cat_rental_id=null){
+    public static function searchSellPro($cat_rental_id=null)
+    {
         return DB::table(static::$table)
                 ->where('is_deleted', NO_DELLETE)
                 ->where('cat_rental_id', $cat_rental_id)
@@ -81,7 +82,8 @@ class SellProduct extends Model {
     }
 
     //delete item category sell
-    public static function delSellPro($id){
+    public static function delSellPro($id)
+    {
         return DB::table(static::$table)
                 ->where('id', '=', $id)
                 ->update(array('is_deleted' => DELETED));
@@ -90,16 +92,19 @@ class SellProduct extends Model {
 
     
     //get all sell product
-     public static function getAllSellPro(){
+    public static function getAllSellPro()
+    {
         return DB::table(static::$table)
                 ->select('sell_product.*')
                 ->where('is_deleted', NO_DELLETE)
+                ->where('display', 0)
                 ->where('display_top', 1)
-                ->paginate(LIMIT_PAGE);                        
+                ->paginate(LIMIT_ITEM_PAGE);                        
     }
     
     //get sell product by id
-     public static function getSellProById($id){
+    public static function getSellProById($id)
+    {
         return DB::table(static::$table)
                 ->select('sell_product.*')
                 ->where('is_deleted', NO_DELLETE)
@@ -108,10 +113,10 @@ class SellProduct extends Model {
     //productDetail
     
     public static function getListPro()
-        {
-            return DB::table(static::$table)
-                    ->where('is_deleted', NO_DELLETE)                                        
-                    ->select('id', 'product_name', 'cat_product_id')
-                    ->get();
-        }
+    {
+        return DB::table(static::$table)
+                ->where('is_deleted', NO_DELLETE)                                        
+                ->select('id', 'product_name', 'cat_product_id')
+                ->get();
+    }
 }

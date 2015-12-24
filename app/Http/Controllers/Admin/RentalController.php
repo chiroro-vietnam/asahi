@@ -125,8 +125,8 @@ class RentalController extends BackendController
         $validator = Validator::make(Input::all(), RentalProduct::$rules, RentalProduct::$messages);
         if($validator->passes())
             {        
-                $display = !empty(Input::get('display')) ? 1 : 0;
-                $display_top = !empty(Input::get('display_top')) ? 1 : 0;
+                $display = (Input::get('display') == 'on') ? 1 : 0;
+                $display_top = (Input::get('display_top') == 'on') ? 1 : 0;
                 
                 $max_order = DB::table('rental_product')
                     ->where('is_deleted', NO_DELLETE)
@@ -167,7 +167,8 @@ class RentalController extends BackendController
                     $fileName2 = rand(date("Ymd"), time()).".".$extension2;
                     Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName2);
                     $inputData['image_second'] = '/uploads/images/rental_product/'.$fileName2;
-                }               
+                }  
+                
                 DB::table('rental_product')->insert($inputData);
 
                  //insert to top_page_show
@@ -184,7 +185,7 @@ class RentalController extends BackendController
                     DB::table('top_page_show')->insert($dataTopPage);
                 }               
                 
-                Session::flash('success', 'The rental product added successfully.');
+                Session::flash('success', '登録が完了しました。');
                 return Redirect::route('admin.product.rental.list');
         }
 
@@ -203,9 +204,6 @@ class RentalController extends BackendController
                 ->where('rental_product.is_deleted', NO_DELLETE)
                 ->select('rental_product.*', 'category_rental.name')
                 ->get();
-
-                // echo "<pre>";
-                // print_r($data);exit;
         return view('admin.product.rental.edit', compact('data'));
     }
     //product rental edit
@@ -214,8 +212,8 @@ class RentalController extends BackendController
         $validator = Validator::make(Input::all(), RentalProduct::$ruleEdit, RentalProduct::$messages);
         if($validator->passes())
         {       
-            $display = !empty(Input::get('display')) ? 1 : 0;
-            $display_top = !empty(Input::get('display_top')) ? 1 : 0;
+            $display = (Input::get('display') == 'on') ? 1 : 0;
+            $display_top = (Input::get('display_top') == 'on') ? 1 : 0;
 
             $inputData['product_name']              = Input::get('product_name');
             $inputData['product_name_auxiliary']    = Input::get('product_name_auxiliary');
@@ -234,38 +232,46 @@ class RentalController extends BackendController
             $inputData['order']                     = Input::get('order');
 
             $inputData['updated_at']	= date('Y-m-d H:i:s');
-            $cr_id = Input::get('cat_rental_id');    
-            $image_first = Input::file('image_first');
-            $file1 = DB::table('rental_product')->find($id);
-            if($file1->image_first){
-                    $file1Del = $file1->image_first;
-                    if(File::isFile($file1Del)){
-                            \File::delete($file1Del);
-                    }
-            }
+            $cr_id = Input::get('cat_rental_id');
+            
+            $image_first = Input::file('image_first'); 
+            if(!empty($image_first))
+            {
+                $file1 = DB::table('rental_product')->find($id);
+                if($file1->image_first){
+                        $file1Del = $file1->image_first;
+                        if(File::isFile($file1Del)){
+                                \File::delete($file1Del);
+                        }
+                }
 
-            if(Input::file('image_first')){
-                    $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
-                    $fileName1 = rand(date("Ymd"), time()).".".$extension1;
-                    Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName1);
-                    $inputData['image_first'] = '/uploads/images/rental_product/'.$fileName1;
-            }
+                if(Input::file('image_first')){
+                        $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
+                        $fileName1 = rand(date("Ymd"), time()).".".$extension1;
+                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName1);
+                        $inputData['image_first'] = '/uploads/images/rental_product/'.$fileName1;
+                }
+            }            
 
             $image_second = Input::file('image_second');
-            $file2 = DB::table('rental_product')->find($id);
-            if($file2->image_second){
+            if(!empty($image_second))
+            {
+                $file2 = DB::table('rental_product')->find($id);
+                if($file2->image_second){
                     $file2Del = $file2->image_second;
                     if(File::isFile($file2Del)){
                             \File::delete($file2Del);
                     }
-            }
+                }
 
-            if(Input::file('image_second')){
+                if(Input::file('image_second')){
                     $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
                     $fileName2 = rand(date("Ymd"), time()).".".$extension2;
                     Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/rental_product/'.$fileName2);
                     $inputData['image_second'] = '/uploads/images/rental_product/'.$fileName2;
+                }  
             }
+            
             //update top_show_page
             if($display_top == 1){
                 $dataTopPage  = array(                       
@@ -283,7 +289,7 @@ class RentalController extends BackendController
             DB::table('rental_product')
                     ->where('id', $id)
                     ->update($inputData);
-            Session::flash('success', 'The rental product updated successfully.');
+            Session::flash('success', '変更が完了しました。');
             return Redirect::to('manage/product/rental/?cr_id='.$cr_id);
         }
 

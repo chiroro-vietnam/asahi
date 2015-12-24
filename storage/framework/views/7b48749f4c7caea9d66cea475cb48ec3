@@ -1,0 +1,65 @@
+<?php $__env->startSection('content'); ?>
+
+<div id="breadcrumbs">
+  <ul class="pan clear">
+    <li><a href="<?php echo route('frontend.homepage'); ?>" title="TOP" class="now">TOP</a></li>
+    <li><a href="<?php echo route('frontend.rental.list'); ?>" title="レンタルサービス">レンタルサービス</a></li>
+    <li><?php echo e($title_cat_rental); ?></li>
+  </ul>
+</div>
+
+<div id="rental">
+<div class="clear" id="index">
+  <div id="topLeft">
+  	<h2><span class="h2_title"><?php echo e($title_rental); ?></span></h2>
+     <?php $count = count($rentals); ?>
+     <?php if($count > 0): ?>
+    <h3 class="h3_title"><?php echo e($title_cat_rental); ?></h3>      
+    <div class="rentalList clear">        
+            <?php foreach($rentals as $rt): ?>
+            <a href="<?php echo url('rental/detail/'.$rt->id); ?>">
+                <div class="listFrame">
+                    <div class="listImg"><?php echo HTML::image(@$rt->image_first); ?></div>
+                    <div class="listName"><span class="ln_cat"><?php echo e($rt->product_name); ?></span><br /><span class="ln_name"><?php echo e($rt->product_name_auxiliary); ?></span></div>
+                </div>            
+             </a>
+             <?php 
+                if($count >= LIMIT_ITEM_PAGE) break; 
+            ?>
+            <?php endforeach; ?>   
+       
+    </div>
+    <?php endif; ?>
+    
+  </div>
+  <div id="topRight">
+    <div class="subMenu">
+    	<div class="sub_title"><img src="frontend/image/sec_rental_title.jpg" alt="レンタルサービス"></div>
+      <ul class="sub_rental">
+       <?php if(count($catRentals) > 0): ?>
+        <?php foreach($catRentals as $cr): ?> 
+            <li class="acrd-ctrl"><a href="#"><?php echo e($cr->name); ?></a>
+                 <?php if(count($lrs) > 0): ?>
+                    <?php foreach($lrs as $rts): ?>
+                        <?php if($cr->id == $rts->cat_rental_id): ?>
+                            <ul class="acrd-pl">
+                                <li><a class="item-detail" href="<?php echo url('rental/detail/'.$rts->id); ?>"><?php echo e(@$rts->product_name); ?></a></li>
+                            </ul> 
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+       <?php endif; ?>        
+        
+      </ul>
+    </div><!-- /subMenu -->
+    <div class="sub_info">
+      <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
+    </div><!-- /sub_info -->
+  </div>  
+  
+</div></div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

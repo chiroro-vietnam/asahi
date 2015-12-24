@@ -80,7 +80,7 @@
       </tr>
       <tr>
         <td width="20%" class="col3">表示設定</td>
-        <td><input type="checkbox" name="display" id="display" <?php if(Input::old('display' == 1)) echo 'checked="checked"'; ?>/>
+        <td><input type="checkbox" name="display" id="display" <?php if(Input::old('display' == 0)) echo 'checked="checked"'; ?>/>
           一時的に一般側画面へ表示しない</td>
       </tr>
       <tr>
@@ -95,24 +95,25 @@
       </tr>
       <tr>
         <td width="20%" class="col3">1日レンタル料金</td>
-        <td><input type="text" name="rental_first_price" id="rental_first_price" />
+        <td><input type="text" name="rental_first_price" id="rental_first_price" value="{{Input::old('rental_first_price')}}" />
           円</td>
       </tr>
       <tr>
         <td width="20%" class="col3">1ヶ月レンタル料金</td>
-        <td><input type="text" name="rental_one_month_price" id="rental_one_month_price" />
+        <td><input type="text" name="rental_one_month_price" id="rental_one_month_price" value="{{Input::old('rental_one_month_price')}}" />
 円</td>
       </tr>
       <tr>
         <td width="20%" class="col3">整備点検費</td>
-        <td><input type="text" name="service_cost" id="service_cost" />
+        <td><input type="text" name="service_cost" id="service_cost" value="{{Input::old('service_cost')}}" />
 円</td>
       </tr>
       
       <tr>
-        <td width="20%" class="col3">表組み</td>
-        
-         <td><textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{Input::old('omotekumi')}}">{{Input::old('omotekumi')}}</textarea></td> 
+        <td width="20%" class="col3">表組み</td>        
+         <td>            
+            <textarea name="omotekumi" cols="90" rows="30" id="omotekumi" value="{{Input::old('omotekumi')}}">{{Input::old('omotekumi')}}</textarea>
+         </td> 
             
       </tr>
       
@@ -122,7 +123,7 @@
         </tr>
         <tr>
             <td class="col3">表示設定</td>
-            <td><input type="checkbox" name="display_top" id="display_top" />おすすめ＜レンタル＞商品として表示する</td>
+            <td><input type="checkbox" name="display_top" id="display_top" <?php if(Input::old('display_top') == 1) echo 'checked="checked"' ;?>/>おすすめ＜レンタル＞商品として表示する</td>
         </tr>
     </table>
     </td>

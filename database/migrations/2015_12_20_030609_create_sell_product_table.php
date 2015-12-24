@@ -28,6 +28,7 @@ class CreateSellProductTable extends Migration {
                 $table->boolean('display_rate');
                 $table->double('sell_price', 15, 8)->nullable();
                 $table->double('annotation_price', 15, 8)->nullable();
+                $table->string('omotekumi_title', 255)->nullable();
                 $table->text('omotekumi')->nullable();
                 $table->string('url', 255);
                 $table->string('file', 255);

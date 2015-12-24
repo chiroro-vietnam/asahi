@@ -79,9 +79,9 @@ class SellingController extends BackendController
 
         if($validator->passes())
         {             
-            $display = !empty(Input::get('display')) ? 1 : 0;
-            $display_top = !empty(Input::get('display_top')) ? 1 : 0;
-            $open_tab = !empty(Input::get('open_tab')) ? 1 : 0;
+            $display = (Input::get('display') == 'on') ? 1 : 0;
+            $display_top = (Input::get('display_top') == 'on') ? 1 : 0;
+            $open_tab = (Input::get('open_tab') == 'on') ? 1 : 0;
             
             $max_order = DB::table('sell_product')
                     ->where('is_deleted', NO_DELLETE)
@@ -99,6 +99,7 @@ class SellingController extends BackendController
             $inputData['display_rate']              = Input::get('display_rate');                 
             $inputData['sell_price']                = Input::get('sell_price');
             $inputData['annotation_price']          = Input::get('annotation_price');
+            $inputData['omotekumi_title']           = Input::get('omotekumi_title');
             $inputData['omotekumi']                 = Input::get('omotekumi');                
             $inputData['url']                       = Input::get('url');
             $inputData['open_tab']                  = $open_tab;                
@@ -136,7 +137,7 @@ class SellingController extends BackendController
             }   
 
             DB::table('sell_product')->insert($inputData);
-            Session::flash('success', 'The sell product insert successfully.');
+            Session::flash('success', '登録が完了しました。');
 
              //insert to top_page_show
             if($display_top == 1)
@@ -243,9 +244,9 @@ class SellingController extends BackendController
         }
       
         if($validator->passes()){                  
-                $display        = !empty(Input::get('display')) ? 1 : 0;
-                $display_top    = !empty(Input::get('display_top')) ? 1 : 0;
-                $open_tab       = !empty(Input::get('open_tab')) ? 1 : 0;
+                $display        = (Input::get('display') == 'on') ? 1 : 0;
+                $display_top    = (Input::get('display_top') == 'on') ? 1 : 0;
+                $open_tab       = (Input::get('open_tab') == 'on') ? 1 : 0;
                 
                 $inputData['display_type']              = Input::get('display_type');                
                 $inputData['product_name']              = Input::get('product_name');
@@ -257,6 +258,7 @@ class SellingController extends BackendController
                 $inputData['display_rate']              = Input::get('display_rate');                
                 $inputData['sell_price']                = Input::get('sell_price');
                 $inputData['annotation_price']          = Input::get('annotation_price');
+                $inputData['omotekumi_title']           = Input::get('omotekumi_title');
                 $inputData['omotekumi']                 = Input::get('omotekumi');                
                 $inputData['url']                       = Input::get('url');
                 $inputData['open_tab']                  = $open_tab;                
@@ -267,44 +269,49 @@ class SellingController extends BackendController
                 
                 $cs_id          = Input::get('cat_product_id');    
                 $image_first    = Input::file('image_first');
-                
-                $file1 = DB::table('rental_product')->find($id);
-                
-                if(!empty($file1))
+                if(!empty($image_first))
                 {
-                    if($file1->image_first){
-                            $file1Del = $file1->image_first;
-                            if(File::isFile($file1Del)){
-                                    \File::delete($file1Del);
-                            }
+                    $file1 = DB::table('rental_product')->find($id);                
+                    if(!empty($file1))
+                    {
+                        if($file1->image_first){
+                                $file1Del = $file1->image_first;
+                                if(File::isFile($file1Del)){
+                                        \File::delete($file1Del);
+                                }
+                        }
                     }
-                }
 
-                if(Input::file('image_first')){
-                        $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
-                        $fileName1 = rand(date("Ymd"), time()).".".$extension1;
-                        Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
-                        $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
+                    if(Input::file('image_first')){
+                            $extension1 = Input::file('image_first')->getClientOriginalExtension(); // getting image extension  
+                            $fileName1 = rand(date("Ymd"), time()).".".$extension1;
+                            Image::make($image_first->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName1);
+                            $inputData['image_first'] = '/uploads/images/sell_product/'.$fileName1;
+                    } 
                 }
+                
                 
                 $image_second = Input::file('image_second');
-                $file2 = DB::table('rental_product')->find($id);
-                if(!empty($file1))
+                if(!empty($image_second))
                 {
-                    if($file2->image_second){
-                            $file2Del = $file2->image_second;
-                            if(File::isFile($file2Del)){
-                                    \File::delete($file2Del);
-                            }
+                    $file2 = DB::table('rental_product')->find($id);
+                    if(!empty($file1))
+                    {
+                        if($file2->image_second){
+                                $file2Del = $file2->image_second;
+                                if(File::isFile($file2Del)){
+                                        \File::delete($file2Del);
+                                }
+                        }
                     }
-                }
 
-                if(Input::file('image_second')){
-                        $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
-                        $fileName2 = rand(date("Ymd"), time()).".".$extension2;
-                        Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
-                        $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
-                }
+                    if(Input::file('image_second')){
+                            $extension2 = Input::file('image_second')->getClientOriginalExtension(); // getting image extension  
+                            $fileName2 = rand(date("Ymd"), time()).".".$extension2;
+                            Image::make($image_second->getRealPath())->save(public_path().'/uploads/images/sell_product/'.$fileName2);
+                            $inputData['image_second'] = '/uploads/images/sell_product/'.$fileName2;
+                    } 
+                }                
                 
                 $file = Input::file('file');
                 if(Input::file('file')){
@@ -332,7 +339,7 @@ class SellingController extends BackendController
                 DB::table('sell_product')
                         ->where('id', $id)
                         ->update($inputData);
-                Session::flash('success', 'The sell product updated successfully.');
+                Session::flash('success', '変更が完了しました。');
                 return Redirect::to('manage/product/sell/?cs_id='.$cs_id);
         }
 

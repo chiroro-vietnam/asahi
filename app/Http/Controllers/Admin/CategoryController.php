@@ -51,7 +51,7 @@ class CategoryController extends BackendController
 
                 DB::table('category_rental')
                         ->insert($inputData);
-                Session::flash('success', 'The category rental add successfully.');
+                Session::flash('success', '登録が完了しました。');
                 return Redirect::route('admin.category.rental.list');
         }
 
@@ -82,7 +82,7 @@ class CategoryController extends BackendController
                 DB::table('category_rental')
                         ->where('id', $id)
                         ->update($inputData);
-                Session::flash('success', 'The category rental edit successfully.');
+                Session::flash('success', '変更が完了しました。');
                 return Redirect::route('admin.category.rental.list');
         }
         return Redirect::to('manage/category/rental/edit/'.$id)
@@ -199,7 +199,7 @@ class CategoryController extends BackendController
 
                 DB::table('category_product')
                         ->insert($inputData);
-                Session::flash('success', 'The category sell add successfully.');
+                Session::flash('success', '登録が完了しました。');
                 return Redirect::route('admin.category.sell.list');
         }
         return Redirect::route('admin.category.sell.add')
@@ -229,7 +229,7 @@ class CategoryController extends BackendController
                 DB::table('category_product')
                         ->where('id', $id)
                         ->update($inputData);
-                Session::flash('success', 'The category sell edit successfully.');
+                Session::flash('success', '変更が完了しました。');
                 return Redirect::route('admin.category.sell.list');
         }
         return Redirect::to('manage/category/sell/edit/'.$id)

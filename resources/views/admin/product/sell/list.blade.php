@@ -58,8 +58,8 @@
     </tr>
     
       <?php 
-              $display_arr = array('0' => '×', '1' => '○'); 
-              $class_arr = array('0'=>'red', '1'=>'blue');
+            $display_arr = array('0' => '○', '1' => '×'); 
+            $class_arr = array('0'=>'blue', '1'=>'red');
             ?>
             @if(isset($sp) && count($sp) > 0)
                 <?php $total = count($sp); $pos=1;?>

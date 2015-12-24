@@ -56,13 +56,13 @@
     	<span class="di_text">販売価格についてはお問い合わせください</span>
       <div class="di_inq_btn"><a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="../../frontend/image/di_inq_btn.jpg" alt="メールでのお問い合わせ"></a></div>
     </div>
-    
-    
-    <h4><span class="h4_title">サイズや料金表について</span></h4>
-    
-    @if($product->display_rate == 1)
+        @if(!empty($product->omotekumi_title))
+            <h4><span class="h4_title">{{$product->omotekumi_title}}</span></h4>
+        @endif    
+       
+    @if($product->display_rate == 1)     
         <div class="inqInput">
-            <?php echo $product->omotekumi;?>
+            {{$product->omotekumi}}
         </div>
     @endif
     

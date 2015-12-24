@@ -10,9 +10,9 @@ class Rental extends Model {
 	public static function getRental(){
 		return DB::table(static::$table)
                         ->select('rental_product.*')
-                        ->where('display', 1)
+                        ->where('display', 0)
                         ->where('is_deleted', '=', NO_DELLETE)
-                        ->paginate(LIMIT_PAGE);
+                        ->paginate(LIMIT_ITEM_PAGE);
 	}
         
         //get list rental detail
