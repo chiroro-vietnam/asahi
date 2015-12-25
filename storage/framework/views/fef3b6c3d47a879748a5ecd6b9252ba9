@@ -16,8 +16,22 @@
 
     <div class="productsDetail clear">
       <div class="dtl_left">
-        <div class="dtlImg1"><?php echo @HTML::image($product->image_first); ?></div>
-        <div class="dtlImg2"><?php echo @HTML::image($product->image_second); ?></div>
+        <div class="dtlImg1">
+            <?php if(empty($product->image_first)): ?>
+            <img src="../../frontend/image/noimage.png" alt="">
+            <?php else: ?>
+            <?php echo HTML::image(@$product->image_first); ?>
+
+            <?php endif; ?>
+        </div>
+        <div class="dtlImg2">
+            <?php if(empty($product->image_second)): ?>
+            <img src="../../frontend/image/noimage.png" alt="">
+            <?php else: ?>
+            <?php echo HTML::image(@$product->image_second); ?>
+
+            <?php endif; ?>
+        </div>
       </div>
       <div class="dtl_right">
         <div class="dtlName">

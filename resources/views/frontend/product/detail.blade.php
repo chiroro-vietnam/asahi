@@ -27,7 +27,7 @@
         </div>
         <div class="dtlImg2">
             @if(empty($product->image_second))
-            <img src="frontend/image/noimage.png" alt="">
+            <img src="../../frontend/image/noimage.png" alt="">
             @else
             {!!HTML::image(@$product->image_second) !!}
             @endif
