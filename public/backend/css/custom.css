@@ -812,5 +812,10 @@ table tbody tr span#transmark{
 }
 
  ul.msg-validate .alert li{
-  margin-left: 10px;
+  margin-left: 8px;
+  width: 870px;
+}
+
+ ul.msg-validate .alert-danger{
+	margin-left: -40px;
 }
