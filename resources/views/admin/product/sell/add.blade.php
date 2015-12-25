@@ -25,8 +25,8 @@
   </tr>
   {!! Form::open( ['method' => 'post', 'url' => 'manage/product/sell/add/', 'enctype'=>'multipart/form-data'] ) !!}  
   <tr>
-    <td><table width="100%" border="1" cellspacing="0" cellpadding="5">
-      
+    <td>
+    <table width="100%" border="1" cellspacing="0" cellpadding="5">
         <tr>
           <td class="col3">表示種別<span class="notnull">[*]</span></td>
           <td><input type="radio" name="display_type" id="radio" value="1" checked="checked"/>

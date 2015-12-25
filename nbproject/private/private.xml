@@ -3,19 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/SellProduct.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/edit.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/Rental.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/sell/add.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/rental/list.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/config/constants.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Models/CategoryProduct.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/HomepageController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/detail.blade.php</file>
             <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/homepage.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/%23%23%23homepage.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/sell/list.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/resources/views/admin/product/sell/edit.blade.php</file>
-            <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Frontend/ProductController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/product/list.blade.php</file>
             <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Admin/RentalController.php</file>
             <file>file:/D:/xampp/htdocs/asahi/app/Http/Controllers/Admin/SellingController.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/product/detail.blade.php</file>
+            <file>file:/D:/xampp/htdocs/asahi/resources/views/frontend/rental/list.blade.php</file>
         </group>
     </open-files>
 </project-private>

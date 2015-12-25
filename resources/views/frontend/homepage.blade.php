@@ -55,26 +55,17 @@
                 <a href="<?php echo url($product->url);?>" <?php if($product->open_tab == 1) echo 'target="_blank"';?>>
                     <div class="listFrame">
                       <div class="listImg">
-                            @if(empty($product->image_first))
-                            <img src="../../frontend/image/noimage.png" alt="">
-                            @else
-                            {!! HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}
-                            @endif
+                            <img src="../../frontend/image/icon_link.png" alt="">
                       </div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>
                     </div>
                 </a> 
-
             @else <!--  file -->
                 <a href="<?php echo url($product->file); ?>">
                     <div class="listFrame">
                       <div class="listImg">
-                          @if(empty($product->image_first))
-                            <img src="frontend/image/noimage.png" alt="">
-                            @else
-                          {!! HTML::image(@$product->image_first, '', array( 'width' => 200, 'height' => 122 )) !!}
-                          @endif
+                          <img src="../../frontend/image/icon_file.png" alt="">
                       </div>
                       <div class="listName"><span class="ln_cat">{{$product->product_name_auxiliary}}</span><br /><span class="ln_name">{{$product->product_name}}</span></div>
                       <div class="listDetail">{{$product->overview}}</div>

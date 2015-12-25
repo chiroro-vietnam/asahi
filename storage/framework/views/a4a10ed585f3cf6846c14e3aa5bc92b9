@@ -11,12 +11,14 @@
 <div id="products">
 <div class="clear" id="index">
   <div id="topLeft">
-  	<h2><span class="h2_title"><?php echo e($title_sell_product); ?></span></h2>
+  <h2><span class="h2_title"><?php echo e($title_sell_product); ?></span></h2>
     <?php $count = count($products); ?>
      <?php if(count($products) > 0): ?>
     <h3 class="h3_title"><?php echo e($tile_branch); ?></h3>       
         <div class="productsList clear"> 
-            <?php foreach($products as $product): ?>            
+            <?php foreach($products as $product): ?> 
+            <!--detail-->
+             <?php if($product->display_type == 1): ?>
                 <a href="<?php echo url('product/detail/'.$product->id); ?>">
                     <div class="listFrame">
                       <div class="listImg">
@@ -30,6 +32,32 @@
                       <div class="listName"><span class="ln_cat"><?php echo e($product->product_name); ?></span><br /><span class="ln_name"><?php echo e($product->product_name_auxiliary); ?></span></div>
                     </div>
                 </a>
+            <!--end detail-->
+            
+            <!--url-->
+            <?php elseif($product->display_type == 2): ?>
+                <a href="<?php echo url($product->url);?>" <?php if($product->open_tab == 1) echo 'target="_blank"';?>>
+                        <div class="listFrame">
+                          <div class="listImg">
+                              <img src="../../frontend/image/icon_link.png" alt="">
+                          </div>
+                          <div class="listName"><span class="ln_cat"><?php echo e($product->product_name); ?></span><br /><span class="ln_name"><?php echo e($product->product_name_auxiliary); ?></span></div>
+                        </div>
+                </a>
+            <!--end url-->
+            
+            <!--end file-->
+            <?php else: ?>
+                <a href="<?php echo url($product->file); ?>">
+                        <div class="listFrame">
+                          <div class="listImg">
+                              <img src="../../frontend/image/icon_file.png" alt="">
+                          </div>
+                          <div class="listName"><span class="ln_cat"><?php echo e($product->product_name); ?></span><br /><span class="ln_name"><?php echo e($product->product_name_auxiliary); ?></span></div>
+                        </div>
+                </a>
+            <!--end file-->
+            <?php endif; ?>
                 <?php 
                     if($count >= LIMIT_ITEM_PAGE) break; 
                 ?>
@@ -63,8 +91,7 @@
     <div class="sub_info">
       <a href="<?php echo route('frontend.inquiry.index'); ?>"><img src="frontend/image/sub_info_mail.png" alt="メールでのお問い合わせ"></a>
     </div><!-- /sub_info -->
-  </div>
-  
+  </div> 
   
 </div></div>
 
